@@ -10,12 +10,13 @@
 		"ghcr.io/rocker-org/devcontainer-features/rstudio-server:0": {},
 		"ghcr.io/rocker-org/devcontainer-features/miniforge:2": {},
 		"ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
-		"ghcr.io/rocker-org/devcontainer-features/renv-cache:0": {}
+		"ghcr.io/rocker-org/devcontainer-features/renv-cache:0": {},
+		"ghcr.io/devcontainers/features/git:1": {}
 	},
-	// Mount any required external folders
-	// "mounts": [
-	// 	"type=bind,source=</path/to/localdir>,target=/workspaces/data"
-	// ],
+	// Mount git config to get username/email
+	"mounts": [
+		"source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached"
+	],
 	"runArgs": [
 		"--user",
 		"${localEnv:UID}:${localEnv:GID}"
