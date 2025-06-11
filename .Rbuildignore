@@ -2,3 +2,9 @@
 ^renv\.lock$
 ^nhsbsa\.Rproj$
 ^\.Rproj\.user$
+^\.devcontainer$
+^\.github$
+^\.vscode$
+^README\.Rmd$
+^cran-comments\.md$
+^inst/open-data-portal-api\.R$

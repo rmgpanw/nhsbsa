@@ -1,11 +1,23 @@
 Package: nhsbsa
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Access NHS Business Services Authority Open Data Portal API
+Version: 0.1.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("NHS Business Services Authority", , , "opendata@nhsbsa.net", role = c("aut", "cre"))
+Description: Provides functions to access and download data from the NHS Business 
+    Services Authority (NHSBSA) Open Data Portal API. Includes functions to list 
+    available datasets, retrieve metadata, and download prescribing and other 
+    healthcare data.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Depends: R (>= 4.1.0)
+Imports:
+    httr2,
+    dplyr,
+    purrr,
+    rlang
+Suggests:
+    testthat (>= 3.0.0),
+    jsonlite
+Config/testthat/edition: 3
