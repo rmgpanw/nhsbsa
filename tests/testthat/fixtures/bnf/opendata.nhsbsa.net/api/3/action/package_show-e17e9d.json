@@ -1,0 +1,2210 @@
+{
+    "help": "https://opendata.nhsbsa.net/api/3/action/help_show?name=package_show",
+    "success": true,
+    "result": {
+        "author": "NHSBSA Data Services support team",
+        "author_email": "DataServicesSupport@nhsbsa.nhs.uk",
+        "creator_user_id": "73783dc8-f5e5-461f-b56e-94ecedd6046c",
+        "id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+        "isopen": true,
+        "license_id": "OGL-UK-3.0",
+        "license_title": "Open Government Licence 3.0 (United Kingdom)",
+        "license_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "maintainer": null,
+        "maintainer_email": null,
+        "metadata_created": "2025-02-20T10:51:14.404162",
+        "metadata_modified": "2026-06-02T10:02:48.277214",
+        "name": "bnf-code-information-current-year",
+        "notes": "<p><strong>Current reporting year:<\/strong> 2026<\/p>\r\n<p style=\"margin: 0;\"><strong>Current version:<\/strong> 90\r\n\r\n<h2 style=\"margin: 0 0 5px 0;\">Dataset Description<\/h2>\r\n<p>This dataset provides the latest view of the current calendar year's BNF publications (January to December). Data is uploaded once the latest month has completed - for example, January data will be published in February.<\/p>\r\n\r\n<p>The NHSBSA uses the British National Formulary (BNF) coding system to support prescription reporting. The BNF provides a structured, hierarchical view of drugs and medical devices at the BNF presentation level, organised into chapters, sections, and paragraphs. This structured approach ensures that therapeutic categories are clearly defined and provides essential context for NHSBSA prescription data reporting.<\/p>\r\n\r\n<p>Each drug or medical device presentation used in Primary Care is assigned a BNF code, allowing it to be identified and extracted for analysis. The BNF code system enables flexible extraction, aggregation, ordering, and presentation of data at multiple levels and in various combinations.<\/p>\r\n\r\n<h3>BNF Code Structure<\/h3>\r\n\r\n<ul>\r\n<li><strong>BNF Drug Code<\/strong>: A 15-digit code, where the first seven digits correspond to the BNF categories, and the last eight digits represent the medicinal product, form, strength, and link to the generic equivalent.<\/li>\r\n<li><strong>BNF Appliance Code<\/strong>: An 11-digit code used for medical appliances.<\/li>\r\n<\/ul>\r\n\r\n<h3> Other BNF Datasets<\/h3>\r\n\r\n<p style=\"margin: 0;\">The current BNF version is updated on a monthly basis, and any changes applied can be found in the <a href=\"https://opendata.nhsbsa.net/dataset/bnf-code-information-monthly-changes\">BNF Code Information - Monthly Changes<\/a> dataset. Previous versions are available in the <a href=\"https://opendata.nhsbsa.net/dataset/bnf-code-information-historic\">BNF Code Information – Historic<\/a> dataset.<\/p>\r\n\r\n<h2 style=\"margin: 0 0 5px 0;\">Overview of Service<\/h2>\r\n    <p>Information about our NHSBSA Prescriptions Data service can be found here - <a href=\"https://www.nhsbsa.nhs.uk/prescription-data\">Prescription Data | NHSBSA<\/a><\/p>\r\n\r\n<!---Expander 2-->\r\n<details class=\"nhsuk-details\">\r\n  <summary class=\"nhsuk-details__summary\">\r\n    <span class=\"nhsuk-details__summary-text nhsuk-u-font-size-24\">Data Source<\/span>\r\n  <\/summary>\r\n  <div class=\"nhsuk-details__text\">\r\n    <p>NHSBSA Data Warehouse.<\/p>\r\n  <\/div>\r\n<\/details>\r\n\r\n<!---Expander 3-->\r\n<details class=\"nhsuk-details\">\r\n  <summary class=\"nhsuk-details__summary\">\r\n    <span class=\"nhsuk-details__summary-text nhsuk-u-font-size-24\">Data Collection<\/span>\r\n  <\/summary>\r\n  <div class=\"nhsuk-details__text\">\r\n     <p>Sourced from NHSBSA Common Drug Reference (CDR) database.<\/p>\r\n  <\/div>\r\n<\/details>\r\n\r\n<!---Expander 4-->\r\n<details class=\"nhsuk-details\">\r\n  <summary class=\"nhsuk-details__summary\">\r\n    <span class=\"nhsuk-details__summary-text nhsuk-u-font-size-24\">Time Periods<\/span>\r\n  <\/summary>\r\n  <div class=\"nhsuk-details__text\">\r\n<p><strong>Current reporting year:<\/strong> 2025<\/p>\r\n<p><\/p>\r\n<p><strong>Publication Frequency:<\/strong> Data will be uploaded on a monthly basis, once the latest month has completed. For example, January data will be published in February.<\/p>\r\n<p><strong>Historical Data:<\/strong> Previous versions from 2020 onwards are available in the <a href=\"https://opendata.nhsbsa.net/dataset/bnf-code-information-historic\">BNF Code Information – Historic<\/a> dataset.<\/p>\r\n\r\n\r\n  <\/div>\r\n<\/details>\r\n\r\n<!---Expander 5-->\r\n<details class=\"nhsuk-details\">\r\n  <summary class=\"nhsuk-details__summary\">\r\n    <span class=\"nhsuk-details__summary-text nhsuk-u-font-size-24\">Geography<\/span>\r\n  <\/summary>\r\n  <div class=\"nhsuk-details__text\">\r\n    <p>Not Applicable. This dataset is not based on a specific geography.<\/p>\r\n  <\/div>\r\n<\/details>\r\n\r\n<!-- Expander Statistics -->\r\n<details class=\"nhsuk-details\">\r\n    <summary class=\"nhsuk-details__summary\">\r\n        <span class=\"nhsuk-details__summary-text nhsuk-u-font-size-24\">Statistical Classification<\/span>\r\n    <\/summary>\r\n   <div class=\"nhsuk-details__text\">\r\n<p>Management Information - This is not an official statistic.<\/p>\r\n    <\/div>\r\n<\/details>\r\n\r\n\r\n<h2>Caveats<\/h2>\r\n\r\n<div class=\"nhsuk-inset-text\">\r\n  <h3 class=\"nhsuk-u-font-size-32\">BNF Categorisation and Structure<\/h3>\r\n  <p><ul>\r\n    <li>The data aligns with the latest BNF categorisation held on NHSBSA drug databases. The British National Formulary (BNF) structure changed with BNF 70 (September 2015), but NHSBSA data continues to follow the BNF 68 structure.<\/li>\r\n    <li><strong>Chapter 19<\/strong> is a general category for products that do not fit into standard BNF chapters. Some headings in this chapter may not clearly reflect the products within.<\/li>\r\n    <li>To be able to classify items not covered within standard BNF chapters (1–15), the NHSBSA has created <strong>pseudo BNF chapters (20–23)<\/strong>. These chapters primarily cover dressings and appliances, ensuring they can be classified and reported effectively within the NHSBSA's coding system.<\/li>\r\n    <li>The BNF code does not include pack size details or further specificity beyond its defined structure.<\/li>\r\n    <li>Drugs and chemical substances can appear in multiple BNF chapters or sections, such as Methadone. <\/li>\r\n    <li>New BNF codes are created as needed, but changes to existing BNF codes occur once a year. For example, if a product moves from Chapter 03 to Chapter 04, this change takes effect in January.<\/li>\r\n  <\/ul><\/p>\r\n<\/div>\r\n\r\n<div class=\"nhsuk-inset-text\">\r\n  <h3 class=\"nhsuk-u-font-size-32\">Therapeutic Classification Limitations<\/h3>\r\n  <p>Medicines are classified based on their primary therapeutic indication, but they may also be prescribed for other reasons that are not captured by NHSBSA during processing. The clinical indication of a prescription is not recorded, so it is not possible to determine the reason for prescribing.<\/p>\r\n<\/div>\r\n\r\n<div class=\"nhsuk-inset-text\">\r\n  <h3 class=\"nhsuk-u-font-size-32\">Appliance BNF Coding Descriptions<\/h3>\r\n  <p>Appliance BNF coding for BNF Paragraph, Subparagraph, and Chemical Substance fields is a representation of other fields to provide a more meaningful description. The BNF Presentation/Product field provides the actual appliance description.<\/p>\r\n<\/div>\r\n\r\n<div class=\"nhsuk-inset-text\">\r\n  <h3 class=\"nhsuk-u-font-size-32\">Compatibility and Matching Considerations<\/h3>\r\n  <p>Care should be taken when attempting to match BNF coding information from this dataset to other NHSBSA datasets, as other datasets may provide snapshots of data specific to individual prescription months, rather than dynamically updated versions.<\/p>\r\n<\/div>\r\n\r\n<div class=\"nhsuk-inset-text\">\r\n  <h3 class=\"nhsuk-u-font-size-32\">Data Accuracy and Source Limitations<\/h3>\r\n  <p>The accuracy of this dataset is dependent on the source CDR drug database, where the raw data is stored.<\/p>\r\n<\/div>\r\n\r\n<div class=\"nhsuk-inset-text\">\r\n  <h3 class=\"nhsuk-u-font-size-32\">Removal of Invalid Products from BNF Structural Hierarchy<\/h3>\r\n  <p>The BNF structural hierarchy provides a live view of <strong>'valid'<\/strong> products at the end of each month, based on the NHSBSA medicines database. Products that become <strong>'invalid'<\/strong> will no longer appear in the data.<\/p>\r\n  <p><strong>Please note:<\/strong> If you compare current files with older versions, some product presentations may no longer match. This is because older files may have included invalid products, whereas current files do not.<\/p>\r\n<\/div>\r\n\r\n<h2>Enquiries<\/h2>\r\n<!---Who can I contact Section-->\r\n<details class=\"nhsuk-details\">\r\n  <summary class=\"nhsuk-details__summary\">\r\n    <span class=\"nhsuk-details__summary-text nhsuk-u-font-size-24\">Who can I contact if I have queries relating to the data?\r\n    <\/span>\r\n  <\/summary>\r\n  <div class=\"nhsuk-details__text\">\r\n    <p><p>If you have any queries regarding the data provided, or if you plan on publishing, the data please contact <a href=\"mailto:DataServicesSupport@nhsbsa.nhs.uk\">DataServicesSupport@nhsbsa.nhs.uk<\/a> ensuring you quote the name of the dataset for reference. This is important to ensure that the figures are not misunderstood or misrepresented.<\/p><\/p>\r\n  <\/div>\r\n<\/details>\r\n\r\n<h2>Citing and Reusing This Data<\/h2>\r\n<!---Reusing the data and copyright Section-->\r\n<details class=\"nhsuk-details\">\r\n  <summary class=\"nhsuk-details__summary\">\r\n    <span class=\"nhsuk-details__summary-text nhsuk-u-font-size-24\">Important information regarding reusing the data and copyright\r\n    <\/span>\r\n  <\/summary>\r\n  <div class=\"nhsuk-details__text\">\r\n    <p><p>If you plan on producing a press or broadcast story based upon the data please contact <a href=\"mailto: communicationsteam@nhsbsa.nhs.uk \"> communicationsteam@nhsbsa.nhs.uk <\/a>. This is important to ensure that the figures are not misunderstood or misrepresented.<\/p>\r\n<p>The information supplied to you continues to be protected by the Copyright, Designs and Patents Act 1988 and is subject to NHSBSA copyright. This information is licenced under the terms of the Open Government Licence detailed at:<\/p>\r\n<p><a href=\"http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/\" target=\"_blank\" rel=\"nofollow noopener\">http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/<\/a><\/p>\r\n<p>Should you wish to re-use the information you must include the following statement: &ldquo;NHSBSA Copyright 2025&rdquo; Failure to do so is a breach of the terms of the licence.<\/p>\r\n<p>Information you receive which is not subject to NHSBSA Copyright continues to be protected by the copyright of the person, or organisation, from which the information originated. Please obtain their permission before reproducing any third party (non NHSBSA Copyright) information.<\/p><\/p>\r\n  <\/div>\r\n<\/details>\r\n\r\n<!---Citation-->\r\n<details class=\"nhsuk-details\">\r\n  <summary class=\"nhsuk-details__summary\">\r\n    <span class=\"nhsuk-details__summary-text nhsuk-u-font-size-24\">Citation\r\n    <\/span>\r\n  <\/summary>\r\n  <div class=\"nhsuk-details__text\">\r\n<p><p>NHS Business Services Authority. \" BNF Code Information – Current \" NHS Business Services Authority Open Data. Accessed **[Date Accessed]**. URL: <a href=\"https://opendata.nhsbsa.net/dataset/bnf-code-information-current-year\">https://opendata.nhsbsa.net/dataset/bnf-code-information-current-year<\/a><\/p>\r\n<\/div>\r\n<\/details>\r\n",
+        "num_resources": 15,
+        "num_tags": 0,
+        "organization": {
+            "id": "ab9f74b0-a7ac-41a8-a97b-e49f8cd02aff",
+            "name": "community_prescribing_dispensing",
+            "title": "Community Prescribing & Dispensing",
+            "type": "organization",
+            "description": "Datasets on the prescribing and dispensing of medicines in the community",
+            "image_url": "https://storage.googleapis.com/dx-nhs-production/_assets/group/2020-11-29-111330.020756-prescribing-Icon.jpg",
+            "created": "2020-03-17T10:06:07.650987",
+            "is_organization": true,
+            "approval_status": "approved",
+            "state": "active"
+        },
+        "owner_org": "ab9f74b0-a7ac-41a8-a97b-e49f8cd02aff",
+        "private": false,
+        "state": "active",
+        "title": "BNF Code Information - Current Year",
+        "type": "dataset",
+        "upload_to_bigquery": "true",
+        "url": "NHS Business Services Authority (NHSBSA)",
+        "version": "1.0",
+        "resources": [
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202503_VERSION_88",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2025-04-15T08:44:22.797599",
+                "datastore_active": false,
+                "description": "",
+                "dialect": "{u'quoteChar': u'\"', u'delimiter': u','}",
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "58fd24589851ad675700d5a7fa8462e9556fc0e2928074261267cbd12c42b2ce",
+                "id": "84728fae-91cf-4c3d-9715-36eace967276",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-03-19T14:22:28.319592",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202503_VERSION_88",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 0,
+                "resource_type": null,
+                "restricted": "{\"level\": \"public\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "title": "Year Month",
+                            "type": "string",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "name": "YEAR_MONTH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "name": "BNF_CHAPTER",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "name": "BNF_CHAPTER_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "name": "BNF_SECTION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "name": "BNF_SECTION_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "name": "BNF_PARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF ",
+                            "name": "BNF_SUBPARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph. ",
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation. ",
+                            "name": "BNF_PRODUCT",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.   ",
+                            "name": "BNF_PRODUCT_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "name": "BNF_PRESENTATION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "name": "BNF_PRESENTATION_CODE",
+                            "format": "default"
+                        }
+                    ],
+                    "missingValues": [
+                        ""
+                    ]
+                },
+                "sha256": "58fd24589851ad675700d5a7fa8462e9556fc0e2928074261267cbd12c42b2ce",
+                "size": 13964756,
+                "state": "active",
+                "title": "BNF Code Information - Current - March 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/84728fae-91cf-4c3d-9715-36eace967276/download/bnf_code_current_202503_version_88.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202504_VERSION_88",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2025-05-02T09:00:02.841592",
+                "datastore_active": false,
+                "description": "",
+                "dialect": "{u'quoteChar': u'\"', u'delimiter': u','}",
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "1f83195fedb40593abba3bb3a2b4ccb29c8648d916b954698b8276e31c5cf448",
+                "id": "a0790278-2dce-49ea-9a07-550a3d81791e",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-03-19T14:23:44.020964",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202504_VERSION_88",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 1,
+                "resource_type": null,
+                "restricted": "{\"level\": \"public\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "title": "Year Month",
+                            "type": "string",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "name": "YEAR_MONTH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "name": "BNF_CHAPTER",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "name": "BNF_CHAPTER_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "name": "BNF_SECTION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "name": "BNF_SECTION_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "name": "BNF_PARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF ",
+                            "name": "BNF_SUBPARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph. ",
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation. ",
+                            "name": "BNF_PRODUCT",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.   ",
+                            "name": "BNF_PRODUCT_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "name": "BNF_PRESENTATION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "name": "BNF_PRESENTATION_CODE",
+                            "format": "default"
+                        }
+                    ],
+                    "missingValues": [
+                        ""
+                    ]
+                },
+                "sha256": "1f83195fedb40593abba3bb3a2b4ccb29c8648d916b954698b8276e31c5cf448",
+                "size": 13991726,
+                "state": "active",
+                "title": "BNF Code Information - Current - April 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/a0790278-2dce-49ea-9a07-550a3d81791e/download/bnf_code_current_202504_version_88.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202505_VERSION_88",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2025-06-03T10:38:24.327545",
+                "datastore_active": false,
+                "description": "",
+                "dialect": "{u'quoteChar': u'\"', u'delimiter': u','}",
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "80e0a89d0426d39eae8d01bfc909642d21bfb2b94dcd420b34f61004968bc511",
+                "id": "cf359d2f-0c9d-40fe-8c41-6db7e43e3dc2",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-03-19T14:24:32.021163",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202505_VERSION_88",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 2,
+                "resource_type": null,
+                "restricted": "{\"level\": \"public\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "title": "Year Month",
+                            "type": "string",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "name": "YEAR_MONTH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "name": "BNF_CHAPTER",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "name": "BNF_CHAPTER_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "name": "BNF_SECTION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "name": "BNF_SECTION_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "name": "BNF_PARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF ",
+                            "name": "BNF_SUBPARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph. ",
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation. ",
+                            "name": "BNF_PRODUCT",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.   ",
+                            "name": "BNF_PRODUCT_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "name": "BNF_PRESENTATION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "name": "BNF_PRESENTATION_CODE",
+                            "format": "default"
+                        }
+                    ],
+                    "missingValues": [
+                        ""
+                    ]
+                },
+                "sha256": "80e0a89d0426d39eae8d01bfc909642d21bfb2b94dcd420b34f61004968bc511",
+                "size": 14004199,
+                "state": "active",
+                "title": "BNF Code Information - Current - May 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/cf359d2f-0c9d-40fe-8c41-6db7e43e3dc2/download/bnf_code_current_202505_version_88.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202506_VERSION_88",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2025-07-02T10:27:03.558530",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "bf66cd1f73824131d3e71acedff7973b8c8c8c81fab1939eeedcb6fcfc57cb26",
+                "id": "728cc420-8a18-4c5f-b59d-ee8b0d31a8f6",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2025-08-04T14:47:40.129823",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202506_VERSION_88",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 3,
+                "resource_type": null,
+                "restricted": "{\"level\": \"public\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "name": "YEAR_MONTH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "name": "BNF_CHAPTER",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "name": "BNF_CHAPTER_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "name": "BNF_SECTION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "name": "BNF_SECTION_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "name": "BNF_PARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF ",
+                            "name": "BNF_SUBPARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph. ",
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation. ",
+                            "name": "BNF_PRODUCT",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.   ",
+                            "name": "BNF_PRODUCT_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "name": "BNF_PRESENTATION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "name": "BNF_PRESENTATION_CODE",
+                            "format": "default"
+                        }
+                    ],
+                    "missingValues": [
+                        ""
+                    ]
+                },
+                "size": 14022375,
+                "state": "active",
+                "title": "BNF Code Information - Current - June 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/728cc420-8a18-4c5f-b59d-ee8b0d31a8f6/download/bnf_code_current_202506_version_88.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202507_VERSION_88",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2025-08-04T14:47:40.157995",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "a69d062afba9a5ef891cf85ed71d694a36a4ea6488a477525ea72ebac812772c",
+                "id": "b1ce568d-37c4-4dd6-8bf4-57e4b044bf6c",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2025-09-05T09:03:17.239840",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202507_VERSION_88",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 4,
+                "resource_type": null,
+                "restricted": "{\"level\": \"public\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "name": "YEAR_MONTH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "name": "BNF_CHAPTER",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "name": "BNF_CHAPTER_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "name": "BNF_SECTION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "name": "BNF_SECTION_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "name": "BNF_PARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF ",
+                            "name": "BNF_SUBPARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph. ",
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation. ",
+                            "name": "BNF_PRODUCT",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.   ",
+                            "name": "BNF_PRODUCT_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "name": "BNF_PRESENTATION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "name": "BNF_PRESENTATION_CODE",
+                            "format": "default"
+                        }
+                    ],
+                    "missingValues": [
+                        ""
+                    ]
+                },
+                "size": 14048019,
+                "state": "active",
+                "title": "BNF Code Information - Current - July 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/b1ce568d-37c4-4dd6-8bf4-57e4b044bf6c/download/bnf_code_current_202507_version_88.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202508_VERSION_88_FINAL",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2025-09-05T09:03:17.248711",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "d17b86b14f21c1b584428ecd29700f43ebd23eb3ce5dd00b87a20b64d551870f",
+                "id": "e4f8df82-1c6f-49a3-b832-fa06429d1db9",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2025-10-03T07:50:20.119531",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202508_VERSION_88_FINAL",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 5,
+                "resource_type": null,
+                "restricted": "{\"level\": \"public\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "name": "YEAR_MONTH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "name": "BNF_CHAPTER",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "name": "BNF_CHAPTER_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "name": "BNF_SECTION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "name": "BNF_SECTION_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "name": "BNF_PARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF ",
+                            "name": "BNF_SUBPARAGRAPH",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph. ",
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation. ",
+                            "name": "BNF_PRODUCT",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.   ",
+                            "name": "BNF_PRODUCT_CODE",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "name": "BNF_PRESENTATION",
+                            "format": "default"
+                        },
+                        {
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "name": "BNF_PRESENTATION_CODE",
+                            "format": "default"
+                        }
+                    ],
+                    "missingValues": [
+                        ""
+                    ]
+                },
+                "size": 14060984,
+                "state": "active",
+                "title": "BNF Code Information - Current - August 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/e4f8df82-1c6f-49a3-b832-fa06429d1db9/download/bnf_code_current_202508_version_88_final.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202509_VERSION_88",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2025-10-03T07:50:20.134020",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "a52aecffe17afdb3751066a528e446d7f68cf0b77d1494cab61e29ec0de5105e",
+                "id": "bed365bc-ea2e-41f9-841e-ba41fb77d83c",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2025-10-27T09:57:53.303123",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202509_VERSION_88",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 6,
+                "resource_type": null,
+                "restricted": "{\\\"level\\\": \\\"public\\\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "YEAR_MONTH",
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER",
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER_CODE",
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION",
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION_CODE",
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH",
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH",
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT",
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT_CODE",
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION",
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION_CODE",
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "format": "default"
+                        }
+                    ]
+                },
+                "sha256": "a52aecffe17afdb3751066a528e446d7f68cf0b77d1494cab61e29ec0de5105e",
+                "size": 14105391,
+                "state": "active",
+                "title": "BNF Code Information - Current - September 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/bed365bc-ea2e-41f9-841e-ba41fb77d83c/download/bnf_code_current_202509_version_88.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202510_VERSION_88",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2025-11-04T08:27:37.265485",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "e537776f6b35eca6b54feb6e725590bbd1df1a12d089c9bbadb96ffd82a45ed4",
+                "id": "0a2aa4d6-f4af-4adb-9c0a-ac5bc5490b23",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2025-12-02T18:06:18.334365",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202510_VERSION_88",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 7,
+                "resource_type": null,
+                "restricted": "{\\\"level\\\": \\\"public\\\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "YEAR_MONTH",
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER",
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER_CODE",
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION",
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION_CODE",
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH",
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH",
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT",
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT_CODE",
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION",
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION_CODE",
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "format": "default"
+                        }
+                    ]
+                },
+                "sha256": "e537776f6b35eca6b54feb6e725590bbd1df1a12d089c9bbadb96ffd82a45ed4",
+                "size": 14127217,
+                "state": "active",
+                "title": "BNF Code Information - Current - October 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/0a2aa4d6-f4af-4adb-9c0a-ac5bc5490b23/download/bnf_code_current_202510_version_88.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202511_VERSION_88",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2025-12-02T18:06:18.347339",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "13a8fc7d79d76fff19648868330e2cf92037fca997e9f7f3f13529d3aac6c267",
+                "id": "e46b1685-eaa5-4d3b-bced-455ec6ce1772",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-01-06T09:21:12.484055",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202511_VERSION_88",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 8,
+                "resource_type": null,
+                "restricted": "{\\\"level\\\": \\\"public\\\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "YEAR_MONTH",
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER",
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER_CODE",
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION",
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION_CODE",
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH",
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH",
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT",
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT_CODE",
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION",
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION_CODE",
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "format": "default"
+                        }
+                    ]
+                },
+                "sha256": "13a8fc7d79d76fff19648868330e2cf92037fca997e9f7f3f13529d3aac6c267",
+                "size": 14144080,
+                "state": "active",
+                "title": "BNF Code Information - Current - November 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/e46b1685-eaa5-4d3b-bced-455ec6ce1772/download/bnf_code_current_202511_version_88.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202512_VERSION_88",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2026-01-06T09:21:12.494403",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "794a7e36957be1ed6c12a2516063fd2cf1073b827bda60f7e2c8b92bc064ed42",
+                "id": "3271f64f-9521-4055-b9b5-e44c66e74637",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-02-03T10:33:39.208138",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202512_VERSION_88",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 9,
+                "resource_type": null,
+                "restricted": "{\\\"level\\\": \\\"public\\\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "YEAR_MONTH",
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER",
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER_CODE",
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION",
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION_CODE",
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH",
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH",
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT",
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT_CODE",
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION",
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION_CODE",
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "format": "default"
+                        }
+                    ]
+                },
+                "sha256": "794a7e36957be1ed6c12a2516063fd2cf1073b827bda60f7e2c8b92bc064ed42",
+                "size": 14163736,
+                "state": "active",
+                "title": "BNF Code Information - Current - December 2025 Version 88",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/3271f64f-9521-4055-b9b5-e44c66e74637/download/bnf_code_current_202512_version_88.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202601_VERSION_90",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2026-02-03T10:36:04.745303",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "a3a8dfc85dfa8bffca90d2f5d5d5809b83bef5cba53f5b16dedeb82f97740db6",
+                "id": "e69fd607-5832-4997-9d61-548f3e0f7dfd",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-03-03T09:14:09.629257",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202601_VERSION_90",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 10,
+                "resource_type": null,
+                "restricted": "{\\\"level\\\": \\\"public\\\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "YEAR_MONTH",
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER",
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER_CODE",
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION",
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION_CODE",
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH",
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH",
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT",
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT_CODE",
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION",
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION_CODE",
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "format": "default"
+                        }
+                    ]
+                },
+                "sha256": "a3a8dfc85dfa8bffca90d2f5d5d5809b83bef5cba53f5b16dedeb82f97740db6",
+                "size": 14178975,
+                "state": "active",
+                "title": "BNF Code Information - Current - January 2026 Version 90",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/e69fd607-5832-4997-9d61-548f3e0f7dfd/download/bnf_code_current_202601_version_90.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202602_VERSION_90",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2026-03-03T09:16:21.301378",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "5b30b33212903fa743f5e7142d16c9fcc515360365a69b83f9e12f9fddec3c52",
+                "id": "8421993a-86d9-4333-93b6-2bdc8dea356a",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-03-19T14:22:28.320715",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202602_VERSION_90",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 11,
+                "resource_type": null,
+                "restricted": "{\\\"level\\\": \\\"public\\\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "YEAR_MONTH",
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER",
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER_CODE",
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION",
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION_CODE",
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH",
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH",
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT",
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT_CODE",
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION",
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION_CODE",
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "format": "default"
+                        }
+                    ]
+                },
+                "sha256": "5b30b33212903fa743f5e7142d16c9fcc515360365a69b83f9e12f9fddec3c52",
+                "size": 14201760,
+                "state": "active",
+                "title": "BNF Code Information - Current - February 2026 Version 90",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/8421993a-86d9-4333-93b6-2bdc8dea356a/download/bnf_code_current_202602_version_90.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202603_VERSION_90",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2026-04-02T08:58:10.385652",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "ace5096c2159caed48d6c45361fb64d74d4f4130978d8a94570541e96b7b08d8",
+                "id": "c97ec870-b4e5-4fd8-a5d7-00b5b45469d8",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-05-05T09:57:28.221843",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202603_VERSION_90",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 12,
+                "resource_type": null,
+                "restricted": "{\\\"level\\\": \\\"public\\\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "YEAR_MONTH",
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER",
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER_CODE",
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION",
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION_CODE",
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH",
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH",
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT",
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT_CODE",
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION",
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION_CODE",
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "format": "default"
+                        }
+                    ]
+                },
+                "sha256": "ace5096c2159caed48d6c45361fb64d74d4f4130978d8a94570541e96b7b08d8",
+                "size": 14223889,
+                "state": "active",
+                "title": "BNF Code Information - Current - March 2026 Version 90",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/c97ec870-b4e5-4fd8-a5d7-00b5b45469d8/download/bnf_code_current_202603_version_90.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202604_VERSION_90",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2026-05-07T13:53:30.399613",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "70c021fd08fa0180b8518776c03ff54fb7c29a6e7252372daa2a1975ee4fbb48",
+                "id": "e7c746f0-4327-4791-bd89-9b1b27f91e6c",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-05-07T14:32:06.977250",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202604_VERSION_90",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 13,
+                "resource_type": null,
+                "restricted": "{\\\"level\\\": \\\"public\\\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "YEAR_MONTH",
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER",
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER_CODE",
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION",
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION_CODE",
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH",
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH",
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT",
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT_CODE",
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION",
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION_CODE",
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "format": "default"
+                        }
+                    ]
+                },
+                "sha256": "70c021fd08fa0180b8518776c03ff54fb7c29a6e7252372daa2a1975ee4fbb48",
+                "size": 14254564,
+                "state": "active",
+                "title": "BNF Code Information - Current - April 2026 Version 90",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/e7c746f0-4327-4791-bd89-9b1b27f91e6c/download/bnf_code_current_202604_version_90.csv",
+                "url_type": "upload"
+            },
+            {
+                "bq_table_name": "BNF_CODE_CURRENT_202605_VERSION_90",
+                "cache_last_updated": null,
+                "cache_url": null,
+                "created": "2026-06-02T10:02:48.305172",
+                "datastore_active": false,
+                "dialect": {
+                    "delimiter": ",",
+                    "quoteChar": "\""
+                },
+                "encoding": "utf-8",
+                "format": "CSV",
+                "hash": "affd27e70be5016c321175a59fb16c35af46c2b1665751861787dd83152706ee",
+                "id": "5a9a1a67-0758-48b8-bcc9-0bcc3d0b61b9",
+                "last_modified": null,
+                "lfs_prefix": "community_prescribing_dispensing/bnf-code-information-current-year",
+                "metadata_modified": "2026-06-02T10:02:48.291535",
+                "mimetype": "text/csv",
+                "mimetype_inner": null,
+                "name": "BNF_CODE_CURRENT_202605_VERSION_90",
+                "package_id": "29d25de3-02cd-4755-9dee-cdc37e37b5f3",
+                "position": 14,
+                "resource_type": null,
+                "restricted": "{\\\"level\\\": \\\"public\\\"}",
+                "sample": {
+
+                },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "YEAR_MONTH",
+                            "title": "Year Month",
+                            "type": "yearmonth",
+                            "description": "Year and Month as YYYY-MM. Example: 2025-03",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER",
+                            "title": "BNF Chapter",
+                            "type": "string",
+                            "description": "The name given to a British National Formulary (BNF) chapter. This is the broadest grouping of the BNF therapeutical classification system.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHAPTER_CODE",
+                            "title": "BNF Chapter Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION",
+                            "title": "BNF Section",
+                            "type": "string",
+                            "description": "The name given to a BNF Section. This is the next broadest grouping of the BNF therapeutical classification system after chapter.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SECTION_CODE",
+                            "title": "BNF Section Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH",
+                            "title": "BNF Paragraph",
+                            "type": "string",
+                            "description": "The name given to the BNF Paragraph. This level of grouping of the BNF Therapeutical classification system sits below BNF section.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PARAGRAPH_CODE",
+                            "title": "BNF Paragraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH",
+                            "title": "BNF Subparagraph",
+                            "type": "string",
+                            "description": "The name of the BNF Sub-Paragraph, a subdivision of the Paragraph level of the BNF",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_SUBPARAGRAPH_CODE",
+                            "title": "BNF Subparagraph Code",
+                            "type": "number",
+                            "description": "The unique code used to refer to the BNF Sub-Paragraph.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE",
+                            "title": "BNF Chemical Substance",
+                            "type": "string",
+                            "description": "The name given to the BNF Chemical Substance (the main active ingredient in a drug. For example, Amoxicillin).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_CHEMICAL_SUBSTANCE_CODE",
+                            "title": "BNF Chemical Substance Code",
+                            "type": "string",
+                            "description": "A unique code used to refer to a BNF Chemical Substance.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT",
+                            "title": "BNF Product",
+                            "type": "string",
+                            "description": "The name of the Product (generic or branded) without indication of the strength or formulation.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRODUCT_CODE",
+                            "title": "BNF Product Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to the BNF Product.",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION",
+                            "title": "BNF Presentation",
+                            "type": "string",
+                            "description": "The name given to the BNF Presentation (specific type, strength, and formulation of a drug or the specific type of an appliance. For example, Amoxicillin 500mg capsules).",
+                            "format": "default"
+                        },
+                        {
+                            "name": "BNF_PRESENTATION_CODE",
+                            "title": "BNF Presentation Code",
+                            "type": "string",
+                            "description": "The unique code used to refer to a BNF Presentation.",
+                            "format": "default"
+                        }
+                    ]
+                },
+                "sha256": "affd27e70be5016c321175a59fb16c35af46c2b1665751861787dd83152706ee",
+                "size": 14271707,
+                "state": "active",
+                "title": "BNF Code Information - Current - May 2026 Version 90",
+                "url": "https://opendata.nhsbsa.net/dataset/29d25de3-02cd-4755-9dee-cdc37e37b5f3/resource/5a9a1a67-0758-48b8-bcc9-0bcc3d0b61b9/download/bnf_code_current_202605_version_90.csv",
+                "url_type": "upload"
+            }
+        ],
+        "tags": [
+
+        ],
+        "groups": [
+
+        ],
+        "relationships_as_subject": [
+
+        ],
+        "relationships_as_object": [
+
+        ]
+    }
+}

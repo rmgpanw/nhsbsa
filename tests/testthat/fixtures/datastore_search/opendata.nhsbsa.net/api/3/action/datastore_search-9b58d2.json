@@ -1,0 +1,262 @@
+{
+    "help": "https://opendata.nhsbsa.net/api/3/action/help_show?name=datastore_search",
+    "success": true,
+    "result": {
+        "include_total": true,
+        "resource_id": "EPD_201401",
+        "fields": [
+            {
+                "id": "YEAR_MONTH",
+                "type": "NUMERIC"
+            },
+            {
+                "id": "REGIONAL_OFFICE_NAME",
+                "type": "STRING"
+            },
+            {
+                "id": "REGIONAL_OFFICE_CODE",
+                "type": "STRING"
+            },
+            {
+                "id": "STP_NAME",
+                "type": "STRING"
+            },
+            {
+                "id": "STP_CODE",
+                "type": "STRING"
+            },
+            {
+                "id": "PCO_NAME",
+                "type": "STRING"
+            },
+            {
+                "id": "PCO_CODE",
+                "type": "STRING"
+            },
+            {
+                "id": "PRACTICE_NAME",
+                "type": "STRING"
+            },
+            {
+                "id": "PRACTICE_CODE",
+                "type": "STRING"
+            },
+            {
+                "id": "ADDRESS_1",
+                "type": "STRING"
+            },
+            {
+                "id": "ADDRESS_2",
+                "type": "STRING"
+            },
+            {
+                "id": "ADDRESS_3",
+                "type": "STRING"
+            },
+            {
+                "id": "ADDRESS_4",
+                "type": "STRING"
+            },
+            {
+                "id": "POSTCODE",
+                "type": "STRING"
+            },
+            {
+                "id": "BNF_CHEMICAL_SUBSTANCE",
+                "type": "STRING"
+            },
+            {
+                "id": "CHEMICAL_SUBSTANCE_BNF_DESCR",
+                "type": "STRING"
+            },
+            {
+                "id": "BNF_CODE",
+                "type": "STRING"
+            },
+            {
+                "id": "BNF_DESCRIPTION",
+                "type": "STRING"
+            },
+            {
+                "id": "BNF_CHAPTER_PLUS_CODE",
+                "type": "STRING"
+            },
+            {
+                "id": "QUANTITY",
+                "type": "NUMERIC"
+            },
+            {
+                "id": "ITEMS",
+                "type": "NUMERIC"
+            },
+            {
+                "id": "TOTAL_QUANTITY",
+                "type": "NUMERIC"
+            },
+            {
+                "id": "ADQUSAGE",
+                "type": "NUMERIC"
+            },
+            {
+                "id": "NIC",
+                "type": "NUMERIC"
+            },
+            {
+                "id": "ACTUAL_COST",
+                "type": "NUMERIC"
+            },
+            {
+                "id": "UNIDENTIFIED",
+                "type": "BOOLEAN"
+            }
+        ],
+        "records_format": "objects",
+        "records": [
+            {
+                "YEAR_MONTH": 201401,
+                "REGIONAL_OFFICE_NAME": "UNIDENTIFIED",
+                "REGIONAL_OFFICE_CODE": "-",
+                "STP_NAME": "UNIDENTIFIED",
+                "STP_CODE": "-",
+                "PCO_NAME": "UNIDENTIFIED",
+                "PCO_CODE": "-",
+                "PRACTICE_NAME": "UNIDENTIFIED DOCTORS",
+                "PRACTICE_CODE": "-",
+                "ADDRESS_1": "-",
+                "ADDRESS_2": "-",
+                "ADDRESS_3": "-",
+                "ADDRESS_4": "-",
+                "POSTCODE": "-",
+                "BNF_CHEMICAL_SUBSTANCE": "2003",
+                "CHEMICAL_SUBSTANCE_BNF_DESCR": "Wound Management & Other Dressings",
+                "BNF_CODE": "20030100372",
+                "BNF_DESCRIPTION": "Softpore dressing 10cm x 15cm",
+                "BNF_CHAPTER_PLUS_CODE": "20: Dressings",
+                "QUANTITY": 10,
+                "ITEMS": 9,
+                "TOTAL_QUANTITY": 90,
+                "ADQUSAGE": 0,
+                "NIC": 18,
+                "ACTUAL_COST": 17.0203,
+                "UNIDENTIFIED": true
+            },
+            {
+                "YEAR_MONTH": 201401,
+                "REGIONAL_OFFICE_NAME": "UNIDENTIFIED",
+                "REGIONAL_OFFICE_CODE": "-",
+                "STP_NAME": "UNIDENTIFIED",
+                "STP_CODE": "-",
+                "PCO_NAME": "UNIDENTIFIED",
+                "PCO_CODE": "-",
+                "PRACTICE_NAME": "UNIDENTIFIED DOCTORS",
+                "PRACTICE_CODE": "-",
+                "ADDRESS_1": "-",
+                "ADDRESS_2": "-",
+                "ADDRESS_3": "-",
+                "ADDRESS_4": "-",
+                "POSTCODE": "-",
+                "BNF_CHEMICAL_SUBSTANCE": "2002",
+                "CHEMICAL_SUBSTANCE_BNF_DESCR": "Arm Sling/Bandages",
+                "BNF_CODE": "20020201081",
+                "BNF_DESCRIPTION": "UrgoKTwo multi-layer compression bandage kit (10cm) 18cm-25cm ankle circumference",
+                "BNF_CHAPTER_PLUS_CODE": "20: Dressings",
+                "QUANTITY": 16,
+                "ITEMS": 1,
+                "TOTAL_QUANTITY": 16,
+                "ADQUSAGE": 0,
+                "NIC": 127.84,
+                "ACTUAL_COST": 120.37838,
+                "UNIDENTIFIED": true
+            },
+            {
+                "YEAR_MONTH": 201401,
+                "REGIONAL_OFFICE_NAME": "UNIDENTIFIED",
+                "REGIONAL_OFFICE_CODE": "-",
+                "STP_NAME": "UNIDENTIFIED",
+                "STP_CODE": "-",
+                "PCO_NAME": "UNIDENTIFIED",
+                "PCO_CODE": "-",
+                "PRACTICE_NAME": "UNIDENTIFIED DOCTORS",
+                "PRACTICE_CODE": "-",
+                "ADDRESS_1": "-",
+                "ADDRESS_2": "-",
+                "ADDRESS_3": "-",
+                "ADDRESS_4": "-",
+                "POSTCODE": "-",
+                "BNF_CHEMICAL_SUBSTANCE": "0604011P0",
+                "CHEMICAL_SUBSTANCE_BNF_DESCR": "Oestrogens conjugated",
+                "BNF_CODE": "0604011P0BBAAAB",
+                "BNF_DESCRIPTION": "Premarin 0.625mg tablets",
+                "BNF_CHAPTER_PLUS_CODE": "06: Endocrine System",
+                "QUANTITY": 84,
+                "ITEMS": 4,
+                "TOTAL_QUANTITY": 336,
+                "ADQUSAGE": 0,
+                "NIC": 16.08,
+                "ACTUAL_COST": 15.18794,
+                "UNIDENTIFIED": true
+            },
+            {
+                "YEAR_MONTH": 201401,
+                "REGIONAL_OFFICE_NAME": "UNIDENTIFIED",
+                "REGIONAL_OFFICE_CODE": "-",
+                "STP_NAME": "UNIDENTIFIED",
+                "STP_CODE": "-",
+                "PCO_NAME": "UNIDENTIFIED",
+                "PCO_CODE": "-",
+                "PRACTICE_NAME": "UNIDENTIFIED DOCTORS",
+                "PRACTICE_CODE": "-",
+                "ADDRESS_1": "-",
+                "ADDRESS_2": "-",
+                "ADDRESS_3": "-",
+                "ADDRESS_4": "-",
+                "POSTCODE": "-",
+                "BNF_CHEMICAL_SUBSTANCE": "0202030S0",
+                "CHEMICAL_SUBSTANCE_BNF_DESCR": "Spironolactone",
+                "BNF_CODE": "0202030S0AAATAT",
+                "BNF_DESCRIPTION": "Spironolactone 25mg tablets",
+                "BNF_CHAPTER_PLUS_CODE": "02: Cardiovascular System",
+                "QUANTITY": 112,
+                "ITEMS": 2,
+                "TOTAL_QUANTITY": 224,
+                "ADQUSAGE": 224,
+                "NIC": 10.64,
+                "ACTUAL_COST": 10.04171,
+                "UNIDENTIFIED": true
+            },
+            {
+                "YEAR_MONTH": 201401,
+                "REGIONAL_OFFICE_NAME": "UNIDENTIFIED",
+                "REGIONAL_OFFICE_CODE": "-",
+                "STP_NAME": "UNIDENTIFIED",
+                "STP_CODE": "-",
+                "PCO_NAME": "UNIDENTIFIED",
+                "PCO_CODE": "-",
+                "PRACTICE_NAME": "UNIDENTIFIED DOCTORS",
+                "PRACTICE_CODE": "-",
+                "ADDRESS_1": "-",
+                "ADDRESS_2": "-",
+                "ADDRESS_3": "-",
+                "ADDRESS_4": "-",
+                "POSTCODE": "-",
+                "BNF_CHEMICAL_SUBSTANCE": "2113",
+                "CHEMICAL_SUBSTANCE_BNF_DESCR": "Catheter Maintenance Products",
+                "BNF_CODE": "21130000110",
+                "BNF_DESCRIPTION": "Uro-Tainer sodium chloride 0.9% catheter maintenance solution",
+                "BNF_CHAPTER_PLUS_CODE": "21: Appliances",
+                "QUANTITY": 500,
+                "ITEMS": 18,
+                "TOTAL_QUANTITY": 9000,
+                "ADQUSAGE": 0,
+                "NIC": 586.5,
+                "ACTUAL_COST": 552.27804,
+                "UNIDENTIFIED": true
+            }
+        ],
+        "_links": {
+            "start": "/api/3/action/datastore_search?resource_id=EPD_201401",
+            "next": "/api/3/action/datastore_search?offset=100&resource_id=EPD_201401"
+        },
+        "total": 18762462
+    }
+}
