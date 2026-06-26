@@ -83,11 +83,14 @@ test_that("nhsbsa_download_resource resolves a resource and streams it", {
     },
     {
       dest <- withr::local_tempfile(fileext = ".csv")
-      out <- nhsbsa_download_resource(
-        "ds",
-        resource_id = "rid-2",
-        dest = dest,
-        quiet = TRUE
+      # With quiet = FALSE the download emits an informational message.
+      expect_message(
+        out <- nhsbsa_download_resource(
+          "ds",
+          resource_id = "rid-2",
+          dest = dest
+        ),
+        class = "nhsbsa_message"
       )
       expect_identical(out, dest)
       expect_identical(streamed_from, "https://example.test/202402.csv")
@@ -107,12 +110,14 @@ test_that("nhsbsa_download_resource short-circuits an existing file", {
     {
       dest <- withr::local_tempfile(fileext = ".csv")
       writeLines("already here", dest)
-      out <- nhsbsa_download_resource(
-        "ds",
-        resource_id = "rid-1",
-        dest = dest,
-        overwrite = FALSE,
-        quiet = TRUE
+      expect_message(
+        out <- nhsbsa_download_resource(
+          "ds",
+          resource_id = "rid-1",
+          dest = dest,
+          overwrite = FALSE
+        ),
+        class = "nhsbsa_message"
       )
       expect_identical(out, dest)
       expect_false(downloaded)
