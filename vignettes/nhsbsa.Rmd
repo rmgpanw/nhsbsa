@@ -1,0 +1,168 @@
+---
+title: "Getting started with nhsbsa"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with nhsbsa}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+```{r setup}
+library(nhsbsa)
+```
+
+## The NHSBSA Open Data Portal
+
+The [NHS Business Services Authority (NHSBSA) Open Data
+Portal](https://opendata.nhsbsa.net) publishes open datasets about NHS
+activity in England — prescribing, dental, pharmaceutical and contractor data
+among them. All of it is freely available under the Open Government Licence.
+
+The portal runs on [CKAN](https://ckan.org), a widely used open-source data
+catalogue. CKAN organises data into **datasets** (called "packages") which each
+contain one or more **resources** — the individual downloadable files (usually
+CSV) or database tables behind them.
+
+`nhsbsa` is a thin, low-level client for this portal. It wraps the CKAN API and
+returns plain data for you to work with: tibbles for tabular results and lists
+for metadata. It contains no knowledge of any particular dataset, so you supply
+the dataset identifiers and interpret the results yourself. If you are familiar
+with the CKAN API, the package will feel familiar too: function names and
+arguments mirror the API.
+
+## The API and the response envelope
+
+Every request goes to a CKAN *action* under
+
+```
+https://opendata.nhsbsa.net/api/3/action/<action>
+```
+
+and comes back as a JSON envelope of the form
+
+```json
+{ "success": true, "result": ... }
+```
+
+or, on failure,
+
+```json
+{ "success": false, "error": { "message": "..." } }
+```
+
+`nhsbsa` handles this envelope for you: it checks the `success` flag, returns
+the `result`, and otherwise raises an informative error. If the portal cannot be
+reached (for example with no internet connection) it fails gracefully with a
+clear message rather than an obscure low-level error.
+
+## What the package wraps
+
+| Function | CKAN action | Returns |
+|---|---|---|
+| `nhsbsa_package_list()` | `package_list` | character vector of dataset ids |
+| `nhsbsa_package_show()` | `package_show` | list (dataset metadata) |
+| `nhsbsa_package_search()` | `package_search` | list (search results) |
+| `nhsbsa_resource_show()` | `resource_show` | list (resource metadata) |
+| `nhsbsa_datastore_search()` | `datastore_search` | tibble of rows |
+| `nhsbsa_datastore_search_sql()` | `datastore_search_sql` | tibble of rows |
+
+Two convenience helpers sit on top of these for the operations you reach for
+most often. They are not pure API wrappers, but they save a little work:
+
+* `nhsbsa_list_resources()` flattens a dataset's resources into a tibble
+  (including each resource's download URL).
+* `nhsbsa_download_resource()` resolves a single resource and streams its file
+  to disk.
+
+Most read-only functions also accept `.return_raw = TRUE`, which returns the
+full parsed response envelope instead of the processed result — useful when you
+need fields the helper does not surface, such as a datastore query's `total`.
+
+## A worked example
+
+### List datasets
+
+```{r}
+datasets <- nhsbsa_package_list()
+length(datasets)
+head(datasets)
+```
+
+### Inspect a dataset's resources
+
+```{r}
+resources <- nhsbsa_list_resources("bnf-code-information-current-year")
+resources
+```
+
+You can filter by a pattern matched against the resource name:
+
+```{r}
+nhsbsa_list_resources(
+  "bnf-code-information-current-year",
+  pattern = "202401"
+)
+```
+
+### Download a resource file
+
+Identify a single resource — by `resource_id`, or by a `pattern` that matches
+exactly one resource name — and stream it to disk:
+
+```{r}
+dest <- nhsbsa_download_resource(
+  "bnf-code-information-current-year",
+  pattern = "202401"
+)
+dest
+```
+
+### Query rows without downloading the whole file
+
+When a resource is loaded into the datastore you can query its rows directly.
+Note that the datastore identifies a resource by its **name** (e.g.
+`"EPD_202401"`), shown in the `name` column of `nhsbsa_list_resources()`, rather
+than by its `id`:
+
+```{r}
+nhsbsa_datastore_search(
+  resource_id = "EPD_202401",
+  filters = list(pco_code = "13T00"),
+  limit = 10
+)
+```
+
+The datastore returns at most one page of rows per request. If more rows match
+than were returned, `nhsbsa_datastore_search()` warns you and explains how to
+page through the rest by increasing `offset`:
+
+```{r}
+# Fetch the next page
+nhsbsa_datastore_search(
+  resource_id = "EPD_202401",
+  filters = list(pco_code = "13T00"),
+  limit = 10,
+  offset = 10
+)
+```
+
+For more control you can query with SQL. The portal requires the `resource_id`
+alongside the query, and you reference the same resource name in the `FROM`
+clause:
+
+```{r}
+nhsbsa_datastore_search_sql(
+  resource_id = "EPD_202401",
+  sql = "SELECT pco_code, SUM(items) AS items
+         FROM `EPD_202401`
+         GROUP BY pco_code"
+)
+```

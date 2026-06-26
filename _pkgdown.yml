@@ -1,0 +1,23 @@
+url: https://rmgpanw.github.io/nhsbsa/
+
+template:
+  bootstrap: 5
+
+reference:
+- title: Datasets
+  desc: Discover and inspect datasets ("packages").
+  contents:
+  - nhsbsa_package_list
+  - nhsbsa_package_show
+  - nhsbsa_package_search
+- title: Resources
+  desc: List and download a dataset's resources (files).
+  contents:
+  - nhsbsa_resource_show
+  - nhsbsa_list_resources
+  - nhsbsa_download_resource
+- title: Datastore
+  desc: Query the rows of a resource.
+  contents:
+  - nhsbsa_datastore_search
+  - nhsbsa_datastore_search_sql

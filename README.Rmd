@@ -1,47 +1,57 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  eval = FALSE
+)
+```
 
 # nhsbsa
 
 <!-- badges: start -->
-
 [![R-CMD-check](https://github.com/rmgpanw/nhsbsa/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rmgpanw/nhsbsa/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/rmgpanw/nhsbsa/graph/badge.svg)](https://app.codecov.io/gh/rmgpanw/nhsbsa)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test coverage](https://codecov.io/gh/rmgpanw/nhsbsa/graph/badge.svg)](https://app.codecov.io/gh/rmgpanw/nhsbsa)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-`nhsbsa` is a low-level R client for the [NHS Business Services
-Authority (NHSBSA) Open Data Portal](https://opendata.nhsbsa.net), a
-[CKAN](https://ckan.org) data catalogue. It provides thin wrappers
-around the portal’s API actions and returns plain data — tibbles for
-tabular results and lists for metadata — leaving the interpretation of
-any particular dataset to the caller.
+`nhsbsa` is a low-level R client for the [NHS Business Services Authority
+(NHSBSA) Open Data Portal](https://opendata.nhsbsa.net), a
+[CKAN](https://ckan.org) data catalogue. It provides thin wrappers around the
+portal's API actions and returns plain data — tibbles for tabular results and
+lists for metadata — leaving the interpretation of any particular dataset to the
+caller.
 
-The package deliberately contains no knowledge of specific datasets.
-Function names and arguments mirror the CKAN API, so if you know the API
-you already know the package.
+The package deliberately contains no knowledge of specific datasets. Function
+names and arguments mirror the CKAN API, so if you know the API you already know
+the package.
 
 ## Installation
 
 You can install the development version of nhsbsa from
 [GitHub](https://github.com/rmgpanw/nhsbsa) with:
 
-``` r
+```{r}
 # install.packages("pak")
 pak::pak("rmgpanw/nhsbsa")
 ```
 
 ## Usage
 
-``` r
+```{r}
 library(nhsbsa)
 ```
 
 Find datasets:
 
-``` r
+```{r}
 # Identifiers of every dataset on the portal
 datasets <- nhsbsa_package_list()
 
@@ -49,9 +59,9 @@ datasets <- nhsbsa_package_list()
 nhsbsa_package_search(q = "prescribing", rows = 5)
 ```
 
-List a dataset’s resources (files), and download one:
+List a dataset's resources (files), and download one:
 
-``` r
+```{r}
 resources <- nhsbsa_list_resources(
   "bnf-code-information-current-year",
   pattern = "202401"
@@ -64,10 +74,9 @@ dest <- nhsbsa_download_resource(
 )
 ```
 
-Query the rows of a datastore resource without downloading the whole
-file:
+Query the rows of a datastore resource without downloading the whole file:
 
-``` r
+```{r}
 # The datastore identifies a resource by its name, e.g. "EPD_202401"
 nhsbsa_datastore_search(
   resource_id = "EPD_202401",
