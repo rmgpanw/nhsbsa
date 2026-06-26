@@ -1,4 +1,4 @@
-with_mock_dir("fixtures/bnf", {
+with_mock_dir("bnf", {
   test_that("nhsbsa_package_show returns the dataset metadata", {
     meta <- nhsbsa_package_show("bnf-code-information-current-year")
     expect_type(meta, "list")

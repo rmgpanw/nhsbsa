@@ -33,7 +33,7 @@ test_that("nhsbsa_warn_incomplete_results warns only when rows remain", {
   )
 })
 
-with_mock_dir("fixtures/datastore_search", {
+with_mock_dir("ds", {
   test_that("nhsbsa_datastore_search returns a tibble of rows", {
     out <- suppressWarnings(
       nhsbsa_datastore_search(resource_id = "EPD_201401", limit = 5)
@@ -50,7 +50,7 @@ with_mock_dir("fixtures/datastore_search", {
   })
 })
 
-with_mock_dir("fixtures/datastore_search_sql", {
+with_mock_dir("dq", {
   test_that("nhsbsa_datastore_search_sql returns a tibble of rows", {
     out <- nhsbsa_datastore_search_sql(
       resource_id = "EPD_201401",

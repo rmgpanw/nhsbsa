@@ -15,3 +15,4 @@
 ^examples\.R$
 ^CRAN-SUBMISSION$
 ^codecov\.yml$
+^\.lintr$

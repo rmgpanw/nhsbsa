@@ -1,4 +1,4 @@
-with_mock_dir("fixtures/package_list", {
+with_mock_dir("pl", {
   test_that("nhsbsa_package_list returns a character vector of dataset ids", {
     out <- nhsbsa_package_list()
     expect_type(out, "character")
