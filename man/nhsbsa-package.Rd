@@ -4,30 +4,21 @@
 \name{nhsbsa-package}
 \alias{nhsbsa}
 \alias{nhsbsa-package}
-\title{nhsbsa: Access NHS Business Services Authority Open Data Portal API}
+\title{nhsbsa: Client for the NHS Business Services Authority Open Data Portal}
 \description{
-This package provides functions to access and download data from the
-NHS Business Services Authority (NHSBSA) Open Data Portal API.
+A low-level client for the NHS Business Services Authority (NHSBSA) Open Data Portal \url{https://opendata.nhsbsa.net}, a 'CKAN' data catalogue. Provides thin wrappers around the portal's API actions for listing datasets, retrieving metadata, querying the datastore and downloading resource files. Results are returned as plain data (tibbles and lists) for the caller to interpret.
 }
-\section{Main functions}{
-
-\describe{
-\item{\code{\link{nhsbsa_list_datasets}}}{List all available datasets}
-\item{\code{\link{nhsbsa_get_metadata}}}{Get metadata for a specific dataset}
-\item{\code{\link{nhsbsa_download_data}}}{Download data from a specific resource}
-\item{\code{\link{nhsbsa_get_epd}}}{Get English Prescribing Dataset (EPD) data}
-}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/rmgpanw/nhsbsa}
+  \item \url{https://rmgpanw.github.io/nhsbsa/}
+  \item Report bugs at \url{https://github.com/rmgpanw/nhsbsa/issues}
 }
 
-\section{API Information}{
-
-The NHSBSA Open Data Portal provides access to various healthcare datasets
-including prescribing data, dental statistics, and more. All data is
-publicly available and subject to the Open Government Licence.
 }
-
 \author{
-\strong{Maintainer}: NHS Business Services Authority \email{opendata@nhsbsa.net}
+\strong{Maintainer}: Alasdair Warwick \email{alasdair.warwick06@gmail.com} (\href{https://orcid.org/0000-0002-0800-2890}{ORCID})
 
 }
 \keyword{internal}

@@ -18,12 +18,13 @@ BugReports: https://github.com/rmgpanw/nhsbsa/issues
 Encoding: UTF-8
 Language: en-GB
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Depends: R (>= 4.1.0)
 Imports:
     cli,
     dplyr,
     httr2,
+    jsonlite,
     purrr,
     rlang,
     stringr,
