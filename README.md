@@ -34,7 +34,8 @@ please [open an issue](https://github.com/rmgpanw/nhsbsa/issues).
 
 `nhsbsa` is **experimental** and a work in progress. It was developed
 with [Claude Code](https://www.anthropic.com/claude-code), modelled on
-the design of established R clients for other NHS and REST APIs. Some
+the design of the author’s [trud](https://github.com/rmgpanw/trud) and
+[gtexr](https://github.com/rmgpanw/gtexr) API-client packages. Some
 functionality has yet to be exercised interactively against the live
 API, so please treat results with care. Bug reports, comments and
 suggestions are very welcome via the [issue
