@@ -7,92 +7,85 @@
 
 #' Search a resource's rows
 #'
-#' Wraps the CKAN `datastore_search` action to query the rows of a datastore
+#' Wraps the CKAN `datastore_search` action to read the rows of a datastore
 #' resource. One argument is provided for each documented API parameter.
 #'
+#' Use this function to *read* rows — choosing and ordering columns with
+#' `fields`, sorting with `sort`, and paging with `limit`/`offset`. To *filter*
+#' by value or to aggregate, use [nhsbsa_datastore_search_sql()] instead (see
+#' Details).
+#'
 #' The CKAN datastore returns at most one page of rows per request (the server
-#' enforces a maximum `limit`). When more rows match than are returned, a warning
+#' enforces a maximum `limit`). When more rows exist than are returned, a warning
 #' of class `nhsbsa_incomplete_results` is signalled describing how to page
 #' through the rest by increasing `offset`.
 #'
 #' @details
-#' There are three ways to narrow a datastore query, from simplest to most
-#' powerful:
-#'
-#' * `filters` — exact field/value matching, e.g.
-#'   `filters = list(PCO_CODE = "13T00")`. The most reliable option.
-#' * `q` — full-text search. As a *per-field* query, pass a named list, e.g.
-#'   `q = list(BNF_CHEMICAL_SUBSTANCE = "Paracetamol")`. As a plain string it
-#'   searches across all fields, but full-text search is not enabled for every
-#'   resource and may return a server error.
-#' * [nhsbsa_datastore_search_sql()] — arbitrary read-only SQL, for selecting
-#'   columns, expressions, aggregation, joins and sorting.
-#'
-#' See `vignette("nhsbsa")` for worked examples of each.
+#' CKAN's `datastore_search` defines `filters` (exact field matching) and `q`
+#' (full-text search) parameters, which this function exposes for API
+#' completeness. **The NHSBSA datastore does not honour them** — a query using
+#' `filters` or `q` returns no matching rows — so to filter by value, aggregate
+#' or compute expressions, use [nhsbsa_datastore_search_sql()] with a SQL
+#' `WHERE`/`GROUP BY` clause. See `vignette("nhsbsa")` for worked examples.
 #'
 #' @param resource_id Character scalar. The resource to query. The NHSBSA
 #'   datastore identifies a resource by its *name* (the `name` column of
 #'   [nhsbsa_list_resources()]), e.g. `"EPD_201401"`, rather than its `id`.
-#' @param q A full-text query. Either a character scalar (searched across all
-#'   fields) or a named list for a per-field search, e.g.
-#'   `list(BNF_CHEMICAL_SUBSTANCE = "Paracetamol")` (sent to the API as a JSON
-#'   object). See Details.
+#' @param q A full-text query (a character scalar, or a named list for a
+#'   per-field search). Accepted for API completeness but not honoured by this
+#'   portal; use [nhsbsa_datastore_search_sql()] instead.
 #' @param distinct Logical. Return only rows that are distinct across the
 #'   selected `fields`?
-#' @param plain Logical. Controls how a `q` full-text query is parsed. When
-#'   `TRUE` (the default), `q` is treated as plain text. When `FALSE`, the
-#'   datastore's full-text query syntax is enabled, so `q` may contain operators
-#'   such as `&` (and), `|` (or) and `:*` (prefix), e.g.
-#'   `q = list(BNF_DESCRIPTION = "Para:*")`.
+#' @param plain Logical. Controls how a `q` full-text query is parsed (`TRUE`,
+#'   the default, treats `q` as plain text). Only relevant to `q`, which this
+#'   portal does not honour.
 #' @param language Character scalar. The text-search language (e.g. `"english"`).
 #' @param limit Integer. Maximum number of rows to return in this request.
 #' @param offset Integer. Number of rows to skip, for paging.
 #' @param fields Character vector. The fields to return, in order.
-#' @param sort Character scalar or vector. Sort clause(s), e.g.
-#'   `"total_items desc"`.
-#' @param filters Named list. Field-value pairs to filter on, sent to the API as
-#'   a JSON object (e.g. `list(bnf_chemical_substance = "0407010H0")`).
+#' @param sort Character scalar or vector. Sort clause(s), e.g. `"ITEMS desc"`.
+#' @param filters Named list. Field-value pairs to filter on. Accepted for API
+#'   completeness but not honoured by this portal; use
+#'   [nhsbsa_datastore_search_sql()] instead.
 #' @param include_total Logical. Include the total match count in the response?
 #'   Required for the incomplete-results warning; defaults to the API default
 #'   (`TRUE`) when left `NULL`.
 #' @inheritParams nhsbsa_package_list
 #'
-#' @return A tibble with one row per matching record. With `.return_raw = TRUE`,
-#'   the parsed response envelope as a list (including `total` and `fields`).
+#' @return A tibble with one row per record. With `.return_raw = TRUE`, the
+#'   parsed response envelope as a list (including `total` and `fields`).
 #'
-#' @seealso [nhsbsa_datastore_search_sql()] to query with SQL,
+#' @seealso [nhsbsa_datastore_search_sql()] to filter or aggregate with SQL,
 #'   [nhsbsa_download_resource()] to download the whole resource file.
 #'
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
-#' # Exact field matching with `filters` (field names are case-sensitive)
+#' # Read selected columns, sorted (field names are case-sensitive)
 #' nhsbsa_datastore_search(
 #'   resource_id = "EPD_202401",
-#'   filters = list(PCO_CODE = "13T00", BNF_CHEMICAL_SUBSTANCE = "0407010H0"),
-#'   limit = 10
-#' )
-#'
-#' # Per-field full-text search with `q`
-#' nhsbsa_datastore_search(
-#'   resource_id = "EPD_202401",
-#'   q = list(BNF_CHEMICAL_SUBSTANCE = "0407010H0"),
-#'   limit = 10
-#' )
-#'
-#' # Select and order columns, and return only distinct rows
-#' nhsbsa_datastore_search(
-#'   resource_id = "EPD_202401",
-#'   fields = c("PRACTICE_CODE", "ITEMS"),
+#'   fields = c("PCO_CODE", "BNF_CHEMICAL_SUBSTANCE", "ITEMS"),
 #'   sort = "ITEMS desc",
+#'   limit = 5
+#' )
+#'
+#' # Distinct values of a column
+#' nhsbsa_datastore_search(
+#'   resource_id = "EPD_202401",
+#'   fields = "PCO_CODE",
 #'   distinct = TRUE,
 #'   limit = 5
 #' )
 #'
-#' # Page through results with `limit` and `offset`
-#' nhsbsa_datastore_search(resource_id = "EPD_202401", limit = 100)
-#' nhsbsa_datastore_search(resource_id = "EPD_202401", limit = 100, offset = 100)
+#' # Page through rows with `limit` and `offset`
+#' nhsbsa_datastore_search(resource_id = "EPD_202401", fields = "ITEMS", limit = 5)
+#' nhsbsa_datastore_search(
+#'   resource_id = "EPD_202401",
+#'   fields = "ITEMS",
+#'   limit = 5,
+#'   offset = 5
+#' )
 #'
-#' # Use the raw envelope to read the total number of matching rows
+#' # Use the raw envelope to read the total number of rows
 #' raw <- nhsbsa_datastore_search(
 #'   resource_id = "EPD_202401",
 #'   limit = 1,
@@ -152,6 +145,15 @@ nhsbsa_datastore_search <- function(
 #' nhsbsa_datastore_search_sql(
 #'   resource_id = "EPD_202401",
 #'   sql = "SELECT YEAR_MONTH, PCO_CODE, ITEMS FROM `EPD_202401` LIMIT 10"
+#' )
+#'
+#' # Filter by value with a WHERE clause (the reliable way to filter)
+#' nhsbsa_datastore_search_sql(
+#'   resource_id = "EPD_202401",
+#'   sql = "SELECT PCO_CODE, BNF_CHEMICAL_SUBSTANCE, ITEMS
+#'          FROM `EPD_202401`
+#'          WHERE PCO_CODE = 'W2U3Z'
+#'          LIMIT 10"
 #' )
 #'
 #' # Aggregate server-side: total items prescribed per organisation

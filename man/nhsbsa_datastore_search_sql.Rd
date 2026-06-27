@@ -35,6 +35,15 @@ nhsbsa_datastore_search_sql(
   sql = "SELECT YEAR_MONTH, PCO_CODE, ITEMS FROM `EPD_202401` LIMIT 10"
 )
 
+# Filter by value with a WHERE clause (the reliable way to filter)
+nhsbsa_datastore_search_sql(
+  resource_id = "EPD_202401",
+  sql = "SELECT PCO_CODE, BNF_CHEMICAL_SUBSTANCE, ITEMS
+         FROM `EPD_202401`
+         WHERE PCO_CODE = 'W2U3Z'
+         LIMIT 10"
+)
+
 # Aggregate server-side: total items prescribed per organisation
 nhsbsa_datastore_search_sql(
   resource_id = "EPD_202401",

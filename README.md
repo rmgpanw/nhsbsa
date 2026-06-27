@@ -14,16 +14,31 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 `nhsbsa` is a low-level R client for the [NHS Business Services
 Authority (NHSBSA) Open Data Portal](https://opendata.nhsbsa.net), a
-[CKAN](https://ckan.org) data catalogue. It provides thin wrappers
-around the portal’s API actions and returns plain data — tibbles for
-tabular results and lists for metadata — leaving the interpretation of
-any particular dataset to the caller.
+[CKAN](https://ckan.org) data catalogue that publishes open datasets
+about NHS activity in England — prescribing, dental, pharmaceutical and
+contractor data among them. The package provides thin wrappers around
+the portal’s API actions and returns plain data — tibbles for tabular
+results and lists for metadata — leaving the interpretation of any
+particular dataset to the caller.
 
-The package deliberately contains no knowledge of specific datasets.
-Function names and arguments mirror the CKAN API, so if you know the API
-you already know the package. See the portal’s own [API
+The package deliberately contains no knowledge of specific datasets, and
+wraps the useful read subset of the API’s actions. Function names and
+arguments mirror the CKAN API, so if you know the API you already know
+the package. See the portal’s own [API
 page](https://opendata.nhsbsa.net/pages/api) and the [CKAN Action API
-reference](https://docs.ckan.org/en/latest/api/) for background.
+reference](https://docs.ckan.org/en/latest/api/#action-api-reference)
+for background. If you need an action the package does not yet wrap,
+please [open an issue](https://github.com/rmgpanw/nhsbsa/issues).
+
+## Status
+
+`nhsbsa` is **experimental** and a work in progress. It was developed
+with [Claude Code](https://www.anthropic.com/claude-code), modelled on
+the design of established R clients for other NHS and REST APIs. Some
+functionality has yet to be exercised interactively against the live
+API, so please treat results with care. Bug reports, comments and
+suggestions are very welcome via the [issue
+tracker](https://github.com/rmgpanw/nhsbsa/issues).
 
 ## Installation
 
@@ -41,14 +56,16 @@ pak::pak("rmgpanw/nhsbsa")
 library(nhsbsa)
 ```
 
-Find datasets:
+Find datasets — list every id, or search:
 
 ``` r
-# Identifiers of every dataset on the portal
 datasets <- nhsbsa_package_list()
+length(datasets)
+#> [1] 2169
 
-# Search for datasets
-nhsbsa_package_search(q = "prescribing", rows = 5)
+hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
+hits$count
+#> [1] 639
 ```
 
 Browsing the [portal website](https://opendata.nhsbsa.net) and clicking
@@ -58,42 +75,99 @@ filter query:
 
 ``` r
 # Equivalent of clicking the "Prescribing" tag on the website
-nhsbsa_package_search(fq = 'tags:"Prescribing"')
+nhsbsa_package_search(fq = 'tags:"Prescribing"')$count
+#> [1] 18
 ```
 
-List a dataset’s resources (files), and download one:
+List a dataset’s resources (files), including each file’s download URL:
 
 ``` r
-resources <- nhsbsa_list_resources(
-  "bnf-code-information-current-year",
-  pattern = "202401"
-)
-resources
+resources <- nhsbsa_list_resources("bnf-code-information-current-year")
+head(resources[, c("name", "format", "url")])
+#> # A tibble: 6 × 3
+#>   name                                     format url                           
+#>   <chr>                                    <chr>  <chr>                         
+#> 1 BNF_CODE_CURRENT_202503_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 2 BNF_CODE_CURRENT_202504_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 3 BNF_CODE_CURRENT_202505_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 4 BNF_CODE_CURRENT_202506_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 5 BNF_CODE_CURRENT_202507_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 6 BNF_CODE_CURRENT_202508_VERSION_88_FINAL CSV    https://opendata.nhsbsa.net/d…
+```
 
+Download one of them to disk:
+
+``` r
 dest <- nhsbsa_download_resource(
   "bnf-code-information-current-year",
   resource_id = resources$id[[1]]
 )
 ```
 
-Query the rows of a datastore resource without downloading the whole
-file:
+Read rows from a tabular (datastore) resource without downloading the
+whole file. The datastore identifies a resource by its **name**
+(e.g. `"EPD_202401"`), and field names are case-sensitive. Use `fields`,
+`sort` and `limit`/`offset` to read:
 
 ``` r
-# The datastore identifies a resource by its name, e.g. "EPD_202401".
-# Field names are case-sensitive.
 nhsbsa_datastore_search(
   resource_id = "EPD_202401",
-  filters = list(PCO_CODE = "13T00"),
-  limit = 10
+  fields = c("PCO_CODE", "BNF_CHEMICAL_SUBSTANCE", "ITEMS"),
+  sort = "ITEMS desc",
+  limit = 5
 )
-
-# Or with SQL
-nhsbsa_datastore_search_sql(
-  resource_id = "EPD_202401",
-  sql = "SELECT * FROM `EPD_202401` LIMIT 10"
-)
+#> Warning: ! Retrieved 5 of 18080573 matching rows; 18080568 not returned.
+#> ℹ Fetch the next page with `offset = 5` (reusing your other arguments),
+#>   increasing `offset` until all rows are retrieved.
+#> ℹ Raising `limit` returns more rows per request, up to the server-side maximum.
+#> # A tibble: 5 × 3
+#>   PCO_CODE BNF_CHEMICAL_SUBSTANCE ITEMS
+#>   <chr>    <chr>                  <int>
+#> 1 11J00    1404000H0               3584
+#> 2 06H00    0212000B0               3571
+#> 3 02Y00    0212000B0               3469
+#> 4 12F00    1404000H0               3160
+#> 5 11M00    1404000H0               3038
 ```
 
-See `vignette("nhsbsa")` for an overview of the portal and the available
-endpoints.
+To filter by value or aggregate, use SQL (this portal’s
+`datastore_search` does not honour the CKAN `filters`/`q` parameters, so
+SQL is the reliable path):
+
+``` r
+nhsbsa_datastore_search_sql(
+  resource_id = "EPD_202401",
+  sql = "SELECT PCO_CODE, SUM(ITEMS) AS items
+         FROM `EPD_202401`
+         WHERE PCO_CODE = 'W2U3Z'
+         GROUP BY PCO_CODE
+         ORDER BY items DESC
+         LIMIT 5"
+)
+#> # A tibble: 1 × 2
+#>   PCO_CODE   items
+#>   <chr>      <int>
+#> 1 W2U3Z    3129964
+```
+
+``` r
+nhsbsa_datastore_search_sql(
+  resource_id = "EPD_202401",
+  sql = "SELECT PCO_CODE, SUM(ITEMS) AS items
+         FROM `EPD_202401`
+         GROUP BY PCO_CODE
+         ORDER BY items DESC
+         LIMIT 5"
+)
+#> # A tibble: 5 × 2
+#>   PCO_CODE   items
+#>   <chr>      <int>
+#> 1 91Q00    3151968
+#> 2 W2U3Z    3129964
+#> 3 A3A8R    3124609
+#> 4 D9Y0V    2697474
+#> 5 15N00    2413359
+```
+
+See `vignette("nhsbsa")` for an overview of the portal, how the package
+maps onto the website, and the different ways to query data.

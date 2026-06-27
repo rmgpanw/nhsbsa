@@ -10,7 +10,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  eval = FALSE
+  # Examples contact the live API, so only evaluate them when online.
+  eval = requireNamespace("curl", quietly = TRUE) && curl::has_internet()
 )
 ```
 
@@ -24,23 +25,35 @@ knitr::opts_chunk$set(
 
 `nhsbsa` is a low-level R client for the [NHS Business Services Authority
 (NHSBSA) Open Data Portal](https://opendata.nhsbsa.net), a
-[CKAN](https://ckan.org) data catalogue. It provides thin wrappers around the
-portal's API actions and returns plain data — tibbles for tabular results and
-lists for metadata — leaving the interpretation of any particular dataset to the
-caller.
+[CKAN](https://ckan.org) data catalogue that publishes open datasets about NHS
+activity in England — prescribing, dental, pharmaceutical and contractor data
+among them. The package provides thin wrappers around the portal's API actions
+and returns plain data — tibbles for tabular results and lists for metadata —
+leaving the interpretation of any particular dataset to the caller.
 
-The package deliberately contains no knowledge of specific datasets. Function
-names and arguments mirror the CKAN API, so if you know the API you already know
-the package. See the portal's own [API page](https://opendata.nhsbsa.net/pages/api)
-and the [CKAN Action API reference](https://docs.ckan.org/en/latest/api/) for
-background.
+The package deliberately contains no knowledge of specific datasets, and wraps
+the useful read subset of the API's actions. Function names and arguments mirror
+the CKAN API, so if you know the API you already know the package. See the
+portal's own [API page](https://opendata.nhsbsa.net/pages/api) and the
+[CKAN Action API reference](https://docs.ckan.org/en/latest/api/#action-api-reference)
+for background. If you need an action the package does not yet wrap, please
+[open an issue](https://github.com/rmgpanw/nhsbsa/issues).
+
+## Status
+
+`nhsbsa` is **experimental** and a work in progress. It was developed with
+[Claude Code](https://www.anthropic.com/claude-code), modelled on the design of
+established R clients for other NHS and REST APIs. Some functionality has yet to
+be exercised interactively against the live API, so please treat results with
+care. Bug reports, comments and suggestions are very welcome via the
+[issue tracker](https://github.com/rmgpanw/nhsbsa/issues).
 
 ## Installation
 
 You can install the development version of nhsbsa from
 [GitHub](https://github.com/rmgpanw/nhsbsa) with:
 
-```{r}
+```{r, eval = FALSE}
 # install.packages("pak")
 pak::pak("rmgpanw/nhsbsa")
 ```
@@ -51,14 +64,14 @@ pak::pak("rmgpanw/nhsbsa")
 library(nhsbsa)
 ```
 
-Find datasets:
+Find datasets — list every id, or search:
 
 ```{r}
-# Identifiers of every dataset on the portal
 datasets <- nhsbsa_package_list()
+length(datasets)
 
-# Search for datasets
-nhsbsa_package_search(q = "prescribing", rows = 5)
+hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
+hits$count
 ```
 
 Browsing the [portal website](https://opendata.nhsbsa.net) and clicking a tag
@@ -67,41 +80,64 @@ such as **#Prescribing** filters the dataset list (the page URL becomes
 
 ```{r}
 # Equivalent of clicking the "Prescribing" tag on the website
-nhsbsa_package_search(fq = 'tags:"Prescribing"')
+nhsbsa_package_search(fq = 'tags:"Prescribing"')$count
 ```
 
-List a dataset's resources (files), and download one:
+List a dataset's resources (files), including each file's download URL:
 
 ```{r}
-resources <- nhsbsa_list_resources(
-  "bnf-code-information-current-year",
-  pattern = "202401"
-)
-resources
+resources <- nhsbsa_list_resources("bnf-code-information-current-year")
+head(resources[, c("name", "format", "url")])
+```
 
+Download one of them to disk:
+
+```{r, eval = FALSE}
 dest <- nhsbsa_download_resource(
   "bnf-code-information-current-year",
   resource_id = resources$id[[1]]
 )
 ```
 
-Query the rows of a datastore resource without downloading the whole file:
+Read rows from a tabular (datastore) resource without downloading the whole
+file. The datastore identifies a resource by its **name** (e.g. `"EPD_202401"`),
+and field names are case-sensitive. Use `fields`, `sort` and `limit`/`offset` to
+read:
 
 ```{r}
-# The datastore identifies a resource by its name, e.g. "EPD_202401".
-# Field names are case-sensitive.
 nhsbsa_datastore_search(
   resource_id = "EPD_202401",
-  filters = list(PCO_CODE = "13T00"),
-  limit = 10
-)
-
-# Or with SQL
-nhsbsa_datastore_search_sql(
-  resource_id = "EPD_202401",
-  sql = "SELECT * FROM `EPD_202401` LIMIT 10"
+  fields = c("PCO_CODE", "BNF_CHEMICAL_SUBSTANCE", "ITEMS"),
+  sort = "ITEMS desc",
+  limit = 5
 )
 ```
 
-See `vignette("nhsbsa")` for an overview of the portal and the available
-endpoints.
+To filter by value or aggregate, use SQL (this portal's `datastore_search` does
+not honour the CKAN `filters`/`q` parameters, so SQL is the reliable path):
+
+```{r}
+nhsbsa_datastore_search_sql(
+  resource_id = "EPD_202401",
+  sql = "SELECT PCO_CODE, SUM(ITEMS) AS items
+         FROM `EPD_202401`
+         WHERE PCO_CODE = 'W2U3Z'
+         GROUP BY PCO_CODE
+         ORDER BY items DESC
+         LIMIT 5"
+)
+```
+
+```{r}
+nhsbsa_datastore_search_sql(
+  resource_id = "EPD_202401",
+  sql = "SELECT PCO_CODE, SUM(ITEMS) AS items
+         FROM `EPD_202401`
+         GROUP BY PCO_CODE
+         ORDER BY items DESC
+         LIMIT 5"
+)
+```
+
+See `vignette("nhsbsa")` for an overview of the portal, how the package maps onto
+the website, and the different ways to query data.

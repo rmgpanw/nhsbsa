@@ -29,7 +29,13 @@ shape every decision:
    with an argument for every documented API parameter. A user who knows the
    CKAN API should not have to learn anything new. The only deliberate
    exceptions are the two convenience helpers `nhsbsa_list_resources()` and
-   `nhsbsa_download_resource()`.
+   `nhsbsa_download_resource()`. They are "exceptions" because, unlike every
+   other exported function, neither corresponds to a single CKAN action:
+   `nhsbsa_list_resources()` calls `package_show` and reshapes the nested
+   `resources` list into a tibble, and `nhsbsa_download_resource()` resolves a
+   resource (via `package_show`) and then streams its file `url` — an ordinary
+   HTTP download that is not part of the `/action/` API at all. They earn their
+   place because together they are the operations a caller most often needs.
 2. **No domain knowledge.** The package knows nothing about specific datasets
    (BNF, prescribing, dental, and so on). It returns plain data — tibbles for
    tabular results, lists for metadata — and leaves interpretation to the
@@ -98,6 +104,19 @@ Do not call `cli::cli_abort()` (or any other package's error helpers) directly.
 * `nhsbsa_download_resource()` returns the destination path invisibly.
 * Any read-only function called with `.return_raw = TRUE` returns the parsed
   envelope as a list.
+
+## Which actions are wrapped
+
+The portal exposes the standard CKAN read API (you can confirm what a given
+instance supports with `help_show`, e.g.
+`https://opendata.nhsbsa.net/api/3/action/help_show?name=package_search`). The
+package wraps the **useful read subset** of those actions — dataset discovery,
+resource listing/metadata/download, datastore queries, and the catalogue
+listings. Other registered actions (the `*_autocomplete` family, `datastore_info`,
+`license_list`, `status_show`, and so on) are intentionally not wrapped yet. If a
+gap is discovered, the convention is to
+[open an issue](https://github.com/rmgpanw/nhsbsa/issues) and then add the
+wrapper as below.
 
 ## Adding a new endpoint
 

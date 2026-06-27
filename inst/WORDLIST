@@ -1,6 +1,10 @@
+API's
+API’s
 BNF
 CKAN
+CKAN's
 CMD
+CSVs
 Codecov
 EPD
 Lifecycle
@@ -9,8 +13,8 @@ Solr
 backoff
 dataset's
 dataset’s
-datastore's
 httptest
 parameterised
+queryable
 tibble
 tibbles
