@@ -21,3 +21,9 @@ reference:
   contents:
   - nhsbsa_datastore_search
   - nhsbsa_datastore_search_sql
+- title: Catalogue
+  desc: List the portal's organisations, groups and tags.
+  contents:
+  - nhsbsa_organization_list
+  - nhsbsa_group_list
+  - nhsbsa_tag_list
