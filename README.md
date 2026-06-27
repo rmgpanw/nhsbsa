@@ -72,13 +72,22 @@ hits$count
 Browsing the [portal website](https://opendata.nhsbsa.net) and clicking
 a tag such as **\#Prescribing** filters the dataset list (the page URL
 becomes `/dataset/?tags=Prescribing`). A filter query finds the datasets
-with that tag — note the API also includes Freedom of Information
-responses that the website hides by default, so it returns more datasets
-than the website shows:
+with that tag:
 
 ``` r
 nhsbsa_package_search(fq = 'tags:"Prescribing"')$count
 #> [1] 18
+```
+
+The API returns more datasets than the website shows for the tag,
+because the website hides the Freedom of Information disclosure log by
+default. Exclude that organisation to match the website’s count:
+
+``` r
+nhsbsa_package_search(
+  fq = 'tags:"Prescribing" -organization:freedom-of-information-disclosure-log'
+)$count
+#> [1] 5
 ```
 
 List a dataset’s resources (files), including each file’s download URL:
@@ -132,9 +141,9 @@ nhsbsa_datastore_search(
 #> 5 11M00    1404000H0               3038
 ```
 
-To filter by value or aggregate, use SQL (this portal’s
-`datastore_search` does not honour the CKAN `filters`/`q` parameters, so
-SQL is the reliable path):
+To filter by value or aggregate, use SQL. On this portal,
+`datastore_search` does not apply the CKAN `filters`/`q` parameters, so
+SQL is the way to filter:
 
 ``` r
 nhsbsa_datastore_search_sql(

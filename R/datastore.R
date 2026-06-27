@@ -23,7 +23,7 @@
 #' @details
 #' CKAN's `datastore_search` defines `filters` (exact field matching) and `q`
 #' (full-text search) parameters, which this function exposes for API
-#' completeness. **The NHSBSA datastore does not honour them** — a query using
+#' completeness. **This portal's datastore does not apply them** — a query using
 #' `filters` or `q` returns no matching rows — so to filter by value, aggregate
 #' or compute expressions, use [nhsbsa_datastore_search_sql()] with a SQL
 #' `WHERE`/`GROUP BY` clause. See `vignette("nhsbsa")` for worked examples.
@@ -32,20 +32,20 @@
 #'   datastore identifies a resource by its *name* (the `name` column of
 #'   [nhsbsa_list_resources()]), e.g. `"EPD_201401"`, rather than its `id`.
 #' @param q A full-text query (a character scalar, or a named list for a
-#'   per-field search). Accepted for API completeness but not honoured by this
+#'   per-field search). Accepted for API completeness but not applied by this
 #'   portal; use [nhsbsa_datastore_search_sql()] instead.
 #' @param distinct Logical. Return only rows that are distinct across the
 #'   selected `fields`?
 #' @param plain Logical. Controls how a `q` full-text query is parsed (`TRUE`,
 #'   the default, treats `q` as plain text). Only relevant to `q`, which this
-#'   portal does not honour.
+#'   portal does not apply.
 #' @param language Character scalar. The text-search language (e.g. `"english"`).
 #' @param limit Integer. Maximum number of rows to return in this request.
 #' @param offset Integer. Number of rows to skip, for paging.
 #' @param fields Character vector. The fields to return, in order.
 #' @param sort Character scalar or vector. Sort clause(s), e.g. `"ITEMS desc"`.
 #' @param filters Named list. Field-value pairs to filter on. Accepted for API
-#'   completeness but not honoured by this portal; use
+#'   completeness but not applied by this portal; use
 #'   [nhsbsa_datastore_search_sql()] instead.
 #' @param include_total Logical. Include the total match count in the response?
 #'   Required for the incomplete-results warning; defaults to the API default

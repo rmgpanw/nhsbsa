@@ -94,12 +94,12 @@ Almost every function maps one-to-one onto a CKAN action of the same name. The
 two exceptions are the resource helpers, which combine an action with a little
 extra work and so are not pure wrappers:
 
-* `nhsbsa_list_resources()` calls `package_show` and reshapes its nested
+* `nhsbsa_list_resources()` calls `nhsbsa_package_show()` and reshapes its nested
   `resources` into a tibble — one row per file, including each file's download
   `url`.
 * `nhsbsa_download_resource()` resolves a single resource (again via
-  `package_show`) and then streams that resource's file `url` to disk. The
-  download itself is an ordinary HTTP request, not a CKAN action.
+  `nhsbsa_package_show()`) and then streams that resource's file `url` to disk.
+  The download itself is an ordinary HTTP request, not a CKAN action.
 
 (`nhsbsa_group_list()` is included for completeness; this portal currently
 defines no groups and so returns an empty vector — it organises data by
@@ -266,7 +266,7 @@ nhsbsa_datastore_search(
 
 CKAN's `datastore_search` also defines `filters` (exact field matching) and `q`
 (full-text search) parameters, and `nhsbsa_datastore_search()` exposes them for
-completeness. **Be aware that this portal's datastore does not honour them** —
+completeness. **Be aware that this portal's datastore does not apply them** —
 they return no matching rows — so to filter by value, use SQL instead.
 
 ### Filtering and aggregating with SQL

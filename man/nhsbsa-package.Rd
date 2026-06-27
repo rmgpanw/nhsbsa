@@ -6,6 +6,8 @@
 \alias{nhsbsa-package}
 \title{nhsbsa: Client for the NHS Business Services Authority Open Data Portal}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 A low-level client for the NHS Business Services Authority (NHSBSA) Open Data Portal \url{https://opendata.nhsbsa.net}, a 'CKAN' data catalogue. Provides thin wrappers around the portal's API actions for listing datasets, retrieving metadata, querying the datastore and downloading resource files. Results are returned as plain data (tibbles and lists) for the caller to interpret.
 }
 \section{Further reading}{

@@ -31,10 +31,11 @@ shape every decision:
    exceptions are the two convenience helpers `nhsbsa_list_resources()` and
    `nhsbsa_download_resource()`. They are "exceptions" because, unlike every
    other exported function, neither corresponds to a single CKAN action:
-   `nhsbsa_list_resources()` calls `package_show` and reshapes the nested
-   `resources` list into a tibble, and `nhsbsa_download_resource()` resolves a
-   resource (via `package_show`) and then streams its file `url` — an ordinary
-   HTTP download that is not part of the `/action/` API at all. They earn their
+   `nhsbsa_list_resources()` calls `nhsbsa_package_show()` and reshapes the
+   nested `resources` list into a tibble, and `nhsbsa_download_resource()`
+   resolves a resource (via `nhsbsa_package_show()`) and then streams its file
+   `url` — an ordinary HTTP download that is not part of the `/action/` API at
+   all. They earn their
    place because together they are the operations a caller most often needs.
 2. **No domain knowledge.** The package knows nothing about specific datasets
    (BNF, prescribing, dental, and so on). It returns plain data — tibbles for

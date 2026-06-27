@@ -25,7 +25,7 @@ datastore identifies a resource by its \emph{name} (the \code{name} column of
 \code{\link[=nhsbsa_list_resources]{nhsbsa_list_resources()}}), e.g. \code{"EPD_201401"}, rather than its \code{id}.}
 
 \item{q}{A full-text query (a character scalar, or a named list for a
-per-field search). Accepted for API completeness but not honoured by this
+per-field search). Accepted for API completeness but not applied by this
 portal; use \code{\link[=nhsbsa_datastore_search_sql]{nhsbsa_datastore_search_sql()}} instead.}
 
 \item{distinct}{Logical. Return only rows that are distinct across the
@@ -33,7 +33,7 @@ selected \code{fields}?}
 
 \item{plain}{Logical. Controls how a \code{q} full-text query is parsed (\code{TRUE},
 the default, treats \code{q} as plain text). Only relevant to \code{q}, which this
-portal does not honour.}
+portal does not apply.}
 
 \item{language}{Character scalar. The text-search language (e.g. \code{"english"}).}
 
@@ -46,7 +46,7 @@ portal does not honour.}
 \item{sort}{Character scalar or vector. Sort clause(s), e.g. \code{"ITEMS desc"}.}
 
 \item{filters}{Named list. Field-value pairs to filter on. Accepted for API
-completeness but not honoured by this portal; use
+completeness but not applied by this portal; use
 \code{\link[=nhsbsa_datastore_search_sql]{nhsbsa_datastore_search_sql()}} instead.}
 
 \item{include_total}{Logical. Include the total match count in the response?
@@ -77,7 +77,7 @@ through the rest by increasing \code{offset}.
 
 CKAN's \code{datastore_search} defines \code{filters} (exact field matching) and \code{q}
 (full-text search) parameters, which this function exposes for API
-completeness. \strong{The NHSBSA datastore does not honour them} — a query using
+completeness. \strong{This portal's datastore does not apply them} — a query using
 \code{filters} or \code{q} returns no matching rows — so to filter by value, aggregate
 or compute expressions, use \code{\link[=nhsbsa_datastore_search_sql]{nhsbsa_datastore_search_sql()}} with a SQL
 \code{WHERE}/\verb{GROUP BY} clause. See \code{vignette("nhsbsa")} for worked examples.
