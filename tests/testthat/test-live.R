@@ -24,11 +24,11 @@ test_that("live: list and download a resource end to end", {
   expect_s3_class(resources, "tbl_df")
   expect_gt(nrow(resources), 0)
 
-  dest <- withr::local_tempfile(fileext = ".csv")
+  dir <- withr::local_tempdir()
   out <- nhsbsa_download_resource(
     "bnf-code-information-current-year",
     resource_id = resources$id[[1]],
-    dest = dest,
+    directory = dir,
     quiet = TRUE
   )
   expect_true(file.exists(out))

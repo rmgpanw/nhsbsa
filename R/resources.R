@@ -83,18 +83,22 @@ nhsbsa_list_resources <- function(dataset_id, pattern = NULL) {
 #' `pattern` that matches a single resource name; if neither is given and the
 #' dataset has more than one resource, an error is raised.
 #'
+#' The file is saved into `directory` under its own name (the file name from the
+#' resource's download URL, e.g. `bnf_code_current_202503_version_88.csv`).
+#'
 #' @inheritParams nhsbsa_list_resources
 #' @param resource_id Character scalar. The identifier of the resource to
 #'   download. Takes precedence over `pattern`.
 #' @param pattern Character scalar. A regular expression matched
 #'   (case-insensitively) against resource names to select a single resource.
-#' @param dest Character scalar. The file path to write to. Defaults to a
-#'   temporary file with a `.csv` extension.
-#' @param overwrite Logical. Overwrite `dest` if it already exists? Defaults to
-#'   `FALSE`, in which case an existing `dest` is left untouched.
+#' @param directory Character scalar. The directory to download into. Defaults to
+#'   the current working directory. The directory must already exist.
+#' @param overwrite Logical. Overwrite the file if it already exists in
+#'   `directory`? Defaults to `FALSE`, in which case the existing file is left
+#'   untouched and its path returned.
 #' @param quiet Logical. Suppress informational messages? Defaults to `FALSE`.
 #'
-#' @return The path to the downloaded file (`dest`), invisibly.
+#' @return The path to the downloaded file, invisibly.
 #'
 #' @seealso [nhsbsa_list_resources()] to discover resources.
 #'
@@ -103,33 +107,44 @@ nhsbsa_list_resources <- function(dataset_id, pattern = NULL) {
 #' resources <- nhsbsa_list_resources("bnf-code-information-current-year")
 #'
 #' # Identify a resource by a pattern matching a single resource name
-#' dest <- nhsbsa_download_resource(
+#' path <- nhsbsa_download_resource(
 #'   "bnf-code-information-current-year",
 #'   pattern = resources$name[[1]],
-#'   dest = tempfile(fileext = ".csv")
+#'   directory = tempdir()
 #' )
-#' dest
+#' path
 #'
 #' # ...or by its exact id. An existing file is not re-downloaded unless
-#' # `overwrite = TRUE`, so this call short-circuits and returns `dest`.
+#' # `overwrite = TRUE`, so this call short-circuits and returns the path.
 #' nhsbsa_download_resource(
 #'   "bnf-code-information-current-year",
 #'   resource_id = resources$id[[1]],
-#'   dest = dest
+#'   directory = tempdir()
 #' )
 nhsbsa_download_resource <- function(
   dataset_id,
   resource_id = NULL,
   pattern = NULL,
-  dest = tempfile(fileext = ".csv"),
+  directory = ".",
   overwrite = FALSE,
   quiet = FALSE
 ) {
+  if (
+    !is.character(directory) || length(directory) != 1 || !dir.exists(directory)
+  ) {
+    nhsbsa_abort(c(
+      "x" = "{.arg directory} must be a path to an existing directory.",
+      "i" = "{.val {directory}} was not found."
+    ))
+  }
+
   resource <- nhsbsa_resolve_resource(
     dataset_id,
     resource_id = resource_id,
     pattern = pattern
   )
+
+  dest <- file.path(directory, nhsbsa_resource_filename(resource))
 
   if (file.exists(dest) && !overwrite) {
     if (!quiet) {
@@ -149,6 +164,17 @@ nhsbsa_download_resource <- function(
 
   nhsbsa_download_file(resource$url, dest)
   invisible(dest)
+}
+
+# Derive the file name to save a resource under, from the file name in its
+# download URL (falling back to the resource name if the URL has none).
+nhsbsa_resource_filename <- function(resource) {
+  url <- sub("[?#].*$", "", resource$url %||% "")
+  filename <- basename(url)
+  if (!nzchar(filename) || identical(filename, ".")) {
+    return(resource$name)
+  }
+  filename
 }
 
 # Resolve a single resource within a dataset, erroring clearly when the

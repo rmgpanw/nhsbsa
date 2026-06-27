@@ -8,7 +8,7 @@ nhsbsa_download_resource(
   dataset_id,
   resource_id = NULL,
   pattern = NULL,
-  dest = tempfile(fileext = ".csv"),
+  directory = ".",
   overwrite = FALSE,
   quiet = FALSE
 )
@@ -23,16 +23,17 @@ download. Takes precedence over \code{pattern}.}
 \item{pattern}{Character scalar. A regular expression matched
 (case-insensitively) against resource names to select a single resource.}
 
-\item{dest}{Character scalar. The file path to write to. Defaults to a
-temporary file with a \code{.csv} extension.}
+\item{directory}{Character scalar. The directory to download into. Defaults to
+the current working directory. The directory must already exist.}
 
-\item{overwrite}{Logical. Overwrite \code{dest} if it already exists? Defaults to
-\code{FALSE}, in which case an existing \code{dest} is left untouched.}
+\item{overwrite}{Logical. Overwrite the file if it already exists in
+\code{directory}? Defaults to \code{FALSE}, in which case the existing file is left
+untouched and its path returned.}
 
 \item{quiet}{Logical. Suppress informational messages? Defaults to \code{FALSE}.}
 }
 \value{
-The path to the downloaded file (\code{dest}), invisibly.
+The path to the downloaded file, invisibly.
 }
 \description{
 Resolves a single resource within a dataset and streams its file to disk.
@@ -44,25 +45,28 @@ This is the file-download counterpart to the datastore row-query functions
 Exactly one resource must be identified. Supply either \code{resource_id} or a
 \code{pattern} that matches a single resource name; if neither is given and the
 dataset has more than one resource, an error is raised.
+
+The file is saved into \code{directory} under its own name (the file name from the
+resource's download URL, e.g. \code{bnf_code_current_202503_version_88.csv}).
 }
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
 resources <- nhsbsa_list_resources("bnf-code-information-current-year")
 
 # Identify a resource by a pattern matching a single resource name
-dest <- nhsbsa_download_resource(
+path <- nhsbsa_download_resource(
   "bnf-code-information-current-year",
   pattern = resources$name[[1]],
-  dest = tempfile(fileext = ".csv")
+  directory = tempdir()
 )
-dest
+path
 
 # ...or by its exact id. An existing file is not re-downloaded unless
-# `overwrite = TRUE`, so this call short-circuits and returns `dest`.
+# `overwrite = TRUE`, so this call short-circuits and returns the path.
 nhsbsa_download_resource(
   "bnf-code-information-current-year",
   resource_id = resources$id[[1]],
-  dest = dest
+  directory = tempdir()
 )
 \dontshow{\}) # examplesIf}
 }

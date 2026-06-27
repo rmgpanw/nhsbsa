@@ -100,12 +100,14 @@ resources <- nhsbsa_list_resources("bnf-code-information-current-year")
 head(resources[, c("name", "format", "url")])
 ```
 
-Download one of them to disk:
+Download one of them to disk. The file is saved into `directory` (the current
+working directory by default) under its own name:
 
 ```{r, eval = FALSE}
-dest <- nhsbsa_download_resource(
+path <- nhsbsa_download_resource(
   "bnf-code-information-current-year",
-  resource_id = resources$id[[1]]
+  resource_id = resources$id[[1]],
+  directory = tempdir()
 )
 ```
 

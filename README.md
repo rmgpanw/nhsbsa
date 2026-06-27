@@ -106,12 +106,14 @@ head(resources[, c("name", "format", "url")])
 #> 6 BNF_CODE_CURRENT_202508_VERSION_88_FINAL CSV    https://opendata.nhsbsa.net/d…
 ```
 
-Download one of them to disk:
+Download one of them to disk. The file is saved into `directory` (the
+current working directory by default) under its own name:
 
 ``` r
-dest <- nhsbsa_download_resource(
+path <- nhsbsa_download_resource(
   "bnf-code-information-current-year",
-  resource_id = resources$id[[1]]
+  resource_id = resources$id[[1]],
+  directory = tempdir()
 )
 ```
 

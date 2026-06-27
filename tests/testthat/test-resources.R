@@ -72,7 +72,7 @@ test_that("nhsbsa_download_resource errors when more than one resource matches",
   )
 })
 
-test_that("nhsbsa_download_resource resolves a resource and streams it", {
+test_that("nhsbsa_download_resource saves under the resource's own file name", {
   streamed_from <- NULL
   with_mocked_bindings(
     nhsbsa_list_resources = function(...) fake_resources(),
@@ -82,19 +82,36 @@ test_that("nhsbsa_download_resource resolves a resource and streams it", {
       invisible(dest)
     },
     {
-      dest <- withr::local_tempfile(fileext = ".csv")
+      dir <- withr::local_tempdir()
       # With quiet = FALSE the download emits an informational message.
       expect_message(
         out <- nhsbsa_download_resource(
           "ds",
           resource_id = "rid-2",
-          dest = dest
+          directory = dir
         ),
         class = "nhsbsa_message"
       )
-      expect_identical(out, dest)
+      # File name is taken from the resource's download URL.
+      expect_identical(out, file.path(dir, "202402.csv"))
       expect_identical(streamed_from, "https://example.test/202402.csv")
-      expect_true(file.exists(dest))
+      expect_true(file.exists(out))
+    }
+  )
+})
+
+test_that("nhsbsa_download_resource errors when the directory does not exist", {
+  with_mocked_bindings(
+    nhsbsa_list_resources = function(...) fake_resources(),
+    {
+      expect_error(
+        nhsbsa_download_resource(
+          "ds",
+          resource_id = "rid-1",
+          directory = file.path(tempdir(), "no-such-dir")
+        ),
+        class = "nhsbsa_error"
+      )
     }
   )
 })
@@ -108,18 +125,18 @@ test_that("nhsbsa_download_resource short-circuits an existing file", {
       invisible(dest)
     },
     {
-      dest <- withr::local_tempfile(fileext = ".csv")
-      writeLines("already here", dest)
+      dir <- withr::local_tempdir()
+      writeLines("already here", file.path(dir, "202401.csv"))
       expect_message(
         out <- nhsbsa_download_resource(
           "ds",
           resource_id = "rid-1",
-          dest = dest,
+          directory = dir,
           overwrite = FALSE
         ),
         class = "nhsbsa_message"
       )
-      expect_identical(out, dest)
+      expect_identical(out, file.path(dir, "202401.csv"))
       expect_false(downloaded)
     }
   )
