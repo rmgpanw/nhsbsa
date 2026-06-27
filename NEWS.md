@@ -8,3 +8,5 @@
   `nhsbsa_list_resources()` and `nhsbsa_download_resource()`.
 * Datastore row queries: `nhsbsa_datastore_search()` and
   `nhsbsa_datastore_search_sql()`.
+* Catalogue listings: `nhsbsa_organization_list()`, `nhsbsa_group_list()` and
+  `nhsbsa_tag_list()`.
