@@ -21,7 +21,9 @@ any particular dataset to the caller.
 
 The package deliberately contains no knowledge of specific datasets.
 Function names and arguments mirror the CKAN API, so if you know the API
-you already know the package.
+you already know the package. See the portal’s own [API
+page](https://opendata.nhsbsa.net/pages/api) and the [CKAN Action API
+reference](https://docs.ckan.org/en/latest/api/) for background.
 
 ## Installation
 
@@ -49,6 +51,16 @@ datasets <- nhsbsa_package_list()
 nhsbsa_package_search(q = "prescribing", rows = 5)
 ```
 
+Browsing the [portal website](https://opendata.nhsbsa.net) and clicking
+a tag such as **\#Prescribing** filters the dataset list (the page URL
+becomes `/dataset/?tags=Prescribing`). The same result comes from a
+filter query:
+
+``` r
+# Equivalent of clicking the "Prescribing" tag on the website
+nhsbsa_package_search(fq = 'tags:"Prescribing"')
+```
+
 List a dataset’s resources (files), and download one:
 
 ``` r
@@ -68,10 +80,11 @@ Query the rows of a datastore resource without downloading the whole
 file:
 
 ``` r
-# The datastore identifies a resource by its name, e.g. "EPD_202401"
+# The datastore identifies a resource by its name, e.g. "EPD_202401".
+# Field names are case-sensitive.
 nhsbsa_datastore_search(
   resource_id = "EPD_202401",
-  filters = list(pco_code = "13T00"),
+  filters = list(PCO_CODE = "13T00"),
   limit = 10
 )
 

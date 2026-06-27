@@ -24,13 +24,19 @@ nhsbsa_datastore_search(
 datastore identifies a resource by its \emph{name} (the \code{name} column of
 \code{\link[=nhsbsa_list_resources]{nhsbsa_list_resources()}}), e.g. \code{"EPD_201401"}, rather than its \code{id}.}
 
-\item{q}{Character scalar, or a JSON object string for fielded search. A
-full-text query.}
+\item{q}{A full-text query. Either a character scalar (searched across all
+fields) or a named list for a per-field search, e.g.
+\code{list(BNF_CHEMICAL_SUBSTANCE = "Paracetamol")} (sent to the API as a JSON
+object). See Details.}
 
-\item{distinct}{Logical. Return only distinct rows?}
+\item{distinct}{Logical. Return only rows that are distinct across the
+selected \code{fields}?}
 
-\item{plain}{Logical. Treat \code{q} as plain text (rather than a complex search
-expression)?}
+\item{plain}{Logical. Controls how a \code{q} full-text query is parsed. When
+\code{TRUE} (the default), \code{q} is treated as plain text. When \code{FALSE}, the
+datastore's full-text query syntax is enabled, so \code{q} may contain operators
+such as \code{&} (and), \code{|} (or) and \verb{:*} (prefix), e.g.
+\code{q = list(BNF_DESCRIPTION = "Para:*")}.}
 
 \item{language}{Character scalar. The text-search language (e.g. \code{"english"}).}
 
@@ -66,14 +72,58 @@ The CKAN datastore returns at most one page of rows per request (the server
 enforces a maximum \code{limit}). When more rows match than are returned, a warning
 of class \code{nhsbsa_incomplete_results} is signalled describing how to page
 through the rest by increasing \code{offset}.
+
+There are three ways to narrow a datastore query, from simplest to most
+powerful:
+\itemize{
+\item \code{filters} — exact field/value matching, e.g.
+\code{filters = list(PCO_CODE = "13T00")}. The most reliable option.
+\item \code{q} — full-text search. As a \emph{per-field} query, pass a named list, e.g.
+\code{q = list(BNF_CHEMICAL_SUBSTANCE = "Paracetamol")}. As a plain string it
+searches across all fields, but full-text search is not enabled for every
+resource and may return a server error.
+\item \code{\link[=nhsbsa_datastore_search_sql]{nhsbsa_datastore_search_sql()}} — arbitrary read-only SQL, for selecting
+columns, expressions, aggregation, joins and sorting.
+}
+
+See \code{vignette("nhsbsa")} for worked examples of each.
 }
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
+# Exact field matching with `filters` (field names are case-sensitive)
 nhsbsa_datastore_search(
   resource_id = "EPD_202401",
-  filters = list(pco_code = "13T00"),
+  filters = list(PCO_CODE = "13T00", BNF_CHEMICAL_SUBSTANCE = "0407010H0"),
   limit = 10
 )
+
+# Per-field full-text search with `q`
+nhsbsa_datastore_search(
+  resource_id = "EPD_202401",
+  q = list(BNF_CHEMICAL_SUBSTANCE = "0407010H0"),
+  limit = 10
+)
+
+# Select and order columns, and return only distinct rows
+nhsbsa_datastore_search(
+  resource_id = "EPD_202401",
+  fields = c("PRACTICE_CODE", "ITEMS"),
+  sort = "ITEMS desc",
+  distinct = TRUE,
+  limit = 5
+)
+
+# Page through results with `limit` and `offset`
+nhsbsa_datastore_search(resource_id = "EPD_202401", limit = 100)
+nhsbsa_datastore_search(resource_id = "EPD_202401", limit = 100, offset = 100)
+
+# Use the raw envelope to read the total number of matching rows
+raw <- nhsbsa_datastore_search(
+  resource_id = "EPD_202401",
+  limit = 1,
+  .return_raw = TRUE
+)
+raw$result$total
 \dontshow{\}) # examplesIf}
 }
 \seealso{

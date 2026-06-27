@@ -20,7 +20,9 @@
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
 #' resources <- nhsbsa_list_resources("english-prescribing-data-epd")
-#' nhsbsa_resource_show(resources$id[[1]])
+#' meta <- nhsbsa_resource_show(resources$id[[1]])
+#' meta$name
+#' meta$datastore_active
 nhsbsa_resource_show <- function(id, .return_raw = FALSE) {
   nhsbsa_query("resource_show")
 }
@@ -44,6 +46,10 @@ nhsbsa_resource_show <- function(id, .return_raw = FALSE) {
 #'
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
+#' # All resources for a dataset
+#' nhsbsa_list_resources("english-prescribing-data-epd")
+#'
+#' # Only resources whose name matches a pattern
 #' nhsbsa_list_resources("english-prescribing-data-epd", pattern = "202401")
 nhsbsa_list_resources <- function(dataset_id, pattern = NULL) {
   metadata <- nhsbsa_package_show(dataset_id)
@@ -94,11 +100,23 @@ nhsbsa_list_resources <- function(dataset_id, pattern = NULL) {
 #'
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
+#' resources <- nhsbsa_list_resources("bnf-code-information-current-year")
+#'
+#' # Identify a resource by a pattern matching a single resource name
 #' dest <- nhsbsa_download_resource(
 #'   "bnf-code-information-current-year",
-#'   pattern = "202401"
+#'   pattern = resources$name[[1]],
+#'   dest = tempfile(fileext = ".csv")
 #' )
 #' dest
+#'
+#' # ...or by its exact id. An existing file is not re-downloaded unless
+#' # `overwrite = TRUE`, so this call short-circuits and returns `dest`.
+#' nhsbsa_download_resource(
+#'   "bnf-code-information-current-year",
+#'   resource_id = resources$id[[1]],
+#'   dest = dest
+#' )
 nhsbsa_download_resource <- function(
   dataset_id,
   resource_id = NULL,

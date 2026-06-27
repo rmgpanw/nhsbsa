@@ -47,11 +47,23 @@ dataset has more than one resource, an error is raised.
 }
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
+resources <- nhsbsa_list_resources("bnf-code-information-current-year")
+
+# Identify a resource by a pattern matching a single resource name
 dest <- nhsbsa_download_resource(
   "bnf-code-information-current-year",
-  pattern = "202401"
+  pattern = resources$name[[1]],
+  dest = tempfile(fileext = ".csv")
 )
 dest
+
+# ...or by its exact id. An existing file is not re-downloaded unless
+# `overwrite = TRUE`, so this call short-circuits and returns `dest`.
+nhsbsa_download_resource(
+  "bnf-code-information-current-year",
+  resource_id = resources$id[[1]],
+  dest = dest
+)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

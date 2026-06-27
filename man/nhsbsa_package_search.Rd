@@ -37,7 +37,18 @@ Wraps the CKAN \code{package_search} action, a Solr-backed search over datasets.
 }
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
+# Free-text search
 hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
 hits$count
+
+# Filter by tag (as clicking a tag on the website does) and sort the results
+nhsbsa_package_search(
+  fq = 'tags:"Prescribing"',
+  sort = "metadata_modified desc",
+  rows = 5
+)
+
+# Page through results with `rows` and `start`
+nhsbsa_package_search(q = "dental", rows = 10, start = 10)
 \dontshow{\}) # examplesIf}
 }

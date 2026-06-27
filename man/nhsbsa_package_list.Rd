@@ -20,7 +20,9 @@ dataset published on the NHSBSA Open Data Portal.
 }
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
-nhsbsa_package_list()
+datasets <- nhsbsa_package_list()
+length(datasets)
+head(datasets)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

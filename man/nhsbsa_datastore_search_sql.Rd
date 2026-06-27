@@ -29,9 +29,20 @@ the caller's responsibility (via \code{LIMIT}/\code{OFFSET} in the query).
 }
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
+# Select specific columns
 nhsbsa_datastore_search_sql(
   resource_id = "EPD_202401",
-  sql = "SELECT * FROM `EPD_202401` LIMIT 10"
+  sql = "SELECT YEAR_MONTH, PCO_CODE, ITEMS FROM `EPD_202401` LIMIT 10"
+)
+
+# Aggregate server-side: total items prescribed per organisation
+nhsbsa_datastore_search_sql(
+  resource_id = "EPD_202401",
+  sql = "SELECT PCO_CODE, SUM(ITEMS) AS items
+         FROM `EPD_202401`
+         GROUP BY PCO_CODE
+         ORDER BY items DESC
+         LIMIT 10"
 )
 \dontshow{\}) # examplesIf}
 }

@@ -8,6 +8,21 @@
 \description{
 A low-level client for the NHS Business Services Authority (NHSBSA) Open Data Portal \url{https://opendata.nhsbsa.net}, a 'CKAN' data catalogue. Provides thin wrappers around the portal's API actions for listing datasets, retrieving metadata, querying the datastore and downloading resource files. Results are returned as plain data (tibbles and lists) for the caller to interpret.
 }
+\section{Further reading}{
+
+The portal is a standard CKAN catalogue. For background on the API this
+package wraps, see:
+\itemize{
+\item The portal's API page:
+\url{https://opendata.nhsbsa.net/pages/api}
+\item The CKAN Action API reference:
+\url{https://docs.ckan.org/en/latest/api/}
+}
+
+\code{vignette("nhsbsa")} explains how the package maps onto what you see on the
+portal website, and shows the different ways to query data.
+}
+
 \seealso{
 Useful links:
 \itemize{

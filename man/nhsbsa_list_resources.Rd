@@ -25,6 +25,10 @@ their download URLs) available for a dataset.
 }
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
+# All resources for a dataset
+nhsbsa_list_resources("english-prescribing-data-epd")
+
+# Only resources whose name matches a pattern
 nhsbsa_list_resources("english-prescribing-data-epd", pattern = "202401")
 \dontshow{\}) # examplesIf}
 }

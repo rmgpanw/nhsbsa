@@ -26,6 +26,10 @@ tables).
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
 metadata <- nhsbsa_package_show("english-prescribing-data-epd")
 metadata$title
+
+# The dataset's resources (files / datastore tables)
+length(metadata$resources)
+metadata$resources[[1]]$name
 \dontshow{\}) # examplesIf}
 }
 \seealso{

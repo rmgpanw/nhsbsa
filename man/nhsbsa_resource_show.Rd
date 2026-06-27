@@ -23,6 +23,8 @@ resource (a file or datastore table).
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
 resources <- nhsbsa_list_resources("english-prescribing-data-epd")
-nhsbsa_resource_show(resources$id[[1]])
+meta <- nhsbsa_resource_show(resources$id[[1]])
+meta$name
+meta$datastore_active
 \dontshow{\}) # examplesIf}
 }

@@ -19,7 +19,9 @@
 #'
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
-#' nhsbsa_package_list()
+#' datasets <- nhsbsa_package_list()
+#' length(datasets)
+#' head(datasets)
 nhsbsa_package_list <- function(.return_raw = FALSE) {
   out <- nhsbsa_query("package_list")
   if (.return_raw) {
@@ -47,6 +49,10 @@ nhsbsa_package_list <- function(.return_raw = FALSE) {
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
 #' metadata <- nhsbsa_package_show("english-prescribing-data-epd")
 #' metadata$title
+#'
+#' # The dataset's resources (files / datastore tables)
+#' length(metadata$resources)
+#' metadata$resources[[1]]$name
 nhsbsa_package_show <- function(id, .return_raw = FALSE) {
   nhsbsa_query("package_show")
 }
@@ -68,8 +74,19 @@ nhsbsa_package_show <- function(id, .return_raw = FALSE) {
 #'
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
+#' # Free-text search
 #' hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
 #' hits$count
+#'
+#' # Filter by tag (as clicking a tag on the website does) and sort the results
+#' nhsbsa_package_search(
+#'   fq = 'tags:"Prescribing"',
+#'   sort = "metadata_modified desc",
+#'   rows = 5
+#' )
+#'
+#' # Page through results with `rows` and `start`
+#' nhsbsa_package_search(q = "dental", rows = 10, start = 10)
 nhsbsa_package_search <- function(
   q = NULL,
   fq = NULL,

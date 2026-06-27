@@ -38,6 +38,10 @@ the dataset identifiers and interpret the results yourself. If you are familiar
 with the CKAN API, the package will feel familiar too: function names and
 arguments mirror the API.
 
+For background on the underlying API, see the portal's own
+[API page](https://opendata.nhsbsa.net/pages/api) and the
+[CKAN Action API reference](https://docs.ckan.org/en/latest/api/).
+
 ## The API and the response envelope
 
 Every request goes to a CKAN *action* under
@@ -73,6 +77,9 @@ clear message rather than an obscure low-level error.
 | `nhsbsa_resource_show()` | `resource_show` | list (resource metadata) |
 | `nhsbsa_datastore_search()` | `datastore_search` | tibble of rows |
 | `nhsbsa_datastore_search_sql()` | `datastore_search_sql` | tibble of rows |
+| `nhsbsa_organization_list()` | `organization_list` | character vector of organisations |
+| `nhsbsa_group_list()` | `group_list` | character vector of groups |
+| `nhsbsa_tag_list()` | `tag_list` | character vector of tags |
 
 Two convenience helpers sit on top of these for the operations you reach for
 most often. They are not pure API wrappers, but they save a little work:
@@ -85,6 +92,35 @@ most often. They are not pure API wrappers, but they save a little work:
 Most read-only functions also accept `.return_raw = TRUE`, which returns the
 full parsed response envelope instead of the processed result — useful when you
 need fields the helper does not surface, such as a datastore query's `total`.
+
+## From the portal website to the API
+
+It helps to think of the package as a programmatic version of the
+[portal website](https://opendata.nhsbsa.net). The things you click there map
+onto API calls:
+
+* **Browsing all datasets** is `nhsbsa_package_list()` (identifiers) or
+  `nhsbsa_package_search()` (richer records, with searching and paging).
+* **Clicking a tag**, say **#Prescribing**, takes the website to
+  `/dataset/?tags=Prescribing`. The equivalent call uses a *filter query* on the
+  `tags` field:
+
+    ```{r}
+    nhsbsa_package_search(fq = 'tags:"Prescribing"')
+    ```
+
+  Tags are case-sensitive; list them with `nhsbsa_tag_list()`. Similarly,
+  filtering by **organisation** maps to `fq = 'organization:<name>'`, with names
+  from `nhsbsa_organization_list()`.
+* **Opening a dataset's page** (e.g.
+  `/dataset/english-prescribing-data-epd`) corresponds to
+  `nhsbsa_package_show("english-prescribing-data-epd")`, whose `resources`
+  element lists the files shown on that page. `nhsbsa_list_resources()` tidies
+  those resources into a tibble.
+* **The "Download" button** on a resource fetches the file that
+  `nhsbsa_download_resource()` streams to disk; **the data preview / "Data API"**
+  for a resource is backed by the datastore that `nhsbsa_datastore_search()`
+  queries.
 
 ## A worked example
 
@@ -127,15 +163,27 @@ dest
 
 ### Query rows without downloading the whole file
 
-When a resource is loaded into the datastore you can query its rows directly.
-Note that the datastore identifies a resource by its **name** (e.g.
-`"EPD_202401"`), shown in the `name` column of `nhsbsa_list_resources()`, rather
-than by its `id`:
+When a resource is loaded into the datastore you can query its rows directly,
+without downloading the whole file. Note that the datastore identifies a
+resource by its **name** (e.g. `"EPD_202401"`), shown in the `name` column of
+`nhsbsa_list_resources()`, rather than by its `id`.
+
+## Ways to query datastore data
+
+There are three ways to narrow a datastore query, from simplest to most
+powerful. Use whichever fits the question.
+
+### 1. `filters` — exact field matching
+
+`filters` takes a named list of field/value pairs and returns rows where each
+field equals the given value exactly. This is the most reliable option. Field
+names are case-sensitive and must match the resource's columns exactly (for the
+EPD they are upper case, e.g. `PCO_CODE`):
 
 ```{r}
 nhsbsa_datastore_search(
   resource_id = "EPD_202401",
-  filters = list(pco_code = "13T00"),
+  filters = list(PCO_CODE = "13T00", BNF_CHEMICAL_SUBSTANCE = "0407010H0"),
   limit = 10
 )
 ```
@@ -148,21 +196,50 @@ page through the rest by increasing `offset`:
 # Fetch the next page
 nhsbsa_datastore_search(
   resource_id = "EPD_202401",
-  filters = list(pco_code = "13T00"),
+  filters = list(PCO_CODE = "13T00"),
   limit = 10,
   offset = 10
 )
 ```
 
-For more control you can query with SQL. The portal requires the `resource_id`
-alongside the query, and you reference the same resource name in the `FROM`
-clause:
+### 2. `q` — full-text search
+
+For a *per-field* full-text search, pass `q` a named list. Each value is matched
+as text within that field (rather than required to be exactly equal):
+
+```{r}
+nhsbsa_datastore_search(
+  resource_id = "EPD_202401",
+  q = list(BNF_CHEMICAL_SUBSTANCE = "Paracetamol"),
+  limit = 10
+)
+```
+
+As a plain string, `q` searches across all fields:
+
+```{r}
+nhsbsa_datastore_search(resource_id = "EPD_202401", q = "Paracetamol")
+```
+
+Note that full-text search is not enabled for every resource on the portal — a
+plain-string `q` may return a server error for some resources, in which case use
+`filters` or SQL instead.
+
+### 3. SQL — full query language
+
+For column selection, expressions, aggregation, joins and sorting, use SQL. The
+portal requires the `resource_id` alongside the query, and you reference the same
+resource name in the `FROM` clause:
 
 ```{r}
 nhsbsa_datastore_search_sql(
   resource_id = "EPD_202401",
-  sql = "SELECT pco_code, SUM(items) AS items
+  sql = "SELECT PCO_CODE, SUM(ITEMS) AS items
          FROM `EPD_202401`
-         GROUP BY pco_code"
+         GROUP BY PCO_CODE
+         ORDER BY items DESC"
 )
 ```
+
+The SQL string is sent to the API verbatim, so you are responsible for paging
+(via `LIMIT`/`OFFSET`) and for quoting identifiers correctly.
