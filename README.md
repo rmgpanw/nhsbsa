@@ -71,11 +71,12 @@ hits$count
 
 Browsing the [portal website](https://opendata.nhsbsa.net) and clicking
 a tag such as **\#Prescribing** filters the dataset list (the page URL
-becomes `/dataset/?tags=Prescribing`). The same result comes from a
-filter query:
+becomes `/dataset/?tags=Prescribing`). A filter query finds the datasets
+with that tag — note the API also includes Freedom of Information
+responses that the website hides by default, so it returns more datasets
+than the website shows:
 
 ``` r
-# Equivalent of clicking the "Prescribing" tag on the website
 nhsbsa_package_search(fq = 'tags:"Prescribing"')$count
 #> [1] 18
 ```

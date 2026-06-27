@@ -117,16 +117,26 @@ onto API calls:
 * **Browsing all datasets** is `nhsbsa_package_list()` (identifiers) or
   `nhsbsa_package_search()` (richer records, with searching and paging).
 * **Clicking a tag**, say **#Prescribing**, takes the website to
-  `/dataset/?tags=Prescribing`. The equivalent call uses a *filter query* on the
-  `tags` field:
+  `/dataset/?tags=Prescribing`. A *filter query* on the `tags` field returns the
+  datasets carrying that tag:
 
     ```{r}
     nhsbsa_package_search(fq = 'tags:"Prescribing"')$count
     ```
 
-  Tags are case-sensitive; list them with `nhsbsa_tag_list()`. Similarly,
-  filtering by **organisation** maps to `fq = 'organization:<name>'`, with names
-  from `nhsbsa_organization_list()`.
+    This returns *more* datasets than the website shows for the same tag,
+    because the website's dataset view hides the Freedom of Information
+    disclosure log by default. To match what the website displays, exclude that
+    organisation as well:
+
+    ```{r}
+    nhsbsa_package_search(
+      fq = 'tags:"Prescribing" -organization:freedom-of-information-disclosure-log'
+    )$count
+    ```
+
+  Tags are case-sensitive; list them with `nhsbsa_tag_list()`, and the
+  organisations you can filter on with `nhsbsa_organization_list()`.
 * **Opening a dataset's page** (e.g.
   `/dataset/english-prescribing-data-epd`) corresponds to
   `nhsbsa_package_show("english-prescribing-data-epd")`, whose `resources`
