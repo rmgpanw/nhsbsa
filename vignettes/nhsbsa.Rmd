@@ -127,12 +127,16 @@ onto API calls:
     This returns *more* datasets than the website shows for the same tag,
     because the website's dataset view hides the Freedom of Information
     disclosure log by default. To match what the website displays, exclude that
-    organisation as well:
+    organisation as well. The result is a list, whose `results` element holds one
+    record per dataset; pull out the `title` of each to compare against the
+    website:
 
     ```{r}
-    nhsbsa_package_search(
+    hits <- nhsbsa_package_search(
       fq = 'tags:"Prescribing" -organization:freedom-of-information-disclosure-log'
-    )$count
+    )
+    hits$count
+    purrr::map_chr(hits$results, "title")
     ```
 
   Tags are case-sensitive; list them with `nhsbsa_tag_list()`, and the
