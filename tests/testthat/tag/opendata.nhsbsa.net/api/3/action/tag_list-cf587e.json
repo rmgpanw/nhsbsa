@@ -1,0 +1,17 @@
+{
+    "help": "https://opendata.nhsbsa.net/api/3/action/help_show?name=tag_list",
+    "success": true,
+    "result": [
+        "English Prescribing Data",
+        "Prescribing",
+        "Hypnotic Prescribing Data",
+        "prescribing data",
+        "Prison Prescribing",
+        "prescribing",
+        "Prescribing data",
+        "secondary care prescribing",
+        "Hospital Prescribing",
+        "Dental prescribing",
+        "Prescribing Data"
+    ]
+}

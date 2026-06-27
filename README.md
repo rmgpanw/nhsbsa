@@ -1,106 +1,186 @@
-# nhsbsa
 
-An R package to access the NHS Business Services Authority (NHSBSA) Open Data Portal API.
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## Overview
+# nhsbsa <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
-The `nhsbsa` package provides convenient functions to access and download data from the NHSBSA Open Data Portal. It includes functions to:
+<!-- badges: start -->
 
-- List available datasets
-- Retrieve dataset metadata
-- Download prescribing and other healthcare data
-- Search for specific medications or treatments
-- Filter data by various criteria
+[![R-CMD-check](https://github.com/rmgpanw/nhsbsa/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rmgpanw/nhsbsa/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/rmgpanw/nhsbsa/graph/badge.svg)](https://app.codecov.io/gh/rmgpanw/nhsbsa)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+
+`nhsbsa` is a low-level R client for the [NHS Business Services
+Authority (NHSBSA) Open Data Portal](https://opendata.nhsbsa.net), a
+[CKAN](https://ckan.org) data catalogue that publishes open datasets
+about NHS activity in England — prescribing, dental, pharmaceutical and
+contractor data among them. The package provides thin wrappers around
+the portal’s API actions and returns plain data — tibbles for tabular
+results and lists for metadata — leaving the interpretation of any
+particular dataset to the caller.
+
+The package deliberately contains no knowledge of specific datasets, and
+wraps the useful read subset of the API’s actions. Function names and
+arguments mirror the CKAN API, so if you know the API you already know
+the package. See the portal’s own [API
+page](https://opendata.nhsbsa.net/pages/api) and the [CKAN Action API
+reference](https://docs.ckan.org/en/latest/api/#action-api-reference)
+for background. If you need an action the package does not yet wrap,
+please [open an issue](https://github.com/rmgpanw/nhsbsa/issues).
+
+## Status
+
+`nhsbsa` is **experimental** and a work in progress. It was developed
+with [Claude Code](https://www.anthropic.com/claude-code), modelled on
+the design of the author’s [trud](https://github.com/rmgpanw/trud) and
+[gtexr](https://github.com/rmgpanw/gtexr) API-client packages. Some
+functionality has yet to be exercised interactively against the live
+API, so please treat results with care. Bug reports, comments and
+suggestions are very welcome via the [issue
+tracker](https://github.com/rmgpanw/nhsbsa/issues).
 
 ## Installation
 
-You can install the development version of nhsbsa from GitHub with:
+You can install the development version of nhsbsa from
+[GitHub](https://github.com/rmgpanw/nhsbsa) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("username/nhsbsa")
+# install.packages("pak")
+pak::pak("rmgpanw/nhsbsa")
 ```
 
 ## Usage
 
-### Basic Operations
-
 ``` r
 library(nhsbsa)
-
-# List all available datasets
-datasets <- nhsbsa_list_datasets()
-
-# Get metadata for English Prescribing Data
-metadata <- nhsbsa_get_metadata("english-prescribing-data-epd")
-
-# List available data files
-resources <- nhsbsa_list_resources("english-prescribing-data-epd")
 ```
 
-### Download Prescribing Data
+Find datasets — list every id, or search:
 
 ``` r
-# Download EPD data for a specific month and organization
-epd_data <- nhsbsa_get_epd(
-  year = 2024,
-  month = 1,
-  pco_code = "13T00",  # NHS Greater Manchester ICB
-  limit = 1000
-)
+datasets <- nhsbsa_package_list()
+length(datasets)
+#> [1] 2169
 
-# Search for specific medications
-paracetamol_data <- nhsbsa_search_epd_chemical(
-  chemical_pattern = "paracetamol",
-  year = 2024,
-  month = 1,
-  exact_match = FALSE,
-  limit = 500
-)
+hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
+hits$count
+#> [1] 639
 ```
 
-### Direct Data Download
+Browsing the [portal website](https://opendata.nhsbsa.net) and clicking
+a tag such as **\#Prescribing** filters the dataset list (the page URL
+becomes `/dataset/?tags=Prescribing`). A filter query finds the datasets
+with that tag:
 
 ``` r
-# Download data directly from a resource with custom filters
-data <- nhsbsa_download_data(
-  resource_name = "EPD_202401",
-  where_conditions = list(
-    pco_code = "13T00",
-    bnf_code = "0102000C0"
-  ),
-  limit = 100
+nhsbsa_package_search(fq = 'tags:"Prescribing"')$count
+#> [1] 18
+```
+
+The API returns more datasets than the website shows for the tag,
+because the website hides the Freedom of Information disclosure log by
+default. Exclude that organisation to match the website’s count:
+
+``` r
+nhsbsa_package_search(
+  fq = 'tags:"Prescribing" -organization:freedom-of-information-disclosure-log'
+)$count
+#> [1] 5
+```
+
+List a dataset’s resources (files), including each file’s download URL:
+
+``` r
+resources <- nhsbsa_list_resources("bnf-code-information-current-year")
+head(resources[, c("name", "format", "url")])
+#> # A tibble: 6 × 3
+#>   name                                     format url                           
+#>   <chr>                                    <chr>  <chr>                         
+#> 1 BNF_CODE_CURRENT_202503_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 2 BNF_CODE_CURRENT_202504_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 3 BNF_CODE_CURRENT_202505_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 4 BNF_CODE_CURRENT_202506_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 5 BNF_CODE_CURRENT_202507_VERSION_88       CSV    https://opendata.nhsbsa.net/d…
+#> 6 BNF_CODE_CURRENT_202508_VERSION_88_FINAL CSV    https://opendata.nhsbsa.net/d…
+```
+
+Download one of them to disk. The file is saved into `directory` (the
+current working directory by default) under its own name:
+
+``` r
+path <- nhsbsa_download_resource(
+  "bnf-code-information-current-year",
+  resource_id = resources$id[[1]],
+  directory = tempdir()
 )
 ```
 
-## Key Features
+Read rows from a tabular (datastore) resource without downloading the
+whole file. The datastore identifies a resource by its **name**
+(e.g. `"EPD_202401"`), and field names are case-sensitive. Use `fields`,
+`sort` and `limit`/`offset` to read:
 
-- **Tidyverse Integration**: Uses modern R practices and the native pipe `|>`
-- **Error Handling**: Robust error checking and informative error messages
-- **API Validation**: Checks API availability before making requests
-- **Flexible Filtering**: Support for complex SQL-like filtering conditions
-- **Performance**: Efficient data retrieval with optional result limits
-- **Documentation**: Comprehensive function documentation with examples
+``` r
+nhsbsa_datastore_search(
+  resource_id = "EPD_202401",
+  fields = c("PCO_CODE", "BNF_CHEMICAL_SUBSTANCE", "ITEMS"),
+  sort = "ITEMS desc",
+  limit = 5
+)
+#> Warning: ! Retrieved 5 of 18080573 matching rows; 18080568 not returned.
+#> ℹ Fetch the next page with `offset = 5` (reusing your other arguments),
+#>   increasing `offset` until all rows are retrieved.
+#> ℹ Raising `limit` returns more rows per request, up to the server-side maximum.
+#> # A tibble: 5 × 3
+#>   PCO_CODE BNF_CHEMICAL_SUBSTANCE ITEMS
+#>   <chr>    <chr>                  <int>
+#> 1 11J00    1404000H0               3584
+#> 2 06H00    0212000B0               3571
+#> 3 02Y00    0212000B0               3469
+#> 4 12F00    1404000H0               3160
+#> 5 11M00    1404000H0               3038
+```
 
-## Data Sources
+To filter by value or aggregate, use SQL. On this portal,
+`datastore_search` does not apply the CKAN `filters`/`q` parameters, so
+SQL is the way to filter:
 
-The package accesses data from the NHSBSA Open Data Portal, including:
+``` r
+nhsbsa_datastore_search_sql(
+  resource_id = "EPD_202401",
+  sql = "SELECT PCO_CODE, SUM(ITEMS) AS items
+         FROM `EPD_202401`
+         WHERE PCO_CODE = 'W2U3Z'
+         GROUP BY PCO_CODE
+         ORDER BY items DESC
+         LIMIT 5"
+)
+#> # A tibble: 1 × 2
+#>   PCO_CODE   items
+#>   <chr>      <int>
+#> 1 W2U3Z    3129964
+```
 
-- English Prescribing Dataset (EPD)
-- Pharmacy and contractor data
-- Prescribing statistics
-- And other healthcare datasets
+``` r
+nhsbsa_datastore_search_sql(
+  resource_id = "EPD_202401",
+  sql = "SELECT PCO_CODE, SUM(ITEMS) AS items
+         FROM `EPD_202401`
+         GROUP BY PCO_CODE
+         ORDER BY items DESC
+         LIMIT 5"
+)
+#> # A tibble: 5 × 2
+#>   PCO_CODE   items
+#>   <chr>      <int>
+#> 1 91Q00    3151968
+#> 2 W2U3Z    3129964
+#> 3 A3A8R    3124609
+#> 4 D9Y0V    2697474
+#> 5 15N00    2413359
+```
 
-## Requirements
-
-- R (>= 4.1.0) for native pipe support
-- Internet connection to access the NHSBSA API
-- Required packages: httr2, dplyr, purrr, rlang
-
-## License
-
-MIT License
-
-## Support
-
-For issues and questions, please file an issue on the GitHub repository.
+See `vignette("nhsbsa")` for an overview of the portal, how the package
+maps onto the website, and the different ways to query data.

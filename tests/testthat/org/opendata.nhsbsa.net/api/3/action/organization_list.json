@@ -1,0 +1,15 @@
+{
+    "help": "https://opendata.nhsbsa.net/api/3/action/help_show?name=organization_list",
+    "success": true,
+    "result": [
+        "ad-hoc-releases",
+        "community_prescribing_dispensing",
+        "dental-data",
+        "digital-service-performance-and-usage",
+        "dispensing-contractors",
+        "freedom-of-information-disclosure-log",
+        "hospital-provider-medicines",
+        "nhsbsa-business-intelligence",
+        "public-services-schemes-and-payments"
+    ]
+}

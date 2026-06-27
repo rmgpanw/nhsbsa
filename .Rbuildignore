@@ -7,4 +7,14 @@
 ^\.vscode$
 ^README\.Rmd$
 ^cran-comments\.md$
-^inst/open-data-portal-api\.R$
+^LICENSE\.md$
+^_pkgdown\.yml$
+^pkgdown$
+^docs$
+^\.air\.toml$
+^examples\.R$
+^CRAN-SUBMISSION$
+^codecov\.yml$
+^\.lintr$
+^CLAUDE\.md$
+^data-raw$
