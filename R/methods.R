@@ -59,7 +59,9 @@ nhsbsa_truncate <- function(x, n) {
 #' them into a table:
 #'
 #' * [nhsbsa_package_show()] returns an `nhsbsa_package`; `as_tibble()` returns
-#'   its resources (one row per file).
+#'   its resources (one row per file). This is the same table as
+#'   [nhsbsa_list_resources()], but built from metadata you have already
+#'   fetched, so it avoids a second request (and does not filter by `pattern`).
 #' * [nhsbsa_resource_show()] returns an `nhsbsa_resource`.
 #' * [nhsbsa_package_search()] returns an `nhsbsa_package_search`; `as_tibble()`
 #'   returns one row per matching dataset.

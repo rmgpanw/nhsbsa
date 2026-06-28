@@ -36,7 +36,9 @@ them into a table:
 \details{
 \itemize{
 \item \code{\link[=nhsbsa_package_show]{nhsbsa_package_show()}} returns an \code{nhsbsa_package}; \code{as_tibble()} returns
-its resources (one row per file).
+its resources (one row per file). This is the same table as
+\code{\link[=nhsbsa_list_resources]{nhsbsa_list_resources()}}, but built from metadata you have already
+fetched, so it avoids a second request (and does not filter by \code{pattern}).
 \item \code{\link[=nhsbsa_resource_show]{nhsbsa_resource_show()}} returns an \code{nhsbsa_resource}.
 \item \code{\link[=nhsbsa_package_search]{nhsbsa_package_search()}} returns an \code{nhsbsa_package_search}; \code{as_tibble()}
 returns one row per matching dataset.

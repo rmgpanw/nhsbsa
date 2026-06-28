@@ -125,6 +125,12 @@ tibble::as_tibble(pkg)
 They are still plain lists underneath, so `$`, `[[` and `str()` work as usual,
 and `.return_raw = TRUE` (or `unclass()`) gives the unclassed list.
 
+`tibble::as_tibble()` on a dataset gives the same table as
+`nhsbsa_list_resources()` — the difference is just the entry point:
+`nhsbsa_list_resources(id, pattern)` fetches (and optionally filters) in one
+call, while `as_tibble()` reuses metadata you have already fetched, avoiding a
+second request.
+
 ## From the portal website to the API
 
 It helps to think of the package as a programmatic version of the

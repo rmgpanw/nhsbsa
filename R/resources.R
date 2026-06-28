@@ -39,6 +39,10 @@ nhsbsa_resource_show <- function(id, .return_raw = FALSE) {
 #' resource name. This is the most direct way to discover the resources (and
 #' their download URLs) available for a dataset.
 #'
+#' If you have already fetched the dataset metadata with [nhsbsa_package_show()],
+#' calling [tibble::as_tibble()] on it gives the same table without a second
+#' request (but without the `pattern` filter).
+#'
 #' @param dataset_id Character scalar. The dataset identifier, as returned by
 #'   [nhsbsa_package_list()].
 #' @param pattern Character scalar. An optional regular expression; only
@@ -47,7 +51,9 @@ nhsbsa_resource_show <- function(id, .return_raw = FALSE) {
 #' @return A tibble with one row per resource and columns `name`, `id`,
 #'   `format`, `created`, `last_modified`, `url` and `size`.
 #'
-#' @seealso [nhsbsa_download_resource()] to download a resource file.
+#' @seealso [nhsbsa_download_resource()] to download a resource file;
+#'   [nhsbsa_package_show()] (with [tibble::as_tibble()]) for the same table from
+#'   already-fetched metadata.
 #'
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
