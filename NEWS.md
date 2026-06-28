@@ -10,3 +10,7 @@
   `nhsbsa_datastore_search_sql()`.
 * Catalogue listings: `nhsbsa_organization_list()`, `nhsbsa_group_list()` and
   `nhsbsa_tag_list()`.
+* `nhsbsa_package_show()`, `nhsbsa_resource_show()` and `nhsbsa_package_search()`
+  return classed lists with tidy `print()` methods, and `tibble::as_tibble()`
+  methods that turn a dataset into its resources and a search into one row per
+  dataset.

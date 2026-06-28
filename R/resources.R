@@ -14,8 +14,9 @@
 #' @param id Character scalar. The resource identifier.
 #' @inheritParams nhsbsa_package_list
 #'
-#' @return A list of resource metadata. With `.return_raw = TRUE`, the parsed
-#'   response envelope as a list.
+#' @return A list of resource metadata, with class `nhsbsa_resource` and a
+#'   [print()][print.nhsbsa_resource] method. With `.return_raw = TRUE`, the
+#'   parsed response envelope as a plain list.
 #'
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
@@ -24,7 +25,11 @@
 #' meta$name
 #' meta$datastore_active
 nhsbsa_resource_show <- function(id, .return_raw = FALSE) {
-  nhsbsa_query("resource_show")
+  out <- nhsbsa_query("resource_show")
+  if (.return_raw) {
+    return(out)
+  }
+  nhsbsa_new_resource(out)
 }
 
 #' List a dataset's resources as a tibble
@@ -53,9 +58,19 @@ nhsbsa_resource_show <- function(id, .return_raw = FALSE) {
 #' nhsbsa_list_resources("english-prescribing-data-epd", pattern = "202401")
 nhsbsa_list_resources <- function(dataset_id, pattern = NULL) {
   metadata <- nhsbsa_package_show(dataset_id)
-  resources <- metadata$resources %||% list()
+  out <- nhsbsa_resources_to_tibble(metadata$resources %||% list())
 
-  out <- tibble::tibble(
+  if (!is.null(pattern)) {
+    out <- out[nhsbsa_str_match(out$name, pattern), ]
+  }
+
+  out
+}
+
+# Flatten a list of CKAN resource records into a tibble (one row per resource).
+# Shared by nhsbsa_list_resources() and the as_tibble() method for a dataset.
+nhsbsa_resources_to_tibble <- function(resources) {
+  tibble::tibble(
     name = nhsbsa_pluck_chr(resources, "name"),
     id = nhsbsa_pluck_chr(resources, "id"),
     format = nhsbsa_pluck_chr(resources, "format"),
@@ -64,12 +79,6 @@ nhsbsa_list_resources <- function(dataset_id, pattern = NULL) {
     url = nhsbsa_pluck_chr(resources, "url"),
     size = nhsbsa_pluck_chr(resources, "size")
   )
-
-  if (!is.null(pattern)) {
-    out <- out[nhsbsa_str_match(out$name, pattern), ]
-  }
-
-  out
 }
 
 #' Download a resource file

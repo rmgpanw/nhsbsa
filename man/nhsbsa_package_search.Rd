@@ -29,8 +29,11 @@ Defaults to \code{NULL} (match all).}
 envelope instead of the processed result. Defaults to \code{FALSE}.}
 }
 \value{
-A list with the search \code{count} and matching datasets in \code{results}.
-With \code{.return_raw = TRUE}, the parsed response envelope as a list.
+A list with the search \code{count} and matching datasets in \code{results},
+with class \code{nhsbsa_package_search} and a
+\link[=print.nhsbsa_package_search]{print()} method; \code{\link[tibble:as_tibble]{tibble::as_tibble()}} turns
+the results into one row per dataset. With \code{.return_raw = TRUE}, the parsed
+response envelope as a plain list.
 }
 \description{
 Wraps the CKAN \code{package_search} action, a Solr-backed search over datasets.
@@ -39,7 +42,8 @@ Wraps the CKAN \code{package_search} action, a Solr-backed search over datasets.
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
 # Free-text search
 hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
-hits$count
+hits
+tibble::as_tibble(hits)
 
 # Filter by tag (as clicking a tag on the website does) and sort the results
 nhsbsa_package_search(

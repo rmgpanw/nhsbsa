@@ -108,6 +108,23 @@ defines no groups and so returns an empty vector — it organises data by
 the processed result — useful when you need fields the helper does not surface,
 such as a datastore query's `total`.
 
+### Working with the returned objects
+
+`nhsbsa_package_show()`, `nhsbsa_resource_show()` and `nhsbsa_package_search()`
+return potentially large nested lists. To make them easier to scan, they print a
+tidy summary, and `tibble::as_tibble()` turns them into a table — a dataset into
+its resources, and a search into one row per matching dataset:
+
+```{r}
+pkg <- nhsbsa_package_show("english-prescribing-data-epd")
+pkg
+
+tibble::as_tibble(pkg)
+```
+
+They are still plain lists underneath, so `$`, `[[` and `str()` work as usual,
+and `.return_raw = TRUE` (or `unclass()`) gives the unclassed list.
+
 ## From the portal website to the API
 
 It helps to think of the package as a programmatic version of the

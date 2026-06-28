@@ -14,8 +14,10 @@ nhsbsa_package_show(id, .return_raw = FALSE)
 envelope instead of the processed result. Defaults to \code{FALSE}.}
 }
 \value{
-A list of dataset metadata. With \code{.return_raw = TRUE}, the parsed
-response envelope as a list.
+A list of dataset metadata, with class \code{nhsbsa_package} and a
+\link[=print.nhsbsa_package]{print()} method; \code{\link[tibble:as_tibble]{tibble::as_tibble()}} turns it into
+a table of its resources. With \code{.return_raw = TRUE}, the parsed response
+envelope as a plain list.
 }
 \description{
 Wraps the CKAN \code{package_show} action to return the full metadata for a single
@@ -25,11 +27,11 @@ tables).
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
 metadata <- nhsbsa_package_show("english-prescribing-data-epd")
+metadata
 metadata$title
 
-# The dataset's resources (files / datastore tables)
-length(metadata$resources)
-metadata$resources[[1]]$name
+# The dataset's resources as a tibble
+tibble::as_tibble(metadata)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

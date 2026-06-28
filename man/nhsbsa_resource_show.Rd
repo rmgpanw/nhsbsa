@@ -13,8 +13,9 @@ nhsbsa_resource_show(id, .return_raw = FALSE)
 envelope instead of the processed result. Defaults to \code{FALSE}.}
 }
 \value{
-A list of resource metadata. With \code{.return_raw = TRUE}, the parsed
-response envelope as a list.
+A list of resource metadata, with class \code{nhsbsa_resource} and a
+\link[=print.nhsbsa_resource]{print()} method. With \code{.return_raw = TRUE}, the
+parsed response envelope as a plain list.
 }
 \description{
 Wraps the CKAN \code{resource_show} action to return the metadata for a single
