@@ -23,6 +23,11 @@ resources as a tibble, optionally filtered by a pattern matched against the
 resource name. This is the most direct way to discover the resources (and
 their download URLs) available for a dataset.
 }
+\details{
+If you have already fetched the dataset metadata with \code{\link[=nhsbsa_package_show]{nhsbsa_package_show()}},
+calling \code{\link[tibble:as_tibble]{tibble::as_tibble()}} on it gives the same table without a second
+request (but without the \code{pattern} filter).
+}
 \examples{
 \dontshow{if (identical(Sys.getenv("IN_PKGDOWN"), "true")) withAutoprint(\{ # examplesIf}
 # All resources for a dataset
@@ -33,5 +38,7 @@ nhsbsa_list_resources("english-prescribing-data-epd", pattern = "202401")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=nhsbsa_download_resource]{nhsbsa_download_resource()}} to download a resource file.
+\code{\link[=nhsbsa_download_resource]{nhsbsa_download_resource()}} to download a resource file;
+\code{\link[=nhsbsa_package_show]{nhsbsa_package_show()}} (with \code{\link[tibble:as_tibble]{tibble::as_tibble()}}) for the same table from
+already-fetched metadata.
 }

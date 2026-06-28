@@ -40,21 +40,27 @@ nhsbsa_package_list <- function(.return_raw = FALSE) {
 #'   [nhsbsa_package_list()].
 #' @inheritParams nhsbsa_package_list
 #'
-#' @return A list of dataset metadata. With `.return_raw = TRUE`, the parsed
-#'   response envelope as a list.
+#' @return A list of dataset metadata, with class `nhsbsa_package` and a
+#'   [print()][print.nhsbsa_package] method; [tibble::as_tibble()] turns it into
+#'   a table of its resources. With `.return_raw = TRUE`, the parsed response
+#'   envelope as a plain list.
 #'
 #' @seealso [nhsbsa_list_resources()] for a tidy table of a dataset's resources.
 #'
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
 #' metadata <- nhsbsa_package_show("english-prescribing-data-epd")
+#' metadata
 #' metadata$title
 #'
-#' # The dataset's resources (files / datastore tables)
-#' length(metadata$resources)
-#' metadata$resources[[1]]$name
+#' # The dataset's resources as a tibble
+#' tibble::as_tibble(metadata)
 nhsbsa_package_show <- function(id, .return_raw = FALSE) {
-  nhsbsa_query("package_show")
+  out <- nhsbsa_query("package_show")
+  if (.return_raw) {
+    return(out)
+  }
+  nhsbsa_new_package(out)
 }
 
 #' Search datasets
@@ -69,14 +75,18 @@ nhsbsa_package_show <- function(id, .return_raw = FALSE) {
 #' @param start Integer. Offset into the result set, for paging.
 #' @inheritParams nhsbsa_package_list
 #'
-#' @return A list with the search `count` and matching datasets in `results`.
-#'   With `.return_raw = TRUE`, the parsed response envelope as a list.
+#' @return A list with the search `count` and matching datasets in `results`,
+#'   with class `nhsbsa_package_search` and a
+#'   [print()][print.nhsbsa_package_search] method; [tibble::as_tibble()] turns
+#'   the results into one row per dataset. With `.return_raw = TRUE`, the parsed
+#'   response envelope as a plain list.
 #'
 #' @export
 #' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
 #' # Free-text search
 #' hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
-#' hits$count
+#' hits
+#' tibble::as_tibble(hits)
 #'
 #' # Filter by tag (as clicking a tag on the website does) and sort the results
 #' nhsbsa_package_search(
@@ -95,5 +105,9 @@ nhsbsa_package_search <- function(
   start = NULL,
   .return_raw = FALSE
 ) {
-  nhsbsa_query("package_search")
+  out <- nhsbsa_query("package_search")
+  if (.return_raw) {
+    return(out)
+  }
+  nhsbsa_new_package_search(out)
 }

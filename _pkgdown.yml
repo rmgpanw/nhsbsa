@@ -27,3 +27,7 @@ reference:
   - nhsbsa_organization_list
   - nhsbsa_group_list
   - nhsbsa_tag_list
+- title: Methods
+  desc: Print and tibble methods for the classed list returns.
+  contents:
+  - nhsbsa-methods
