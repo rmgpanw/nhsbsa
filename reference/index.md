@@ -41,3 +41,14 @@ List the portal’s organisations, groups and tags.
   : List dataset groups
 - [`nhsbsa_tag_list()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_tag_list.md)
   : List tags
+
+## Methods
+
+Print and tibble methods for the classed list returns.
+
+- [`print(`*`<nhsbsa_package>`*`)`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa-methods.md)
+  [`print(`*`<nhsbsa_resource>`*`)`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa-methods.md)
+  [`print(`*`<nhsbsa_package_search>`*`)`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa-methods.md)
+  [`as_tibble(`*`<nhsbsa_package>`*`)`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa-methods.md)
+  [`as_tibble(`*`<nhsbsa_package_search>`*`)`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa-methods.md)
+  : Methods for nhsbsa objects

@@ -3,6 +3,15 @@
 ``` r
 
 library(nhsbsa)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 ```
 
 ## The NHSBSA Open Data Portal
@@ -110,6 +119,62 @@ and so returns an empty vector — it organises data by *organisation* and
 instead of the processed result — useful when you need fields the helper
 does not surface, such as a datastore query’s `total`.
 
+### Working with the returned objects
+
+[`nhsbsa_package_show()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_package_show.md),
+[`nhsbsa_resource_show()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_resource_show.md)
+and
+[`nhsbsa_package_search()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_package_search.md)
+return potentially large nested lists. To make them easier to scan, they
+print a tidy summary, and
+[`tibble::as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html)
+turns them into a table — a dataset into its resources, and a search
+into one row per matching dataset:
+
+``` r
+
+pkg <- nhsbsa_package_show("english-prescribing-data-epd")
+pkg
+#> <nhsbsa dataset> "english-prescribing-data-epd"
+#> Title: RETIRED - English Prescribing Dataset (EPD)
+#> Organisation: Community Prescribing & Dispensing
+#> Modified: 2026-03-06
+#> Resources: 138
+#> Tags: Prescribing, Prescriptions
+#> Use `tibble::as_tibble()` for its resources.
+
+tibble::as_tibble(pkg)
+#> # A tibble: 138 × 7
+#>    name       id                        format created last_modified url   size 
+#>    <chr>      <chr>                     <chr>  <chr>   <chr>         <chr> <chr>
+#>  1 EPD_201401 8ae6b792-2a0c-4f4b-826c-… CSV    2020-1… NA            http… 6618…
+#>  2 EPD_201402 78b8c360-1048-4d30-82fd-… CSV    2020-1… NA            http… 6338…
+#>  3 EPD_201403 54584067-3109-4f27-8c48-… CSV    2020-1… NA            http… 6566…
+#>  4 EPD_201404 5e25a419-8334-4fb2-bcef-… CSV    2020-1… NA            http… 6501…
+#>  5 EPD_201405 5763be28-0dde-430c-bddc-… CSV    2020-1… NA            http… 6623…
+#>  6 EPD_201406 32c2c600-2e9d-47e2-9d45-… CSV    2020-1… NA            http… 6566…
+#>  7 EPD_201407 9f185ff8-aad4-4555-b1fe-… CSV    2020-1… NA            http… 6716…
+#>  8 EPD_201408 3afbd596-a511-4c4f-9a4e-… CSV    2020-1… NA            http… 6429…
+#>  9 EPD_201409 d6fa3292-0ba8-468e-ae2d-… CSV    2020-1… NA            http… 6609…
+#> 10 EPD_201410 e131e18d-9561-4ba2-98aa-… CSV    2020-1… NA            http… 6696…
+#> # ℹ 128 more rows
+```
+
+They are still plain lists underneath, so `$`, `[[` and
+[`str()`](https://rdrr.io/r/utils/str.html) work as usual, and
+`.return_raw = TRUE` (or
+[`unclass()`](https://rdrr.io/r/base/class.html)) gives the unclassed
+list.
+
+[`tibble::as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html)
+on a dataset gives the same table as
+[`nhsbsa_list_resources()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_list_resources.md)
+— the difference is just the entry point:
+`nhsbsa_list_resources(id, pattern)` fetches (and optionally filters) in
+one call, while
+[`as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html)
+reuses metadata you have already fetched, avoiding a second request.
+
 ## From the portal website to the API
 
 It helps to think of the package as a programmatic version of the
@@ -135,18 +200,18 @@ there map onto API calls:
   This returns *more* datasets than the website shows for the same tag,
   because the website’s dataset view hides the Freedom of Information
   disclosure log by default. To match what the website displays, exclude
-  that organisation as well. The result is a list, whose `results`
-  element holds one record per dataset; pull out the `title` of each to
-  compare against the website:
+  that organisation as well.
+  [`tibble::as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html)
+  turns the result into one row per dataset, so you can pull out the
+  titles to compare against the website directly:
 
   ``` r
 
-  hits <- nhsbsa_package_search(
+  nhsbsa_package_search(
     fq = 'tags:"Prescribing" -organization:freedom-of-information-disclosure-log'
-  )
-  hits$count
-  #> [1] 5
-  purrr::map_chr(hits$results, "title")
+  ) |>
+    as_tibble() |>
+    pull(title)
   #> [1] "Prescription Cost Analysis (PCA) Monthly Administrative Data"
   #> [2] "English Prescribing Dataset (EPD) with SNOMED Code"          
   #> [3] "Prescription Cost Analysis (PCA) Annual Statistics"          
@@ -197,20 +262,24 @@ head(datasets)
 
 When you do not already know the id, search for one with
 [`nhsbsa_package_search()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_package_search.md).
-It returns a list with a match `count` and the matching dataset records
-in `results`:
+It prints a tidy summary — the match count and a table of the matching
+datasets;
+[`tibble::as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html)
+returns that table to work with:
 
 ``` r
 
-hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
-hits$count
-#> [1] 639
-vapply(hits$results, function(x) x$name, character(1))
-#> [1] "prescriber-details"                              
-#> [2] "foi-03835"                                       
-#> [3] "english-prescribing-data-epd"                    
-#> [4] "hospital-prescribing-dispensed-in-the-community" 
-#> [5] "english-prescribing-dataset-epd-with-snomed-code"
+nhsbsa_package_search(q = "prescribing", rows = 5)
+#> <nhsbsa package search> 639 datasets found
+#> Showing the first 5; increase `rows` for more.
+#> # A tibble: 5 × 5
+#>   name                        title organisation num_resources metadata_modified
+#>   <chr>                       <chr> <chr>                <int> <chr>            
+#> 1 prescriber-details          Pres… community_p…            47 2026-06-03T08:09…
+#> 2 foi-03835                   FOI-… freedom-of-…            41 2026-06-16T12:59…
+#> 3 english-prescribing-data-e… RETI… community_p…           138 2026-03-06T12:49…
+#> 4 hospital-prescribing-dispe… Hosp… community_p…           113 2026-06-23T09:31…
+#> 5 english-prescribing-datase… Engl… community_p…            66 2026-06-22T09:54…
 ```
 
 ### Inspect a dataset’s resources
@@ -224,7 +293,9 @@ lists them as a tibble, including the download `url` of each:
 resources <- nhsbsa_list_resources("english-prescribing-data-epd")
 nrow(resources)
 #> [1] 138
-head(resources[, c("name", "format", "url")])
+resources |>
+  select(name, format, url) |>
+  slice_head(n = 6)
 #> # A tibble: 6 × 3
 #>   name       format url                                                         
 #>   <chr>      <chr>  <chr>                                                       
@@ -240,9 +311,8 @@ Filter by a pattern matched against the resource name:
 
 ``` r
 
-nhsbsa_list_resources("english-prescribing-data-epd", pattern = "202401")[,
-  c("name", "id", "last_modified")
-]
+nhsbsa_list_resources("english-prescribing-data-epd", pattern = "202401") |>
+  select(name, id, last_modified)
 #> # A tibble: 1 × 3
 #>   name       id                                   last_modified             
 #>   <chr>      <chr>                                <chr>                     
@@ -250,16 +320,19 @@ nhsbsa_list_resources("english-prescribing-data-epd", pattern = "202401")[,
 ```
 
 [`nhsbsa_resource_show()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_resource_show.md)
-returns the full metadata for a single resource (by its `id`), if you
-need more detail than the table above:
+returns the full metadata for a single resource (by its `id`), and
+prints a summary if you need more detail than the table above:
 
 ``` r
 
-resource <- nhsbsa_resource_show(resources$id[[1]])
-resource$name
-#> [1] "EPD_201401"
-resource$format
-#> [1] "CSV"
+nhsbsa_resource_show(resources$id[[1]])
+#> <nhsbsa resource> "EPD_201401"
+#> Format: CSV
+#> Size: 6618466913
+#> Datastore: FALSE
+#> Modified: —
+#> URL:
+#> https://opendata.nhsbsa.net/dataset/65050ec0-5abd-48ce-989d-defc08ed837e/resource/8ae6b792-2a0c-4f4b-826c-dc6483dc32a7/download/epd_201401.csv
 ```
 
 ### Download a resource file
@@ -279,7 +352,7 @@ path <- nhsbsa_download_resource(
   directory = tempdir()
 )
 #> ℹ Downloading "BNF_CODE_CURRENT_202503_VERSION_88" to
-#>   /tmp/RtmpqfHG8C/bnf_code_current_202503_version_88.csv.
+#>   /tmp/RtmpEUgGu4/bnf_code_current_202503_version_88.csv.
 basename(path)
 #> [1] "bnf_code_current_202503_version_88.csv"
 ```

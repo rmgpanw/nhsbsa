@@ -23,3 +23,12 @@
   [`nhsbsa_group_list()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_group_list.md)
   and
   [`nhsbsa_tag_list()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_tag_list.md).
+- [`nhsbsa_package_show()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_package_show.md),
+  [`nhsbsa_resource_show()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_resource_show.md)
+  and
+  [`nhsbsa_package_search()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_package_search.md)
+  return classed lists with tidy
+  [`print()`](https://rdrr.io/r/base/print.html) methods, and
+  [`tibble::as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html)
+  methods that turn a dataset into its resources and a search into one
+  row per dataset.

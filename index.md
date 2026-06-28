@@ -45,6 +45,15 @@ pak::pak("rmgpanw/nhsbsa")
 ``` r
 
 library(nhsbsa)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 ```
 
 Find datasets — list every id, or search:
@@ -88,7 +97,9 @@ List a dataset’s resources (files), including each file’s download URL:
 ``` r
 
 resources <- nhsbsa_list_resources("bnf-code-information-current-year")
-head(resources[, c("name", "format", "url")])
+resources |>
+  select(name, format, url) |>
+  slice_head(n = 6)
 #> # A tibble: 6 × 3
 #>   name                                     format url                           
 #>   <chr>                                    <chr>  <chr>                         

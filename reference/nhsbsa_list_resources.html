@@ -75,8 +75,16 @@ resources whose <code>name</code> matches (case-insensitively) are returned.</p>
 <code>format</code>, <code>created</code>, <code>last_modified</code>, <code>url</code> and <code>size</code>.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>If you have already fetched the dataset metadata with <code><a href="nhsbsa_package_show.html">nhsbsa_package_show()</a></code>,
+calling <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble()</a></code> on it gives the same table without a second
+request (but without the <code>pattern</code> filter).</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="nhsbsa_download_resource.html">nhsbsa_download_resource()</a></code> to download a resource file.</p></div>
+    <div class="dont-index"><p><code><a href="nhsbsa_download_resource.html">nhsbsa_download_resource()</a></code> to download a resource file;
+<code><a href="nhsbsa_package_show.html">nhsbsa_package_show()</a></code> (with <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble()</a></code>) for the same table from
+already-fetched metadata.</p></div>
     </div>
 
     <div class="section level2">

@@ -30,10 +30,23 @@ nhsbsa_list_resources(dataset_id, pattern = NULL)
 A tibble with one row per resource and columns `name`, `id`, `format`,
 `created`, `last_modified`, `url` and `size`.
 
+## Details
+
+If you have already fetched the dataset metadata with
+[`nhsbsa_package_show()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_package_show.md),
+calling
+[`tibble::as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html)
+on it gives the same table without a second request (but without the
+`pattern` filter).
+
 ## See also
 
 [`nhsbsa_download_resource()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_download_resource.md)
-to download a resource file.
+to download a resource file;
+[`nhsbsa_package_show()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_package_show.md)
+(with
+[`tibble::as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html))
+for the same table from already-fetched metadata.
 
 ## Examples
 

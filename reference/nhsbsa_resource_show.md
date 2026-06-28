@@ -22,8 +22,10 @@ nhsbsa_resource_show(id, .return_raw = FALSE)
 
 ## Value
 
-A list of resource metadata. With `.return_raw = TRUE`, the parsed
-response envelope as a list.
+A list of resource metadata, with class `nhsbsa_resource` and a
+[print()](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa-methods.md)
+method. With `.return_raw = TRUE`, the parsed response envelope as a
+plain list.
 
 ## Examples
 

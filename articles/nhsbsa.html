@@ -71,7 +71,16 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rmgpanw/nhsbsa" class="external-link">nhsbsa</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rmgpanw/nhsbsa" class="external-link">nhsbsa</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     filter, lag</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="the-nhsbsa-open-data-portal">The NHSBSA Open Data Portal<a class="anchor" aria-label="anchor" href="#the-nhsbsa-open-data-portal"></a>
 </h2>
@@ -162,6 +171,51 @@ read-only functions also accept <code>.return_raw = TRUE</code>, which
 returns the full parsed response envelope instead of the processed
 result — useful when you need fields the helper does not surface, such
 as a datastore query’s <code>total</code>.</p>
+<div class="section level3">
+<h3 id="working-with-the-returned-objects">Working with the returned objects<a class="anchor" aria-label="anchor" href="#working-with-the-returned-objects"></a>
+</h3>
+<p><code><a href="../reference/nhsbsa_package_show.html">nhsbsa_package_show()</a></code>,
+<code><a href="../reference/nhsbsa_resource_show.html">nhsbsa_resource_show()</a></code> and
+<code><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search()</a></code> return potentially large nested
+lists. To make them easier to scan, they print a tidy summary, and
+<code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble()</a></code> turns them into a table — a dataset
+into its resources, and a search into one row per matching dataset:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pkg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_package_show.html">nhsbsa_package_show</a></span><span class="op">(</span><span class="st">"english-prescribing-data-epd"</span><span class="op">)</span></span>
+<span><span class="va">pkg</span></span>
+<span><span class="co">#&gt; &lt;nhsbsa dataset&gt; <span style="color: #0000BB;">"english-prescribing-data-epd"</span></span></span>
+<span><span class="co">#&gt; Title: RETIRED - English Prescribing Dataset (EPD)</span></span>
+<span><span class="co">#&gt; Organisation: Community Prescribing &amp; Dispensing</span></span>
+<span><span class="co">#&gt; Modified: 2026-03-06</span></span>
+<span><span class="co">#&gt; Resources: 138</span></span>
+<span><span class="co">#&gt; Tags: Prescribing, Prescriptions</span></span>
+<span><span class="co">#&gt; <span style="font-style: italic;">Use `tibble::as_tibble()` for its resources.</span></span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">pkg</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 138 × 7</span></span></span>
+<span><span class="co">#&gt;    name       id                        format created last_modified url   size </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> EPD_201401 8ae6b792-2a0c-4f4b-826c-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6618…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> EPD_201402 78b8c360-1048-4d30-82fd-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6338…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> EPD_201403 54584067-3109-4f27-8c48-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6566…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> EPD_201404 5e25a419-8334-4fb2-bcef-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6501…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> EPD_201405 5763be28-0dde-430c-bddc-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6623…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> EPD_201406 32c2c600-2e9d-47e2-9d45-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6566…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EPD_201407 9f185ff8-aad4-4555-b1fe-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6716…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EPD_201408 3afbd596-a511-4c4f-9a4e-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6429…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> EPD_201409 d6fa3292-0ba8-468e-ae2d-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6609…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> EPD_201410 e131e18d-9561-4ba2-98aa-… CSV    2020-1… <span style="color: #BB0000;">NA</span>            http… 6696…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 128 more rows</span></span></span></code></pre></div>
+<p>They are still plain lists underneath, so <code>$</code>,
+<code>[[</code> and <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code> work as usual, and
+<code>.return_raw = TRUE</code> (or <code><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass()</a></code>) gives the
+unclassed list.</p>
+<p><code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble()</a></code> on a dataset gives the same table as
+<code><a href="../reference/nhsbsa_list_resources.html">nhsbsa_list_resources()</a></code> — the difference is just the entry
+point: <code>nhsbsa_list_resources(id, pattern)</code> fetches (and
+optionally filters) in one call, while <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble()</a></code> reuses
+metadata you have already fetched, avoiding a second request.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="from-the-portal-website-to-the-api">From the portal website to the API<a class="anchor" aria-label="anchor" href="#from-the-portal-website-to-the-api"></a>
@@ -178,22 +232,22 @@ paging).</p></li>
 <strong>#Prescribing</strong>, takes the website to
 <code>/dataset/?tags=Prescribing</code>. A <em>filter query</em> on the
 <code>tags</code> field returns the datasets carrying that tag:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span>fq <span class="op">=</span> <span class="st">'tags:"Prescribing"'</span><span class="op">)</span><span class="op">$</span><span class="va">count</span></span>
 <span><span class="co">#&gt; [1] 18</span></span></code></pre></div>
 <p>This returns <em>more</em> datasets than the website shows for the
 same tag, because the website’s dataset view hides the Freedom of
 Information disclosure log by default. To match what the website
-displays, exclude that organisation as well. The result is a list, whose
-<code>results</code> element holds one record per dataset; pull out the
-<code>title</code> of each to compare against the website:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span></span>
+displays, exclude that organisation as well.
+<code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble()</a></code> turns the result into one row per
+dataset, so you can pull out the titles to compare against the website
+directly:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span></span>
 <span>  fq <span class="op">=</span> <span class="st">'tags:"Prescribing" -organization:freedom-of-information-disclosure-log'</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">hits</span><span class="op">$</span><span class="va">count</span></span>
-<span><span class="co">#&gt; [1] 5</span></span>
-<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span><span class="va">hits</span><span class="op">$</span><span class="va">results</span>, <span class="st">"title"</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">title</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Prescription Cost Analysis (PCA) Monthly Administrative Data"</span></span>
 <span><span class="co">#&gt; [2] "English Prescribing Dataset (EPD) with SNOMED Code"          </span></span>
 <span><span class="co">#&gt; [3] "Prescription Cost Analysis (PCA) Annual Statistics"          </span></span>
@@ -224,7 +278,7 @@ queries.</p></li>
 </h3>
 <p><code><a href="../reference/nhsbsa_package_list.html">nhsbsa_package_list()</a></code> returns the identifier of every
 dataset; use it when you want to scan or search the ids yourself:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_package_list.html">nhsbsa_package_list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 2169</span></span>
@@ -236,19 +290,21 @@ dataset; use it when you want to scan or search the ids yourself:</p>
 <span><span class="co">#&gt; [5] "bnf-code-information-current-year"               </span></span>
 <span><span class="co">#&gt; [6] "bnf-code-information-historic"</span></span></code></pre></div>
 <p>When you do not already know the id, search for one with
-<code><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search()</a></code>. It returns a list with a match
-<code>count</code> and the matching dataset records in
-<code>results</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span>q <span class="op">=</span> <span class="st">"prescribing"</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="va">hits</span><span class="op">$</span><span class="va">count</span></span>
-<span><span class="co">#&gt; [1] 639</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">vapply</a></span><span class="op">(</span><span class="va">hits</span><span class="op">$</span><span class="va">results</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="va">name</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "prescriber-details"                              </span></span>
-<span><span class="co">#&gt; [2] "foi-03835"                                       </span></span>
-<span><span class="co">#&gt; [3] "english-prescribing-data-epd"                    </span></span>
-<span><span class="co">#&gt; [4] "hospital-prescribing-dispensed-in-the-community" </span></span>
-<span><span class="co">#&gt; [5] "english-prescribing-dataset-epd-with-snomed-code"</span></span></code></pre></div>
+<code><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search()</a></code>. It prints a tidy summary — the
+match count and a table of the matching datasets;
+<code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble()</a></code> returns that table to work with:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span>q <span class="op">=</span> <span class="st">"prescribing"</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;nhsbsa package search&gt; 639 datasets found</span></span>
+<span><span class="co">#&gt; <span style="font-style: italic;">Showing the first 5; increase `rows` for more.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span></span>
+<span><span class="co">#&gt;   name                        title organisation num_resources metadata_modified</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> prescriber-details          Pres… community_p…            47 2026-06-03T08:09…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> foi-03835                   FOI-… freedom-of-…            41 2026-06-16T12:59…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> english-prescribing-data-e… RETI… community_p…           138 2026-03-06T12:49…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> hospital-prescribing-dispe… Hosp… community_p…           113 2026-06-23T09:31…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> english-prescribing-datase… Engl… community_p…            66 2026-06-22T09:54…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="inspect-a-datasets-resources">Inspect a dataset’s resources<a class="anchor" aria-label="anchor" href="#inspect-a-datasets-resources"></a>
@@ -256,11 +312,13 @@ dataset; use it when you want to scan or search the ids yourself:</p>
 <p>A dataset is a container of <em>resources</em> (files).
 <code><a href="../reference/nhsbsa_list_resources.html">nhsbsa_list_resources()</a></code> lists them as a tibble, including
 the download <code>url</code> of each:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resources</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_list_resources.html">nhsbsa_list_resources</a></span><span class="op">(</span><span class="st">"english-prescribing-data-epd"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">resources</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 138</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">resources</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"format"</span>, <span class="st">"url"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">resources</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">format</span>, <span class="va">url</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;   name       format url                                                         </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                       </span></span>
@@ -271,23 +329,25 @@ the download <code>url</code> of each:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> EPD_201405 CSV    https://opendata.nhsbsa.net/dataset/65050ec0-5abd-48ce-989d…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> EPD_201406 CSV    https://opendata.nhsbsa.net/dataset/65050ec0-5abd-48ce-989d…</span></span></code></pre></div>
 <p>Filter by a pattern matched against the resource name:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_list_resources.html">nhsbsa_list_resources</a></span><span class="op">(</span><span class="st">"english-prescribing-data-epd"</span>, pattern <span class="op">=</span> <span class="st">"202401"</span><span class="op">)</span><span class="op">[</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"id"</span>, <span class="st">"last_modified"</span><span class="op">)</span></span>
-<span><span class="op">]</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_list_resources.html">nhsbsa_list_resources</a></span><span class="op">(</span><span class="st">"english-prescribing-data-epd"</span>, pattern <span class="op">=</span> <span class="st">"202401"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">id</span>, <span class="va">last_modified</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   name       id                                   last_modified             </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> EPD_202401 fe7c75f9-7ac6-4d03-8941-74f596db4a5a 2024-03-19T09:39:16.950431</span></span></code></pre></div>
 <p><code><a href="../reference/nhsbsa_resource_show.html">nhsbsa_resource_show()</a></code> returns the full metadata for a
-single resource (by its <code>id</code>), if you need more detail than
-the table above:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">resource</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_resource_show.html">nhsbsa_resource_show</a></span><span class="op">(</span><span class="va">resources</span><span class="op">$</span><span class="va">id</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">resource</span><span class="op">$</span><span class="va">name</span></span>
-<span><span class="co">#&gt; [1] "EPD_201401"</span></span>
-<span><span class="va">resource</span><span class="op">$</span><span class="va">format</span></span>
-<span><span class="co">#&gt; [1] "CSV"</span></span></code></pre></div>
+single resource (by its <code>id</code>), and prints a summary if you
+need more detail than the table above:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_resource_show.html">nhsbsa_resource_show</a></span><span class="op">(</span><span class="va">resources</span><span class="op">$</span><span class="va">id</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;nhsbsa resource&gt; <span style="color: #0000BB;">"EPD_201401"</span></span></span>
+<span><span class="co">#&gt; Format: CSV</span></span>
+<span><span class="co">#&gt; Size: 6618466913</span></span>
+<span><span class="co">#&gt; Datastore: FALSE</span></span>
+<span><span class="co">#&gt; Modified: —</span></span>
+<span><span class="co">#&gt; URL:</span></span>
+<span><span class="co">#&gt; https://opendata.nhsbsa.net/dataset/65050ec0-5abd-48ce-989d-defc08ed837e/resource/8ae6b792-2a0c-4f4b-826c-dc6483dc32a7/download/epd_201401.csv</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="download-a-resource-file">Download a resource file<a class="anchor" aria-label="anchor" href="#download-a-resource-file"></a>
@@ -298,7 +358,7 @@ its file to disk. The file is saved into <code>directory</code> (the
 current working directory by default) under its own name; here we use a
 (smaller) resource from the BNF code dataset and save to a temporary
 directory:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bnf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_list_resources.html">nhsbsa_list_resources</a></span><span class="op">(</span><span class="st">"bnf-code-information-current-year"</span><span class="op">)</span></span>
 <span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_download_resource.html">nhsbsa_download_resource</a></span><span class="op">(</span></span>
 <span>  <span class="st">"bnf-code-information-current-year"</span>,</span>
@@ -306,7 +366,7 @@ directory:</p>
 <span>  directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Downloading <span style="color: #0000BB;">"BNF_CODE_CURRENT_202503_VERSION_88"</span> to</span></span>
-<span><span class="co">#&gt;   <span style="color: #0000BB;">/tmp/RtmpqfHG8C/bnf_code_current_202503_version_88.csv</span>.</span></span>
+<span><span class="co">#&gt;   <span style="color: #0000BB;">/tmp/RtmpEUgGu4/bnf_code_current_202503_version_88.csv</span>.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "bnf_code_current_202503_version_88.csv"</span></span></code></pre></div>
 </div>
@@ -348,7 +408,7 @@ You can choose and order columns with <code>fields</code>, sort with
 Field names are case-sensitive and must match the resource’s columns
 exactly (for the EPD they are upper case,
 e.g. <code>PCO_CODE</code>):</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_datastore_search.html">nhsbsa_datastore_search</a></span><span class="op">(</span></span>
 <span>  resource_id <span class="op">=</span> <span class="st">"EPD_202401"</span>,</span>
 <span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PCO_CODE"</span>, <span class="st">"BNF_CHEMICAL_SUBSTANCE"</span>, <span class="st">"ITEMS"</span><span class="op">)</span>,</span>
@@ -371,7 +431,7 @@ e.g. <code>PCO_CODE</code>):</p>
 rows exist than were returned, <code><a href="../reference/nhsbsa_datastore_search.html">nhsbsa_datastore_search()</a></code>
 warns you and explains how to page through the rest by increasing
 <code>offset</code>:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_datastore_search.html">nhsbsa_datastore_search</a></span><span class="op">(</span></span>
 <span>  resource_id <span class="op">=</span> <span class="st">"EPD_202401"</span>,</span>
 <span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PCO_CODE"</span>, <span class="st">"ITEMS"</span><span class="op">)</span>,</span>
@@ -406,7 +466,7 @@ query, which is the reliable way to filter, compute expressions,
 aggregate and sort on this portal. The portal requires the
 <code>resource_id</code> alongside the query, and you reference the same
 resource name in the <code>FROM</code> clause:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter to one organisation</span></span>
 <span><span class="fu"><a href="../reference/nhsbsa_datastore_search_sql.html">nhsbsa_datastore_search_sql</a></span><span class="op">(</span></span>
 <span>  resource_id <span class="op">=</span> <span class="st">"EPD_202401"</span>,</span>
@@ -423,7 +483,7 @@ resource name in the <code>FROM</code> clause:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> W2U3Z    0408010H0                  4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> W2U3Z    0601022B0                  1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> W2U3Z    0906040G0                  1</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Aggregate: total items prescribed per organisation</span></span>
 <span><span class="fu"><a href="../reference/nhsbsa_datastore_search_sql.html">nhsbsa_datastore_search_sql</a></span><span class="op">(</span></span>
 <span>  resource_id <span class="op">=</span> <span class="st">"EPD_202401"</span>,</span>
