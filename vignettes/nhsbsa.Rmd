@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(nhsbsa)
+library(dplyr)
 ```
 
 ## The NHSBSA Open Data Portal
@@ -150,16 +151,16 @@ onto API calls:
     This returns *more* datasets than the website shows for the same tag,
     because the website's dataset view hides the Freedom of Information
     disclosure log by default. To match what the website displays, exclude that
-    organisation as well. The result is a list, whose `results` element holds one
-    record per dataset; pull out the `title` of each to compare against the
-    website:
+    organisation as well. `tibble::as_tibble()` turns the result into one row per
+    dataset, so you can pull out the titles to compare against the website
+    directly:
 
     ```{r}
-    hits <- nhsbsa_package_search(
+    nhsbsa_package_search(
       fq = 'tags:"Prescribing" -organization:freedom-of-information-disclosure-log'
-    )
-    hits$count
-    purrr::map_chr(hits$results, "title")
+    ) |>
+      as_tibble() |>
+      pull(title)
     ```
 
   Tags are case-sensitive; list them with `nhsbsa_tag_list()`, and the
@@ -188,13 +189,11 @@ head(datasets)
 ```
 
 When you do not already know the id, search for one with
-`nhsbsa_package_search()`. It returns a list with a match `count` and the
-matching dataset records in `results`:
+`nhsbsa_package_search()`. It prints a tidy summary — the match count and a table
+of the matching datasets; `tibble::as_tibble()` returns that table to work with:
 
 ```{r}
-hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
-hits$count
-vapply(hits$results, function(x) x$name, character(1))
+nhsbsa_package_search(q = "prescribing", rows = 5)
 ```
 
 ### Inspect a dataset's resources
@@ -205,24 +204,23 @@ them as a tibble, including the download `url` of each:
 ```{r}
 resources <- nhsbsa_list_resources("english-prescribing-data-epd")
 nrow(resources)
-head(resources[, c("name", "format", "url")])
+resources |>
+  select(name, format, url) |>
+  slice_head(n = 6)
 ```
 
 Filter by a pattern matched against the resource name:
 
 ```{r}
-nhsbsa_list_resources("english-prescribing-data-epd", pattern = "202401")[,
-  c("name", "id", "last_modified")
-]
+nhsbsa_list_resources("english-prescribing-data-epd", pattern = "202401") |>
+  select(name, id, last_modified)
 ```
 
 `nhsbsa_resource_show()` returns the full metadata for a single resource (by its
-`id`), if you need more detail than the table above:
+`id`), and prints a summary if you need more detail than the table above:
 
 ```{r}
-resource <- nhsbsa_resource_show(resources$id[[1]])
-resource$name
-resource$format
+nhsbsa_resource_show(resources$id[[1]])
 ```
 
 ### Download a resource file
