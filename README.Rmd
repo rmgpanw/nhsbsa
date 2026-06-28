@@ -63,6 +63,7 @@ pak::pak("rmgpanw/nhsbsa")
 
 ```{r}
 library(nhsbsa)
+library(dplyr)
 ```
 
 Find datasets — list every id, or search:
@@ -97,7 +98,9 @@ List a dataset's resources (files), including each file's download URL:
 
 ```{r}
 resources <- nhsbsa_list_resources("bnf-code-information-current-year")
-head(resources[, c("name", "format", "url")])
+resources |>
+  select(name, format, url) |>
+  slice_head(n = 6)
 ```
 
 Download one of them to disk. The file is saved into `directory` (the current
