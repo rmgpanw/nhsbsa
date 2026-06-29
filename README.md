@@ -33,9 +33,9 @@ please [open an issue](https://github.com/rmgpanw/nhsbsa/issues).
 ## Status
 
 `nhsbsa` is **experimental** and a work in progress. It was developed
-with [Claude Code](https://www.anthropic.com/claude-code), modelled on
-the design of the author’s [trud](https://github.com/rmgpanw/trud) and
-[gtexr](https://github.com/rmgpanw/gtexr) API-client packages. Some
+with [Claude Code](https://claude.com/product/claude-code), modelled on
+the design of the author’s [trud](https://github.com/ropensci/trud) and
+[gtexr](https://github.com/ropensci/gtexr) API-client packages. Some
 functionality has yet to be exercised interactively against the live
 API, so please treat results with care. Bug reports, comments and
 suggestions are very welcome via the [issue
@@ -43,7 +43,13 @@ tracker](https://github.com/rmgpanw/nhsbsa/issues).
 
 ## Installation
 
-You can install the development version of nhsbsa from
+Install the released version of nhsbsa from CRAN with:
+
+``` r
+install.packages("nhsbsa")
+```
+
+Or install the development version from
 [GitHub](https://github.com/rmgpanw/nhsbsa) with:
 
 ``` r
@@ -71,11 +77,11 @@ Find datasets — list every id, or search:
 ``` r
 datasets <- nhsbsa_package_list()
 length(datasets)
-#> [1] 2169
+#> [1] 2170
 
 hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
 hits$count
-#> [1] 639
+#> [1] 640
 ```
 
 Browsing the [portal website](https://opendata.nhsbsa.net) and clicking

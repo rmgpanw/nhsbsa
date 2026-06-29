@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A low-level client for the NHS Business Services Authority (NHSBSA) Open Data Portal \url{https://opendata.nhsbsa.net}, a 'CKAN' data catalogue. Provides thin wrappers around the portal's API actions for listing datasets, retrieving metadata, querying the datastore and downloading resource files. Results are returned as plain data (tibbles and lists) for the caller to interpret.
+A low-level client for the National Health Service Business Services Authority (NHSBSA) Open Data Portal \url{https://opendata.nhsbsa.net}, a 'CKAN' data catalogue. Provides thin wrappers around the portal's API actions for listing datasets, retrieving metadata, querying the datastore and downloading resource files. Results are returned as plain data (tibbles and lists) for the caller to interpret.
 }
 \section{Further reading}{
 
@@ -35,7 +35,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Alasdair Warwick \email{alasdair.warwick06@gmail.com} (\href{https://orcid.org/0000-0002-0800-2890}{ORCID})
+\strong{Maintainer}: Alasdair Warwick \email{alasdair.warwick06@gmail.com} (\href{https://orcid.org/0000-0002-0800-2890}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

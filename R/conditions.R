@@ -33,7 +33,7 @@
 #' )
 #'
 #' e <- tryCatch(
-#'   nhsbsa_abort(
+#'   nhsbsa:::nhsbsa_abort(
 #'     named_cli_message_vector,
 #'     class = "nhsbsa_dataset_not_found"
 #'   ),
