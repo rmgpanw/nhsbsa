@@ -16,8 +16,8 @@
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Client for the NHS Business Services Authority Open Data Portal">
-<meta name="description" content="A low-level client for the NHS Business Services Authority (NHSBSA) Open Data Portal &lt;https://opendata.nhsbsa.net&gt;, a CKAN data catalogue. Provides thin wrappers around the portal's API actions for listing datasets, retrieving metadata, querying the datastore and downloading resource files. Results are returned as plain data (tibbles and lists) for the caller to interpret.">
-<meta property="og:description" content="A low-level client for the NHS Business Services Authority (NHSBSA) Open Data Portal &lt;https://opendata.nhsbsa.net&gt;, a CKAN data catalogue. Provides thin wrappers around the portal's API actions for listing datasets, retrieving metadata, querying the datastore and downloading resource files. Results are returned as plain data (tibbles and lists) for the caller to interpret.">
+<meta name="description" content="A low-level client for the National Health Service Business Services Authority (NHSBSA) Open Data Portal &lt;https://opendata.nhsbsa.net&gt;, a CKAN data catalogue. Provides thin wrappers around the portal's API actions for listing datasets, retrieving metadata, querying the datastore and downloading resource files. Results are returned as plain data (tibbles and lists) for the caller to interpret.">
+<meta property="og:description" content="A low-level client for the National Health Service Business Services Authority (NHSBSA) Open Data Portal &lt;https://opendata.nhsbsa.net&gt;, a CKAN data catalogue. Provides thin wrappers around the portal's API actions for listing datasets, retrieving metadata, querying the datastore and downloading resource files. Results are returned as plain data (tibbles and lists) for the caller to interpret.">
 <meta property="og:image" content="https://rmgpanw.github.io/nhsbsa/logo.png">
 </head>
 <body>
@@ -71,20 +71,23 @@
 <div class="section level2">
 <h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
 </h2>
-<p><code>nhsbsa</code> is <strong>experimental</strong> and a work in progress. It was developed with <a href="https://www.anthropic.com/claude-code" class="external-link">Claude Code</a>, modelled on the design of the author’s <a href="https://github.com/rmgpanw/trud" class="external-link">trud</a> and <a href="https://github.com/rmgpanw/gtexr" class="external-link">gtexr</a> API-client packages. Some functionality has yet to be exercised interactively against the live API, so please treat results with care. Bug reports, comments and suggestions are very welcome via the <a href="https://github.com/rmgpanw/nhsbsa/issues" class="external-link">issue tracker</a>.</p>
+<p><code>nhsbsa</code> is <strong>experimental</strong> and a work in progress. It was developed with <a href="https://claude.com/product/claude-code" class="external-link">Claude Code</a>, modelled on the design of the author’s <a href="https://github.com/ropensci/trud" class="external-link">trud</a> and <a href="https://github.com/ropensci/gtexr" class="external-link">gtexr</a> API-client packages. Some functionality has yet to be exercised interactively against the live API, so please treat results with care. Bug reports, comments and suggestions are very welcome via the <a href="https://github.com/rmgpanw/nhsbsa/issues" class="external-link">issue tracker</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of nhsbsa from <a href="https://github.com/rmgpanw/nhsbsa" class="external-link">GitHub</a> with:</p>
+<p>Install the released version of nhsbsa from CRAN with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"nhsbsa"</span><span class="op">)</span></span></code></pre></div>
+<p>Or install the development version from <a href="https://github.com/rmgpanw/nhsbsa" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"rmgpanw/nhsbsa"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rmgpanw/nhsbsa" class="external-link">nhsbsa</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -96,26 +99,26 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
 <p>Find datasets — list every id, or search:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nhsbsa_package_list.html">nhsbsa_package_list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2169</span></span>
+<span><span class="co">#&gt; [1] 2170</span></span>
 <span></span>
 <span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span>q <span class="op">=</span> <span class="st">"prescribing"</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">hits</span><span class="op">$</span><span class="va">count</span></span>
-<span><span class="co">#&gt; [1] 639</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 640</span></span></code></pre></div>
 <p>Browsing the <a href="https://opendata.nhsbsa.net" class="external-link">portal website</a> and clicking a tag such as <strong>#Prescribing</strong> filters the dataset list (the page URL becomes <code>/dataset/?tags=Prescribing</code>). A filter query finds the datasets with that tag:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span>fq <span class="op">=</span> <span class="st">'tags:"Prescribing"'</span><span class="op">)</span><span class="op">$</span><span class="va">count</span></span>
 <span><span class="co">#&gt; [1] 18</span></span></code></pre></div>
 <p>The API returns more datasets than the website shows for the tag, because the website hides the Freedom of Information disclosure log by default. Exclude that organisation to match the website’s count:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span></span>
 <span>  fq <span class="op">=</span> <span class="st">'tags:"Prescribing" -organization:freedom-of-information-disclosure-log'</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">count</span></span>
 <span><span class="co">#&gt; [1] 5</span></span></code></pre></div>
 <p>List a dataset’s resources (files), including each file’s download URL:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resources</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nhsbsa_list_resources.html">nhsbsa_list_resources</a></span><span class="op">(</span><span class="st">"bnf-code-information-current-year"</span><span class="op">)</span></span>
 <span><span class="va">resources</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">format</span>, <span class="va">url</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -130,14 +133,14 @@
 <span><span class="co">#&gt; 5 BNF_CODE_CURRENT_202507_VERSION_88       CSV    https://opendata.nhsbsa.net/d…</span></span>
 <span><span class="co">#&gt; 6 BNF_CODE_CURRENT_202508_VERSION_88_FINAL CSV    https://opendata.nhsbsa.net/d…</span></span></code></pre></div>
 <p>Download one of them to disk. The file is saved into <code>directory</code> (the current working directory by default) under its own name:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nhsbsa_download_resource.html">nhsbsa_download_resource</a></span><span class="op">(</span></span>
 <span>  <span class="st">"bnf-code-information-current-year"</span>,</span>
 <span>  resource_id <span class="op">=</span> <span class="va">resources</span><span class="op">$</span><span class="va">id</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>  directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Read rows from a tabular (datastore) resource without downloading the whole file. The datastore identifies a resource by its <strong>name</strong> (e.g. <code>"EPD_202401"</code>), and field names are case-sensitive. Use <code>fields</code>, <code>sort</code> and <code>limit</code>/<code>offset</code> to read:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nhsbsa_datastore_search.html">nhsbsa_datastore_search</a></span><span class="op">(</span></span>
 <span>  resource_id <span class="op">=</span> <span class="st">"EPD_202401"</span>,</span>
 <span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PCO_CODE"</span>, <span class="st">"BNF_CHEMICAL_SUBSTANCE"</span>, <span class="st">"ITEMS"</span><span class="op">)</span>,</span>
@@ -157,7 +160,7 @@
 <span><span class="co">#&gt; 4 12F00    1404000H0               3160</span></span>
 <span><span class="co">#&gt; 5 11M00    1404000H0               3038</span></span></code></pre></div>
 <p>To filter by value or aggregate, use SQL. On this portal, <code>datastore_search</code> does not apply the CKAN <code>filters</code>/<code>q</code> parameters, so SQL is the way to filter:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nhsbsa_datastore_search_sql.html">nhsbsa_datastore_search_sql</a></span><span class="op">(</span></span>
 <span>  resource_id <span class="op">=</span> <span class="st">"EPD_202401"</span>,</span>
 <span>  sql <span class="op">=</span> <span class="st">"SELECT PCO_CODE, SUM(ITEMS) AS items</span></span>
@@ -171,7 +174,7 @@
 <span><span class="co">#&gt;   PCO_CODE   items</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt;</span></span>
 <span><span class="co">#&gt; 1 W2U3Z    3129964</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nhsbsa_datastore_search_sql.html">nhsbsa_datastore_search_sql</a></span><span class="op">(</span></span>
 <span>  resource_id <span class="op">=</span> <span class="st">"EPD_202401"</span>,</span>
 <span>  sql <span class="op">=</span> <span class="st">"SELECT PCO_CODE, SUM(ITEMS) AS items</span></span>
@@ -224,7 +227,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Alasdair Warwick <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-0800-2890" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Alasdair Warwick <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-0800-2890" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 

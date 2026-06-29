@@ -250,7 +250,7 @@ search the ids yourself:
 
 datasets <- nhsbsa_package_list()
 length(datasets)
-#> [1] 2169
+#> [1] 2170
 head(datasets)
 #> [1] "03449"                                           
 #> [2] "03500"                                           
@@ -270,7 +270,7 @@ returns that table to work with:
 ``` r
 
 nhsbsa_package_search(q = "prescribing", rows = 5)
-#> <nhsbsa package search> 639 datasets found
+#> <nhsbsa package search> 640 datasets found
 #> Showing the first 5; increase `rows` for more.
 #> # A tibble: 5 × 5
 #>   name                        title organisation num_resources metadata_modified
@@ -352,7 +352,7 @@ path <- nhsbsa_download_resource(
   directory = tempdir()
 )
 #> ℹ Downloading "BNF_CODE_CURRENT_202503_VERSION_88" to
-#>   /tmp/RtmpEUgGu4/bnf_code_current_202503_version_88.csv.
+#>   /tmp/RtmpFYTbc2/bnf_code_current_202503_version_88.csv.
 basename(path)
 #> [1] "bnf_code_current_202503_version_88.csv"
 ```

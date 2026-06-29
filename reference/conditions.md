@@ -72,7 +72,7 @@ named_cli_message_vector <- c(
 )
 
 e <- tryCatch(
-  nhsbsa_abort(
+  nhsbsa:::nhsbsa_abort(
     named_cli_message_vector,
     class = "nhsbsa_dataset_not_found"
   ),
@@ -81,13 +81,18 @@ e <- tryCatch(
 
 # Inspect the condition class hierarchy
 class(e)
-#> [1] "simpleError" "error"       "condition"  
+#> [1] "nhsbsa_dataset_not_found" "nhsbsa_error"            
+#> [3] "rlang_error"              "error"                   
+#> [5] "condition"               
 
 # Inspect the stored structured `cli` message
 e$cli_message
-#> NULL
+#>                                                           x 
+#> "Dataset \033[34m\"does-not-exist\"\033[39m was not found." 
+#>                                                           i 
+#>     "List available datasets with `nhsbsa_package_list()`." 
 
 # Inspect the default formatted condition message
 conditionMessage(e)
-#> [1] "could not find function \"nhsbsa_abort\""
+#> [1] "\033[1m\033[22m\033[31m✖\033[39m Dataset \033[34m\"does-not-exist\"\033[39m was not found.\n\033[36mℹ\033[39m List available datasets with `nhsbsa_package_list()`."
 ```

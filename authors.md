@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Alasdair Warwick**. Author, maintainer.
+- **Alasdair Warwick**. Author, maintainer, copyright holder.
   [](https://orcid.org/0000-0002-0800-2890)
 
 ## Citation

@@ -1,11 +1,11 @@
 # nhsbsa: Client for the NHS Business Services Authority Open Data Portal
 
-A low-level client for the NHS Business Services Authority (NHSBSA) Open
-Data Portal <https://opendata.nhsbsa.net>, a 'CKAN' data catalogue.
-Provides thin wrappers around the portal's API actions for listing
-datasets, retrieving metadata, querying the datastore and downloading
-resource files. Results are returned as plain data (tibbles and lists)
-for the caller to interpret.
+A low-level client for the National Health Service Business Services
+Authority (NHSBSA) Open Data Portal <https://opendata.nhsbsa.net>, a
+'CKAN' data catalogue. Provides thin wrappers around the portal's API
+actions for listing datasets, retrieving metadata, querying the
+datastore and downloading resource files. Results are returned as plain
+data (tibbles and lists) for the caller to interpret.
 
 ## Further reading
 
@@ -33,4 +33,4 @@ Useful links:
 ## Author
 
 **Maintainer**: Alasdair Warwick <alasdair.warwick06@gmail.com>
-([ORCID](https://orcid.org/0000-0002-0800-2890))
+([ORCID](https://orcid.org/0000-0002-0800-2890)) \[copyright holder\]

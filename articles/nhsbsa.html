@@ -281,7 +281,7 @@ dataset; use it when you want to scan or search the ids yourself:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_package_list.html">nhsbsa_package_list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2169</span></span>
+<span><span class="co">#&gt; [1] 2170</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "03449"                                           </span></span>
 <span><span class="co">#&gt; [2] "03500"                                           </span></span>
@@ -295,7 +295,7 @@ match count and a table of the matching datasets;
 <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble()</a></code> returns that table to work with:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span>q <span class="op">=</span> <span class="st">"prescribing"</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; &lt;nhsbsa package search&gt; 639 datasets found</span></span>
+<span><span class="co">#&gt; &lt;nhsbsa package search&gt; 640 datasets found</span></span>
 <span><span class="co">#&gt; <span style="font-style: italic;">Showing the first 5; increase `rows` for more.</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span></span>
 <span><span class="co">#&gt;   name                        title organisation num_resources metadata_modified</span></span>
@@ -366,7 +366,7 @@ directory:</p>
 <span>  directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Downloading <span style="color: #0000BB;">"BNF_CODE_CURRENT_202503_VERSION_88"</span> to</span></span>
-<span><span class="co">#&gt;   <span style="color: #0000BB;">/tmp/RtmpEUgGu4/bnf_code_current_202503_version_88.csv</span>.</span></span>
+<span><span class="co">#&gt;   <span style="color: #0000BB;">/tmp/RtmpFYTbc2/bnf_code_current_202503_version_88.csv</span>.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "bnf_code_current_202503_version_88.csv"</span></span></code></pre></div>
 </div>

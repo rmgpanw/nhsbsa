@@ -60,7 +60,7 @@ the parsed response envelope as a plain list.
 # Free-text search
 hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
 hits
-#> <nhsbsa package search> 639 datasets found
+#> <nhsbsa package search> 640 datasets found
 #> Showing the first 5; increase `rows` for more.
 #> # A tibble: 5 × 5
 #>   name                        title organisation num_resources metadata_modified
