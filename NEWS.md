@@ -6,8 +6,6 @@
   `nhsbsa_package_search()`.
 * Resource endpoints and file download: `nhsbsa_resource_show()`,
   `nhsbsa_list_resources()` and `nhsbsa_download_resource()`.
-  `nhsbsa_download_resource()` requires an explicit `directory` to download into;
-  there is no default, so it never writes to the working directory implicitly.
 * Datastore row queries: `nhsbsa_datastore_search()` and
   `nhsbsa_datastore_search_sql()`.
 * Catalogue listings: `nhsbsa_organization_list()`, `nhsbsa_group_list()` and
