@@ -109,8 +109,8 @@ resources |>
   slice_head(n = 6)
 ```
 
-Download one of them to disk. The file is saved into `directory` (the current
-working directory by default) under its own name:
+Download one of them to disk. You choose the destination `directory` (it must
+already exist), and the file is saved there under its own name:
 
 ```{r, eval = FALSE}
 path <- nhsbsa_download_resource(

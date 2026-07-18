@@ -49,6 +49,8 @@ The original named \code{cli} message vector is stored in \code{cli_message} so 
 condition can be re-thrown to reproduce an identical message (see examples).
 }
 \examples{
+# These are internal helpers, so the example is not run.
+\dontrun{
 # Capture an nhsbsa error condition and inspect it
 dataset_id <- "does-not-exist"
 
@@ -58,7 +60,7 @@ named_cli_message_vector <- c(
 )
 
 e <- tryCatch(
-  nhsbsa:::nhsbsa_abort(
+  nhsbsa_abort(
     named_cli_message_vector,
     class = "nhsbsa_dataset_not_found"
   ),
@@ -73,5 +75,6 @@ e$cli_message
 
 # Inspect the default formatted condition message
 conditionMessage(e)
+}
 }
 \keyword{internal}

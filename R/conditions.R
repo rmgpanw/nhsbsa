@@ -24,6 +24,8 @@
 #' @keywords internal
 #' @name conditions
 #' @examples
+#' # These are internal helpers, so the example is not run.
+#' \dontrun{
 #' # Capture an nhsbsa error condition and inspect it
 #' dataset_id <- "does-not-exist"
 #'
@@ -33,7 +35,7 @@
 #' )
 #'
 #' e <- tryCatch(
-#'   nhsbsa:::nhsbsa_abort(
+#'   nhsbsa_abort(
 #'     named_cli_message_vector,
 #'     class = "nhsbsa_dataset_not_found"
 #'   ),
@@ -48,6 +50,7 @@
 #'
 #' # Inspect the default formatted condition message
 #' conditionMessage(e)
+#' }
 NULL
 
 #' @rdname conditions

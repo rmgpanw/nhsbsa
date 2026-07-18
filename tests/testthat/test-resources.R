@@ -48,7 +48,11 @@ test_that("nhsbsa_download_resource errors clearly on no match", {
     nhsbsa_list_resources = function(...) fake_resources(),
     {
       expect_error(
-        nhsbsa_download_resource("ds", pattern = "no-such-thing"),
+        nhsbsa_download_resource(
+          "ds",
+          pattern = "no-such-thing",
+          directory = tempdir()
+        ),
         class = "nhsbsa_resource_not_found"
       )
     }
@@ -61,11 +65,15 @@ test_that("nhsbsa_download_resource errors when more than one resource matches",
     {
       # No selector and two resources -> ambiguous.
       expect_error(
-        nhsbsa_download_resource("ds"),
+        nhsbsa_download_resource("ds", directory = tempdir()),
         class = "nhsbsa_multiple_resources"
       )
       expect_error(
-        nhsbsa_download_resource("ds", pattern = "FILE_2024"),
+        nhsbsa_download_resource(
+          "ds",
+          pattern = "FILE_2024",
+          directory = tempdir()
+        ),
         class = "nhsbsa_multiple_resources"
       )
     }

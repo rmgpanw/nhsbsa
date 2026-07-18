@@ -1,3 +1,10 @@
+## Resubmission
+
+This is a resubmission. In response to the reviewer's feedback I have:
+
+* Removed the use of `:::` in documentation. The example for the internal condition helpers (`?conditions`) no longer calls `nhsbsa:::nhsbsa_abort()`.
+* Removed the default write path from `nhsbsa_download_resource()`. Examples, tests and vignettes write only to `tempdir()`.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes

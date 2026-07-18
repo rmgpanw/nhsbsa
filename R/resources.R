@@ -102,12 +102,13 @@ nhsbsa_resources_to_tibble <- function(resources) {
 #' resource's download URL, e.g. `bnf_code_current_202503_version_88.csv`).
 #'
 #' @inheritParams nhsbsa_list_resources
+#' @param directory Character scalar. The directory to download into. Required;
+#'   there is no default, and the directory must already exist. Use
+#'   [tempdir()][base::tempdir] for a throwaway location.
 #' @param resource_id Character scalar. The identifier of the resource to
 #'   download. Takes precedence over `pattern`.
 #' @param pattern Character scalar. A regular expression matched
 #'   (case-insensitively) against resource names to select a single resource.
-#' @param directory Character scalar. The directory to download into. Defaults to
-#'   the current working directory. The directory must already exist.
 #' @param overwrite Logical. Overwrite the file if it already exists in
 #'   `directory`? Defaults to `FALSE`, in which case the existing file is left
 #'   untouched and its path returned.
@@ -138,14 +139,17 @@ nhsbsa_resources_to_tibble <- function(resources) {
 #' )
 nhsbsa_download_resource <- function(
   dataset_id,
+  directory,
   resource_id = NULL,
   pattern = NULL,
-  directory = ".",
   overwrite = FALSE,
   quiet = FALSE
 ) {
   if (
-    !is.character(directory) || length(directory) != 1 || !dir.exists(directory)
+    missing(directory) ||
+      !is.character(directory) ||
+      length(directory) != 1 ||
+      !dir.exists(directory)
   ) {
     nhsbsa_abort(c(
       "x" = "{.arg directory} must be a path to an existing directory.",

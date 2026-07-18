@@ -226,10 +226,10 @@ nhsbsa_resource_show(resources$id[[1]])
 ### Download a resource file
 
 Identify a single resource — by `resource_id`, or by a `pattern` that matches
-exactly one resource name — and stream its file to disk. The file is saved into
-`directory` (the current working directory by default) under its own name; here
-we use a (smaller) resource from the BNF code dataset and save to a temporary
-directory:
+exactly one resource name — and stream its file to disk. You choose the
+destination `directory` (it must already exist), and the file is saved there
+under its own name; here we use a (smaller) resource from the BNF code dataset
+and save to a temporary directory:
 
 ```{r}
 bnf <- nhsbsa_list_resources("bnf-code-information-current-year")

@@ -6,9 +6,9 @@
 \usage{
 nhsbsa_download_resource(
   dataset_id,
+  directory,
   resource_id = NULL,
   pattern = NULL,
-  directory = ".",
   overwrite = FALSE,
   quiet = FALSE
 )
@@ -17,14 +17,15 @@ nhsbsa_download_resource(
 \item{dataset_id}{Character scalar. The dataset identifier, as returned by
 \code{\link[=nhsbsa_package_list]{nhsbsa_package_list()}}.}
 
+\item{directory}{Character scalar. The directory to download into. Required;
+there is no default, and the directory must already exist. Use
+\link[base:tempfile]{tempdir()} for a throwaway location.}
+
 \item{resource_id}{Character scalar. The identifier of the resource to
 download. Takes precedence over \code{pattern}.}
 
 \item{pattern}{Character scalar. A regular expression matched
 (case-insensitively) against resource names to select a single resource.}
-
-\item{directory}{Character scalar. The directory to download into. Defaults to
-the current working directory. The directory must already exist.}
 
 \item{overwrite}{Logical. Overwrite the file if it already exists in
 \code{directory}? Defaults to \code{FALSE}, in which case the existing file is left
