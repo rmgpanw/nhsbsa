@@ -69,11 +69,11 @@ Find datasets — list every id, or search:
 
 datasets <- nhsbsa_package_list()
 length(datasets)
-#> [1] 2170
+#> [1] 2217
 
 hits <- nhsbsa_package_search(q = "prescribing", rows = 5)
 hits$count
-#> [1] 640
+#> [1] 661
 ```
 
 Browsing the [portal website](https://opendata.nhsbsa.net) and clicking
@@ -118,8 +118,8 @@ resources |>
 #> 6 BNF_CODE_CURRENT_202508_VERSION_88_FINAL CSV    https://opendata.nhsbsa.net/d…
 ```
 
-Download one of them to disk. The file is saved into `directory` (the
-current working directory by default) under its own name:
+Download one of them to disk. You choose the destination `directory` (it
+must already exist), and the file is saved there under its own name:
 
 ``` r
 

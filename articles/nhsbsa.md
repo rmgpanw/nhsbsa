@@ -212,8 +212,8 @@ there map onto API calls:
   ) |>
     as_tibble() |>
     pull(title)
-  #> [1] "Prescription Cost Analysis (PCA) Monthly Administrative Data"
-  #> [2] "English Prescribing Dataset (EPD) with SNOMED Code"          
+  #> [1] "English Prescribing Dataset (EPD) with SNOMED Code"          
+  #> [2] "Prescription Cost Analysis (PCA) Monthly Administrative Data"
   #> [3] "Prescription Cost Analysis (PCA) Annual Statistics"          
   #> [4] "Missing Scottish Dispensing Data from June 2023 to June 2024"
   #> [5] "RETIRED - English Prescribing Dataset (EPD)"
@@ -250,7 +250,7 @@ search the ids yourself:
 
 datasets <- nhsbsa_package_list()
 length(datasets)
-#> [1] 2170
+#> [1] 2217
 head(datasets)
 #> [1] "03449"                                           
 #> [2] "03500"                                           
@@ -270,16 +270,16 @@ returns that table to work with:
 ``` r
 
 nhsbsa_package_search(q = "prescribing", rows = 5)
-#> <nhsbsa package search> 640 datasets found
+#> <nhsbsa package search> 661 datasets found
 #> Showing the first 5; increase `rows` for more.
 #> # A tibble: 5 × 5
 #>   name                        title organisation num_resources metadata_modified
 #>   <chr>                       <chr> <chr>                <int> <chr>            
-#> 1 prescriber-details          Pres… community_p…            47 2026-06-03T08:09…
+#> 1 prescriber-details          Pres… community_p…            48 2026-07-15T13:05…
 #> 2 foi-03835                   FOI-… freedom-of-…            41 2026-06-16T12:59…
 #> 3 english-prescribing-data-e… RETI… community_p…           138 2026-03-06T12:49…
 #> 4 hospital-prescribing-dispe… Hosp… community_p…           113 2026-06-23T09:31…
-#> 5 english-prescribing-datase… Engl… community_p…            66 2026-06-22T09:54…
+#> 5 english-prescribing-datase… Engl… community_p…            66 2026-07-07T07:50…
 ```
 
 ### Inspect a dataset’s resources
@@ -338,10 +338,10 @@ nhsbsa_resource_show(resources$id[[1]])
 ### Download a resource file
 
 Identify a single resource — by `resource_id`, or by a `pattern` that
-matches exactly one resource name — and stream its file to disk. The
-file is saved into `directory` (the current working directory by
-default) under its own name; here we use a (smaller) resource from the
-BNF code dataset and save to a temporary directory:
+matches exactly one resource name — and stream its file to disk. You
+choose the destination `directory` (it must already exist), and the file
+is saved there under its own name; here we use a (smaller) resource from
+the BNF code dataset and save to a temporary directory:
 
 ``` r
 
@@ -352,7 +352,7 @@ path <- nhsbsa_download_resource(
   directory = tempdir()
 )
 #> ℹ Downloading "BNF_CODE_CURRENT_202503_VERSION_88" to
-#>   /tmp/RtmpFYTbc2/bnf_code_current_202503_version_88.csv.
+#>   /tmp/Rtmpx5kw5N/bnf_code_current_202503_version_88.csv.
 basename(path)
 #> [1] "bnf_code_current_202503_version_88.csv"
 ```
@@ -435,11 +435,11 @@ nhsbsa_datastore_search(
 #> # A tibble: 5 × 2
 #>   PCO_CODE ITEMS
 #>   <chr>    <int>
-#> 1 -            1
-#> 2 -            1
+#> 1 -            2
+#> 2 -            3
 #> 3 -            1
-#> 4 -            1
-#> 5 -            1
+#> 4 -            3
+#> 5 -           18
 ```
 
 CKAN’s `datastore_search` also defines `filters` (exact field matching)
@@ -470,11 +470,11 @@ nhsbsa_datastore_search_sql(
 #> # A tibble: 5 × 3
 #>   PCO_CODE BNF_CHEMICAL_SUBSTANCE ITEMS
 #>   <chr>    <chr>                  <int>
-#> 1 W2U3Z    0913011N0                  4
-#> 2 W2U3Z    0703021Q0                  1
-#> 3 W2U3Z    0408010H0                  4
-#> 4 W2U3Z    0601022B0                  1
-#> 5 W2U3Z    0906040G0                  1
+#> 1 W2U3Z    1302011L0                  1
+#> 2 W2U3Z    0403040W0                  4
+#> 3 W2U3Z    0401010AD                  1
+#> 4 W2U3Z    0205040D0                  4
+#> 5 W2U3Z    2130                       4
 ```
 
 ``` r

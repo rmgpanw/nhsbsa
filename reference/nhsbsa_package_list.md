@@ -33,7 +33,7 @@ to search datasets.
 ``` r
 datasets <- nhsbsa_package_list()
 length(datasets)
-#> [1] 2170
+#> [1] 2217
 head(datasets)
 #> [1] "03449"                                           
 #> [2] "03500"                                           

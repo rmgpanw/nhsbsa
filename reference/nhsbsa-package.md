@@ -32,5 +32,5 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Alasdair Warwick <alasdair.warwick06@gmail.com>
+**Maintainer**: Alasdair Warwick <alasdair.warwick.19@ucl.ac.uk>
 ([ORCID](https://orcid.org/0000-0002-0800-2890)) \[copyright holder\]

@@ -53,16 +53,16 @@ nhsbsa_datastore_search_sql(
 #> # A tibble: 10 × 3
 #>    YEAR_MONTH PCO_CODE ITEMS
 #>         <int> <chr>    <int>
-#>  1     202401 -            1
+#>  1     202401 -            6
 #>  2     202401 -            1
-#>  3     202401 -            5
-#>  4     202401 -            1
-#>  5     202401 -            2
+#>  3     202401 -            3
+#>  4     202401 -           13
+#>  5     202401 -            1
 #>  6     202401 -            1
 #>  7     202401 -            1
 #>  8     202401 -            1
-#>  9     202401 -            4
-#> 10     202401 -            1
+#>  9     202401 -            1
+#> 10     202401 -            2
 
 # Filter by value with a WHERE clause (the reliable way to filter)
 nhsbsa_datastore_search_sql(
@@ -75,16 +75,16 @@ nhsbsa_datastore_search_sql(
 #> # A tibble: 10 × 3
 #>    PCO_CODE BNF_CHEMICAL_SUBSTANCE ITEMS
 #>    <chr>    <chr>                  <int>
-#>  1 W2U3Z    0202020D0                  1
-#>  2 W2U3Z    0403030E0                 12
-#>  3 W2U3Z    0602010V0                 13
-#>  4 W2U3Z    2130                       1
-#>  5 W2U3Z    1304000H0                  1
-#>  6 W2U3Z    0704020N0                  1
-#>  7 W2U3Z    0208020V0                  1
-#>  8 W2U3Z    1304000F0                  1
-#>  9 W2U3Z    0913011V0                  1
-#> 10 W2U3Z    1003020AF                  3
+#>  1 W2U3Z    0704020AE                  5
+#>  2 W2U3Z    1001010J0                  1
+#>  3 W2U3Z    0302000C0                  1
+#>  4 W2U3Z    0407010H0                  1
+#>  5 W2U3Z    0205040D0                  4
+#>  6 W2U3Z    1108010B0                  3
+#>  7 W2U3Z    0601022B0                  6
+#>  8 W2U3Z    0406000B0                  8
+#>  9 W2U3Z    0601023B0                  1
+#> 10 W2U3Z    1311060Q0                  1
 
 # Aggregate server-side: total items prescribed per organisation
 nhsbsa_datastore_search_sql(

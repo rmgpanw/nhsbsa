@@ -12,9 +12,9 @@ than running a query.
 ``` r
 nhsbsa_download_resource(
   dataset_id,
+  directory,
   resource_id = NULL,
   pattern = NULL,
-  directory = ".",
   overwrite = FALSE,
   quiet = FALSE
 )
@@ -27,6 +27,13 @@ nhsbsa_download_resource(
   Character scalar. The dataset identifier, as returned by
   [`nhsbsa_package_list()`](https://rmgpanw.github.io/nhsbsa/reference/nhsbsa_package_list.md).
 
+- directory:
+
+  Character scalar. The directory to download into. Required; there is
+  no default, and the directory must already exist. Use
+  [tempdir()](https://rdrr.io/r/base/tempfile.html) for a throwaway
+  location.
+
 - resource_id:
 
   Character scalar. The identifier of the resource to download. Takes
@@ -36,11 +43,6 @@ nhsbsa_download_resource(
 
   Character scalar. A regular expression matched (case-insensitively)
   against resource names to select a single resource.
-
-- directory:
-
-  Character scalar. The directory to download into. Defaults to the
-  current working directory. The directory must already exist.
 
 - overwrite:
 
@@ -83,9 +85,9 @@ path <- nhsbsa_download_resource(
   directory = tempdir()
 )
 #> ℹ Downloading "BNF_CODE_CURRENT_202503_VERSION_88" to
-#>   /tmp/RtmpPehOCP/bnf_code_current_202503_version_88.csv.
+#>   /tmp/RtmpsPq3wW/bnf_code_current_202503_version_88.csv.
 path
-#> [1] "/tmp/RtmpPehOCP/bnf_code_current_202503_version_88.csv"
+#> [1] "/tmp/RtmpsPq3wW/bnf_code_current_202503_version_88.csv"
 
 # ...or by its exact id. An existing file is not re-downloaded unless
 # `overwrite = TRUE`, so this call short-circuits and returns the path.
@@ -94,7 +96,7 @@ nhsbsa_download_resource(
   resource_id = resources$id[[1]],
   directory = tempdir()
 )
-#> ℹ /tmp/RtmpPehOCP/bnf_code_current_202503_version_88.csv already exists;
+#> ℹ /tmp/RtmpsPq3wW/bnf_code_current_202503_version_88.csv already exists;
 #>   skipping download.
 #> ℹ Set `overwrite = TRUE` to download it again.
 ```

@@ -248,8 +248,8 @@ directly:</p>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">title</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Prescription Cost Analysis (PCA) Monthly Administrative Data"</span></span>
-<span><span class="co">#&gt; [2] "English Prescribing Dataset (EPD) with SNOMED Code"          </span></span>
+<span><span class="co">#&gt; [1] "English Prescribing Dataset (EPD) with SNOMED Code"          </span></span>
+<span><span class="co">#&gt; [2] "Prescription Cost Analysis (PCA) Monthly Administrative Data"</span></span>
 <span><span class="co">#&gt; [3] "Prescription Cost Analysis (PCA) Annual Statistics"          </span></span>
 <span><span class="co">#&gt; [4] "Missing Scottish Dispensing Data from June 2023 to June 2024"</span></span>
 <span><span class="co">#&gt; [5] "RETIRED - English Prescribing Dataset (EPD)"</span></span></code></pre></div>
@@ -281,7 +281,7 @@ dataset; use it when you want to scan or search the ids yourself:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_package_list.html">nhsbsa_package_list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2170</span></span>
+<span><span class="co">#&gt; [1] 2217</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "03449"                                           </span></span>
 <span><span class="co">#&gt; [2] "03500"                                           </span></span>
@@ -295,16 +295,16 @@ match count and a table of the matching datasets;
 <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">tibble::as_tibble()</a></code> returns that table to work with:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span>q <span class="op">=</span> <span class="st">"prescribing"</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; &lt;nhsbsa package search&gt; 640 datasets found</span></span>
+<span><span class="co">#&gt; &lt;nhsbsa package search&gt; 661 datasets found</span></span>
 <span><span class="co">#&gt; <span style="font-style: italic;">Showing the first 5; increase `rows` for more.</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span></span>
 <span><span class="co">#&gt;   name                        title organisation num_resources metadata_modified</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> prescriber-details          Pres… community_p…            47 2026-06-03T08:09…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> prescriber-details          Pres… community_p…            48 2026-07-15T13:05…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> foi-03835                   FOI-… freedom-of-…            41 2026-06-16T12:59…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> english-prescribing-data-e… RETI… community_p…           138 2026-03-06T12:49…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> hospital-prescribing-dispe… Hosp… community_p…           113 2026-06-23T09:31…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> english-prescribing-datase… Engl… community_p…            66 2026-06-22T09:54…</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> english-prescribing-datase… Engl… community_p…            66 2026-07-07T07:50…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="inspect-a-datasets-resources">Inspect a dataset’s resources<a class="anchor" aria-label="anchor" href="#inspect-a-datasets-resources"></a>
@@ -354,10 +354,10 @@ need more detail than the table above:</p>
 </h3>
 <p>Identify a single resource — by <code>resource_id</code>, or by a
 <code>pattern</code> that matches exactly one resource name — and stream
-its file to disk. The file is saved into <code>directory</code> (the
-current working directory by default) under its own name; here we use a
-(smaller) resource from the BNF code dataset and save to a temporary
-directory:</p>
+its file to disk. You choose the destination <code>directory</code> (it
+must already exist), and the file is saved there under its own name;
+here we use a (smaller) resource from the BNF code dataset and save to a
+temporary directory:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bnf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_list_resources.html">nhsbsa_list_resources</a></span><span class="op">(</span><span class="st">"bnf-code-information-current-year"</span><span class="op">)</span></span>
 <span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_download_resource.html">nhsbsa_download_resource</a></span><span class="op">(</span></span>
@@ -366,7 +366,7 @@ directory:</p>
 <span>  directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Downloading <span style="color: #0000BB;">"BNF_CODE_CURRENT_202503_VERSION_88"</span> to</span></span>
-<span><span class="co">#&gt;   <span style="color: #0000BB;">/tmp/RtmpFYTbc2/bnf_code_current_202503_version_88.csv</span>.</span></span>
+<span><span class="co">#&gt;   <span style="color: #0000BB;">/tmp/Rtmpx5kw5N/bnf_code_current_202503_version_88.csv</span>.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "bnf_code_current_202503_version_88.csv"</span></span></code></pre></div>
 </div>
@@ -445,11 +445,11 @@ warns you and explains how to page through the rest by increasing
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span></span></span>
 <span><span class="co">#&gt;   PCO_CODE ITEMS</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -            1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -            1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -            2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -            3</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -            1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> -            1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> -            1</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> -            3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> -           18</span></span></code></pre></div>
 <p>CKAN’s <code>datastore_search</code> also defines
 <code>filters</code> (exact field matching) and <code>q</code>
 (full-text search) parameters, and
@@ -478,11 +478,11 @@ resource name in the <code>FROM</code> clause:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
 <span><span class="co">#&gt;   PCO_CODE BNF_CHEMICAL_SUBSTANCE ITEMS</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> W2U3Z    0913011N0                  4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> W2U3Z    0703021Q0                  1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> W2U3Z    0408010H0                  4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> W2U3Z    0601022B0                  1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> W2U3Z    0906040G0                  1</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> W2U3Z    1302011L0                  1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> W2U3Z    0403040W0                  4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> W2U3Z    0401010AD                  1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> W2U3Z    0205040D0                  4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> W2U3Z    2130                       4</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Aggregate: total items prescribed per organisation</span></span>
 <span><span class="fu"><a href="../reference/nhsbsa_datastore_search_sql.html">nhsbsa_datastore_search_sql</a></span><span class="op">(</span></span>
@@ -517,7 +517,7 @@ identifiers correctly.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

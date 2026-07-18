@@ -54,9 +54,9 @@ This is the file-download counterpart to the datastore row-query functions
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nhsbsa_download_resource</span><span class="op">(</span></span>
 <span>  <span class="va">dataset_id</span>,</span>
+<span>  <span class="va">directory</span>,</span>
 <span>  resource_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pattern <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  directory <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -71,6 +71,12 @@ This is the file-download counterpart to the datastore row-query functions
 <code><a href="nhsbsa_package_list.html">nhsbsa_package_list()</a></code>.</p></dd>
 
 
+<dt id="arg-directory">directory<a class="anchor" aria-label="anchor" href="#arg-directory"></a></dt>
+<dd><p>Character scalar. The directory to download into. Required;
+there is no default, and the directory must already exist. Use
+<a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a> for a throwaway location.</p></dd>
+
+
 <dt id="arg-resource-id">resource_id<a class="anchor" aria-label="anchor" href="#arg-resource-id"></a></dt>
 <dd><p>Character scalar. The identifier of the resource to
 download. Takes precedence over <code>pattern</code>.</p></dd>
@@ -79,11 +85,6 @@ download. Takes precedence over <code>pattern</code>.</p></dd>
 <dt id="arg-pattern">pattern<a class="anchor" aria-label="anchor" href="#arg-pattern"></a></dt>
 <dd><p>Character scalar. A regular expression matched
 (case-insensitively) against resource names to select a single resource.</p></dd>
-
-
-<dt id="arg-directory">directory<a class="anchor" aria-label="anchor" href="#arg-directory"></a></dt>
-<dd><p>Character scalar. The directory to download into. Defaults to
-the current working directory. The directory must already exist.</p></dd>
 
 
 <dt id="arg-overwrite">overwrite<a class="anchor" aria-label="anchor" href="#arg-overwrite"></a></dt>
@@ -124,9 +125,9 @@ resource's download URL, e.g. <code>bnf_code_current_202503_version_88.csv</code
 <span class="r-in"><span>  directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Downloading <span style="color: #0000BB;">"BNF_CODE_CURRENT_202503_VERSION_88"</span> to</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">/tmp/RtmpPehOCP/bnf_code_current_202503_version_88.csv</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">/tmp/RtmpsPq3wW/bnf_code_current_202503_version_88.csv</span>.</span>
 <span class="r-in"><span><span class="va">path</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpPehOCP/bnf_code_current_202503_version_88.csv"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpsPq3wW/bnf_code_current_202503_version_88.csv"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ...or by its exact id. An existing file is not re-downloaded unless</span></span></span>
 <span class="r-in"><span><span class="co"># `overwrite = TRUE`, so this call short-circuits and returns the path.</span></span></span>
@@ -135,7 +136,7 @@ resource's download URL, e.g. <code>bnf_code_current_202503_version_88.csv</code
 <span class="r-in"><span>  resource_id <span class="op">=</span> <span class="va">resources</span><span class="op">$</span><span class="va">id</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>  directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #0000BB;">/tmp/RtmpPehOCP/bnf_code_current_202503_version_88.csv</span> already exists;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #0000BB;">/tmp/RtmpsPq3wW/bnf_code_current_202503_version_88.csv</span> already exists;</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   skipping download.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Set `overwrite = TRUE` to download it again.</span>
 </code></pre></div>
@@ -149,7 +150,7 @@ resource's download URL, e.g. <code>bnf_code_current_202503_version_88.csv</code
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

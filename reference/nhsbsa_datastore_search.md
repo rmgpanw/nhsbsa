@@ -160,10 +160,10 @@ nhsbsa_datastore_search(
 #> # A tibble: 5 × 1
 #>   PCO_CODE
 #>   <chr>   
-#> 1 D2P2L   
-#> 2 92G00   
-#> 3 11J00   
-#> 4 72Q00   
+#> 1 -       
+#> 2 DT300   
+#> 3 15E00   
+#> 4 11J00   
 #> 5 15C00   
 
 # Page through rows with `limit` and `offset`
@@ -177,9 +177,9 @@ nhsbsa_datastore_search(resource_id = "EPD_202401", fields = "ITEMS", limit = 5)
 #>   <int>
 #> 1     1
 #> 2     1
-#> 3     2
+#> 3     3
 #> 4     1
-#> 5     1
+#> 5     2
 nhsbsa_datastore_search(
   resource_id = "EPD_202401",
   fields = "ITEMS",
@@ -193,9 +193,9 @@ nhsbsa_datastore_search(
 #> # A tibble: 5 × 1
 #>   ITEMS
 #>   <int>
-#> 1     1
-#> 2     2
-#> 3     3
+#> 1    11
+#> 2     3
+#> 3     1
 #> 4     1
 #> 5     1
 
