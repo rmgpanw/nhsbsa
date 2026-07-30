@@ -2,8 +2,11 @@
 
 This is a resubmission. In response to the reviewer's feedback I have:
 
-* Removed the use of `:::` in documentation. The example for the internal condition helpers (`?conditions`) no longer calls `nhsbsa:::nhsbsa_abort()`.
-* Removed the default write path from `nhsbsa_download_resource()`. Examples, tests and vignettes write only to `tempdir()`.
+* Removed the example from the documentation of the internal condition helpers
+  (`?conditions`). These functions are intentionally unexported, so they now
+  carry no example (this also removes the earlier `:::` usage and `\dontrun{}`).
+* Removed the default write path from `nhsbsa_download_resource()`. Examples,
+  tests and vignettes write only to `tempdir()`.
 
 ## R CMD check results
 

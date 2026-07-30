@@ -13,7 +13,7 @@
 #' programmatically.
 #'
 #' The original named `cli` message vector is stored in `cli_message` so a
-#' condition can be re-thrown to reproduce an identical message (see examples).
+#' condition can be re-thrown to reproduce an identical message.
 #'
 #' @inheritParams cli::cli_abort
 #' @param class Optional character vector of additional classes to prepend
@@ -23,34 +23,6 @@
 #'
 #' @keywords internal
 #' @name conditions
-#' @examples
-#' # These are internal helpers, so the example is not run.
-#' \dontrun{
-#' # Capture an nhsbsa error condition and inspect it
-#' dataset_id <- "does-not-exist"
-#'
-#' named_cli_message_vector <- c(
-#'   x = "Dataset {.val {dataset_id}} was not found.",
-#'   i = "List available datasets with `nhsbsa_package_list()`."
-#' )
-#'
-#' e <- tryCatch(
-#'   nhsbsa_abort(
-#'     named_cli_message_vector,
-#'     class = "nhsbsa_dataset_not_found"
-#'   ),
-#'   error = function(cnd) cnd
-#' )
-#'
-#' # Inspect the condition class hierarchy
-#' class(e)
-#'
-#' # Inspect the stored structured `cli` message
-#' e$cli_message
-#'
-#' # Inspect the default formatted condition message
-#' conditionMessage(e)
-#' }
 NULL
 
 #' @rdname conditions
