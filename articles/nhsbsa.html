@@ -234,7 +234,7 @@ paging).</p></li>
 <code>tags</code> field returns the datasets carrying that tag:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search</a></span><span class="op">(</span>fq <span class="op">=</span> <span class="st">'tags:"Prescribing"'</span><span class="op">)</span><span class="op">$</span><span class="va">count</span></span>
-<span><span class="co">#&gt; [1] 18</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 17</span></span></code></pre></div>
 <p>This returns <em>more</em> datasets than the website shows for the
 same tag, because the website’s dataset view hides the Freedom of
 Information disclosure log by default. To match what the website
@@ -281,14 +281,14 @@ dataset; use it when you want to scan or search the ids yourself:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nhsbsa_package_list.html">nhsbsa_package_list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2217</span></span>
+<span><span class="co">#&gt; [1] 2218</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "03449"                                           </span></span>
 <span><span class="co">#&gt; [2] "03500"                                           </span></span>
-<span><span class="co">#&gt; [3] "25521"                                           </span></span>
-<span><span class="co">#&gt; [4] "baby-loss-certificate-key-performance-indicators"</span></span>
-<span><span class="co">#&gt; [5] "bnf-code-information-current-year"               </span></span>
-<span><span class="co">#&gt; [6] "bnf-code-information-historic"</span></span></code></pre></div>
+<span><span class="co">#&gt; [3] "baby-loss-certificate-key-performance-indicators"</span></span>
+<span><span class="co">#&gt; [4] "bnf-code-information-current-year"               </span></span>
+<span><span class="co">#&gt; [5] "bnf-code-information-historic"                   </span></span>
+<span><span class="co">#&gt; [6] "bnf-code-information-monthly-changes"</span></span></code></pre></div>
 <p>When you do not already know the id, search for one with
 <code><a href="../reference/nhsbsa_package_search.html">nhsbsa_package_search()</a></code>. It prints a tidy summary — the
 match count and a table of the matching datasets;
@@ -300,11 +300,11 @@ match count and a table of the matching datasets;
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span></span>
 <span><span class="co">#&gt;   name                        title organisation num_resources metadata_modified</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> prescriber-details          Pres… community_p…            48 2026-07-15T13:05…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> prescriber-details          Pres… community_p…            48 2026-07-29T11:29…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> foi-03835                   FOI-… freedom-of-…            41 2026-06-16T12:59…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> english-prescribing-data-e… RETI… community_p…           138 2026-03-06T12:49…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> hospital-prescribing-dispe… Hosp… community_p…           113 2026-06-23T09:31…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> english-prescribing-datase… Engl… community_p…            66 2026-07-07T07:50…</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> hospital-prescribing-dispe… Hosp… community_p…           114 2026-07-22T08:04…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> english-prescribing-datase… Engl… community_p…            67 2026-07-22T14:12…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="inspect-a-datasets-resources">Inspect a dataset’s resources<a class="anchor" aria-label="anchor" href="#inspect-a-datasets-resources"></a>
@@ -366,7 +366,7 @@ temporary directory:</p>
 <span>  directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Downloading <span style="color: #0000BB;">"BNF_CODE_CURRENT_202503_VERSION_88"</span> to</span></span>
-<span><span class="co">#&gt;   <span style="color: #0000BB;">/tmp/Rtmpx5kw5N/bnf_code_current_202503_version_88.csv</span>.</span></span>
+<span><span class="co">#&gt;   <span style="color: #0000BB;">/tmp/RtmppEvjVl/bnf_code_current_202503_version_88.csv</span>.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "bnf_code_current_202503_version_88.csv"</span></span></code></pre></div>
 </div>
@@ -445,11 +445,11 @@ warns you and explains how to page through the rest by increasing
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span></span></span>
 <span><span class="co">#&gt;   PCO_CODE ITEMS</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -            2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -            3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -            1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -            2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -            1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> -            3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> -           18</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> -            1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> -           21</span></span></code></pre></div>
 <p>CKAN’s <code>datastore_search</code> also defines
 <code>filters</code> (exact field matching) and <code>q</code>
 (full-text search) parameters, and
@@ -478,11 +478,11 @@ resource name in the <code>FROM</code> clause:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
 <span><span class="co">#&gt;   PCO_CODE BNF_CHEMICAL_SUBSTANCE ITEMS</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> W2U3Z    1302011L0                  1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> W2U3Z    0403040W0                  4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> W2U3Z    0401010AD                  1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> W2U3Z    0205040D0                  4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> W2U3Z    2130                       4</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> W2U3Z    0407020AD                  1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> W2U3Z    2122                       1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> W2U3Z    020400080                  1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> W2U3Z    0101021B0                  1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> W2U3Z    0205052AE                  1</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Aggregate: total items prescribed per organisation</span></span>
 <span><span class="fu"><a href="../reference/nhsbsa_datastore_search_sql.html">nhsbsa_datastore_search_sql</a></span><span class="op">(</span></span>

@@ -102,20 +102,20 @@ response envelope as a plain list.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name                        title organisation num_resources metadata_modified</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> prescriber-details          Pres… community_p…            48 2026-07-15T13:05…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> prescriber-details          Pres… community_p…            48 2026-07-29T11:29…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> foi-03835                   FOI-… freedom-of-…            41 2026-06-16T12:59…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> english-prescribing-data-e… RETI… community_p…           138 2026-03-06T12:49…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> hospital-prescribing-dispe… Hosp… community_p…           113 2026-06-23T09:31…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> english-prescribing-datase… Engl… community_p…            66 2026-07-07T07:50…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> hospital-prescribing-dispe… Hosp… community_p…           114 2026-07-22T08:04…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> english-prescribing-datase… Engl… community_p…            67 2026-07-22T14:12…</span>
 <span class="r-in"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name                        title organisation num_resources metadata_modified</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> prescriber-details          Pres… community_p…            48 2026-07-15T13:05…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> prescriber-details          Pres… community_p…            48 2026-07-29T11:29…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> foi-03835                   FOI-… freedom-of-…            41 2026-06-16T12:59…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> english-prescribing-data-e… RETI… community_p…           138 2026-03-06T12:49…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> hospital-prescribing-dispe… Hosp… community_p…           113 2026-06-23T09:31…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> english-prescribing-datase… Engl… community_p…            66 2026-07-07T07:50…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> hospital-prescribing-dispe… Hosp… community_p…           114 2026-07-22T08:04…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> english-prescribing-datase… Engl… community_p…            67 2026-07-22T14:12…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Filter by tag (as clicking a tag on the website does) and sort the results</span></span></span>
 <span class="r-in"><span><span class="fu">nhsbsa_package_search</span><span class="op">(</span></span></span>
@@ -123,20 +123,20 @@ response envelope as a plain list.</p>
 <span class="r-in"><span>  sort <span class="op">=</span> <span class="st">"metadata_modified desc"</span>,</span></span>
 <span class="r-in"><span>  rows <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> &lt;nhsbsa package search&gt; 18 datasets found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> &lt;nhsbsa package search&gt; 17 datasets found</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-style: italic;">Showing the first 5; increase `rows` for more.</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name                        title organisation num_resources metadata_modified</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> english-prescribing-datase… Engl… community_p…            66 2026-07-07T07:50…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> prescription-cost-analysis… Pres… community_p…            64 2026-06-22T14:22…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> english-prescribing-datase… Engl… community_p…            67 2026-07-22T14:12…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> prescription-cost-analysis… Pres… community_p…            65 2026-07-21T10:15…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> prescription-cost-analysis… Pres… community_p…            24 2026-06-05T14:01…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> scottish-dispensed-data     Miss… ad-hoc-rele…            13 2026-04-28T11:00…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> english-prescribing-data-e… RETI… community_p…           138 2026-03-06T12:49…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Page through results with `rows` and `start`</span></span></span>
 <span class="r-in"><span><span class="fu">nhsbsa_package_search</span><span class="op">(</span>q <span class="op">=</span> <span class="st">"dental"</span>, rows <span class="op">=</span> <span class="fl">10</span>, start <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> &lt;nhsbsa package search&gt; 307 datasets found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> &lt;nhsbsa package search&gt; 303 datasets found</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-style: italic;">Showing the first 10; increase `rows` for more.</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name                       title organisation num_resources metadata_modified</span>

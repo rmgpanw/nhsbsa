@@ -33,12 +33,12 @@ to search datasets.
 ``` r
 datasets <- nhsbsa_package_list()
 length(datasets)
-#> [1] 2217
+#> [1] 2218
 head(datasets)
 #> [1] "03449"                                           
 #> [2] "03500"                                           
-#> [3] "25521"                                           
-#> [4] "baby-loss-certificate-key-performance-indicators"
-#> [5] "bnf-code-information-current-year"               
-#> [6] "bnf-code-information-historic"                   
+#> [3] "baby-loss-certificate-key-performance-indicators"
+#> [4] "bnf-code-information-current-year"               
+#> [5] "bnf-code-information-historic"                   
+#> [6] "bnf-code-information-monthly-changes"            
 ```

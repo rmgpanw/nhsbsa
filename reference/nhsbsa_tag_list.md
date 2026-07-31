@@ -45,7 +45,7 @@ to find datasets by tag.
 # All tags
 tags <- nhsbsa_tag_list()
 length(tags)
-#> [1] 1067
+#> [1] 1074
 
 # Only tags containing a given string
 nhsbsa_tag_list(query = "prescribing")

@@ -194,7 +194,7 @@ there map onto API calls:
   ``` r
 
   nhsbsa_package_search(fq = 'tags:"Prescribing"')$count
-  #> [1] 18
+  #> [1] 17
   ```
 
   This returns *more* datasets than the website shows for the same tag,
@@ -250,14 +250,14 @@ search the ids yourself:
 
 datasets <- nhsbsa_package_list()
 length(datasets)
-#> [1] 2217
+#> [1] 2218
 head(datasets)
 #> [1] "03449"                                           
 #> [2] "03500"                                           
-#> [3] "25521"                                           
-#> [4] "baby-loss-certificate-key-performance-indicators"
-#> [5] "bnf-code-information-current-year"               
-#> [6] "bnf-code-information-historic"
+#> [3] "baby-loss-certificate-key-performance-indicators"
+#> [4] "bnf-code-information-current-year"               
+#> [5] "bnf-code-information-historic"                   
+#> [6] "bnf-code-information-monthly-changes"
 ```
 
 When you do not already know the id, search for one with
@@ -275,11 +275,11 @@ nhsbsa_package_search(q = "prescribing", rows = 5)
 #> # A tibble: 5 × 5
 #>   name                        title organisation num_resources metadata_modified
 #>   <chr>                       <chr> <chr>                <int> <chr>            
-#> 1 prescriber-details          Pres… community_p…            48 2026-07-15T13:05…
+#> 1 prescriber-details          Pres… community_p…            48 2026-07-29T11:29…
 #> 2 foi-03835                   FOI-… freedom-of-…            41 2026-06-16T12:59…
 #> 3 english-prescribing-data-e… RETI… community_p…           138 2026-03-06T12:49…
-#> 4 hospital-prescribing-dispe… Hosp… community_p…           113 2026-06-23T09:31…
-#> 5 english-prescribing-datase… Engl… community_p…            66 2026-07-07T07:50…
+#> 4 hospital-prescribing-dispe… Hosp… community_p…           114 2026-07-22T08:04…
+#> 5 english-prescribing-datase… Engl… community_p…            67 2026-07-22T14:12…
 ```
 
 ### Inspect a dataset’s resources
@@ -352,7 +352,7 @@ path <- nhsbsa_download_resource(
   directory = tempdir()
 )
 #> ℹ Downloading "BNF_CODE_CURRENT_202503_VERSION_88" to
-#>   /tmp/Rtmpx5kw5N/bnf_code_current_202503_version_88.csv.
+#>   /tmp/RtmppEvjVl/bnf_code_current_202503_version_88.csv.
 basename(path)
 #> [1] "bnf_code_current_202503_version_88.csv"
 ```
@@ -435,11 +435,11 @@ nhsbsa_datastore_search(
 #> # A tibble: 5 × 2
 #>   PCO_CODE ITEMS
 #>   <chr>    <int>
-#> 1 -            2
-#> 2 -            3
+#> 1 -            1
+#> 2 -            2
 #> 3 -            1
-#> 4 -            3
-#> 5 -           18
+#> 4 -            1
+#> 5 -           21
 ```
 
 CKAN’s `datastore_search` also defines `filters` (exact field matching)
@@ -470,11 +470,11 @@ nhsbsa_datastore_search_sql(
 #> # A tibble: 5 × 3
 #>   PCO_CODE BNF_CHEMICAL_SUBSTANCE ITEMS
 #>   <chr>    <chr>                  <int>
-#> 1 W2U3Z    1302011L0                  1
-#> 2 W2U3Z    0403040W0                  4
-#> 3 W2U3Z    0401010AD                  1
-#> 4 W2U3Z    0205040D0                  4
-#> 5 W2U3Z    2130                       4
+#> 1 W2U3Z    0407020AD                  1
+#> 2 W2U3Z    2122                       1
+#> 3 W2U3Z    020400080                  1
+#> 4 W2U3Z    0101021B0                  1
+#> 5 W2U3Z    0205052AE                  1
 ```
 
 ``` r

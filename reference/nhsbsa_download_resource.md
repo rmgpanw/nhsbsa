@@ -85,9 +85,9 @@ path <- nhsbsa_download_resource(
   directory = tempdir()
 )
 #> ℹ Downloading "BNF_CODE_CURRENT_202503_VERSION_88" to
-#>   /tmp/RtmpsPq3wW/bnf_code_current_202503_version_88.csv.
+#>   /tmp/RtmpdHe2hU/bnf_code_current_202503_version_88.csv.
 path
-#> [1] "/tmp/RtmpsPq3wW/bnf_code_current_202503_version_88.csv"
+#> [1] "/tmp/RtmpdHe2hU/bnf_code_current_202503_version_88.csv"
 
 # ...or by its exact id. An existing file is not re-downloaded unless
 # `overwrite = TRUE`, so this call short-circuits and returns the path.
@@ -96,7 +96,7 @@ nhsbsa_download_resource(
   resource_id = resources$id[[1]],
   directory = tempdir()
 )
-#> ℹ /tmp/RtmpsPq3wW/bnf_code_current_202503_version_88.csv already exists;
+#> ℹ /tmp/RtmpdHe2hU/bnf_code_current_202503_version_88.csv already exists;
 #>   skipping download.
 #> ℹ Set `overwrite = TRUE` to download it again.
 ```
